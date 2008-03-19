@@ -1,5 +1,6 @@
 2008-03-19  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* po/POTFILES.in:
 	* src/nsc-error.[ch]:
 	* src/nsc-gstreamer.[ch]:
 	* src/Makefile.am: Add initial gstreamer framework code.
