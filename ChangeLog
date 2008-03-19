@@ -1,5 +1,11 @@
 2008-03-19  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* src/nsc-error.[ch]:
+	* src/nsc-gstreamer.[ch]:
+	* src/Makefile.am: Add initial gstreamer framework code.
+	
+2008-03-19  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* AUTHORS:
 	* autogen.sh:
 	* configure.ac:
@@ -16,5 +22,5 @@
 	* src/Makefile.am: 
 	* src/nsc-converter.[ch]:
 	* src/nsc-extension.[ch]:
-	* src/nsc-module.c: Intial files:
+	* src/nsc-module.c: Initial project files.
 

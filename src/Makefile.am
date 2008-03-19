@@ -11,10 +11,12 @@ nautilus_extensiondir=$(NAUTILUS_EXTENSION_DIR)
 
 nautilus_extension_LTLIBRARIES=libnautilus-sound-converter.la
 
-libnautilus_sound_converter_la_SOURCES =	\
-	nsc-module.c				\
-	nsc-extension.c		nsc-extension.h	\
-	nsc-converter.c		nsc-converter.h
+libnautilus_sound_converter_la_SOURCES =		\
+	nsc-module.c					\
+	nsc-error.c		nsc-error.h		\
+	nsc-extension.c		nsc-extension.h		\
+	nsc-converter.c		nsc-converter.h		\
+	nsc-gstreamer.c		nsc-gstreamer.h
 
 libnautilus_sound_converter_la_LDFLAGS = -module -avoid-version
 libnautilus_sound_converter_la_LIBADD  = $(NSC_LIBS)
