@@ -41,12 +41,11 @@ struct _NscConverterPrivate {
 	
 	/* Files to be convertered */
 	GList		*files;
+	gint		 total_files;
 
 	GtkWidget	*dialog;
 	GtkWidget	*path_chooser;
 	GtkWidget       *profile_chooser;
-
-	gint		 files_total;
 };
 
 #define NSC_CONVERTER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
@@ -86,7 +85,7 @@ nsc_converter_set_property (GObject      *object,
 	switch (property_id) {
 	case PROP_FILES:
 		priv->files = g_value_get_pointer (value);
-		priv->files_total = g_list_length (priv->files);
+		priv->total_files = g_list_length (priv->files);
 		break;
 	default:
 		/* We don't have any other property... */
