@@ -1,4 +1,4 @@
-AC_INIT([nautilus-sound-converter], [0.1.0], [https://sourceforge.net/tracker/?func=add&group_id=158972&atid=809972], [nautilus-sound-converter])
+AC_INIT([nautilus-sound-converter], [0.1.0], [http://code.google.com/p/nautilus-sound-converter/issues/entry], [nautilus-sound-converter])
 AC_PREREQ([2.59])
 AC_COPYRIGHT([Copyright (C) 2008 Brian Pepple])
 
