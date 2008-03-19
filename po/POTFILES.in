@@ -1,0 +1,6 @@
+# List of source files containing translatable strings.
+# Please keep this list in alphabetic order.
+[encoding: UTF-8]
+data/main.xml
+src/nsc-extension.c
+src/nsc-converter.c

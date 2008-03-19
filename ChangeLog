@@ -1,0 +1,20 @@
+2008-03-19  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* AUTHORS:
+	* autogen.sh:
+	* configure.ac:
+	* Makefile.am:
+	* NEWS:
+	* README:
+	* TODO:
+	* data/main.glade:
+	* data/main.xml:
+	* data/Makefile.am:
+	* po/ChangeLog:
+	* po/LINGUAS:
+	* po/POTFILES.in:
+	* src/Makefile.am: 
+	* src/nsc-converter.[ch]:
+	* src/nsc-extension.[ch]:
+	* src/nsc-module.c: Intial files:
+
