@@ -28,11 +28,13 @@
 
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
+#include <gtk/gtkbox.h>
 #include <gtk/gtkbuilder.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkfilechooser.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkwidget.h>
+#include <gst/gst.h>
 #include <libnautilus-extension/nautilus-file-info.h>
 #include <profiles/gnome-media-profiles.h>
 
@@ -82,6 +84,9 @@ nsc_converter_finalize (GObject *object)
 
 	/* Put clean-up code here */
 	g_free (priv->new_path);
+
+	if (priv->profile)
+		g_object_unref (priv->profile);
 
 	g_object_unref (priv->gconf);
 
@@ -217,6 +222,9 @@ converter_response_cb (GtkWidget *dialog,
 			g_strdup (gtk_file_chooser_get_uri
 				  (GTK_FILE_CHOOSER (priv->path_chooser)));
 
+		priv->profile =
+			gm_audio_profile_choose_get_active (priv->path_chooser);
+
 		/* Ok, let's get ready to rumble */
 	}
 	gtk_widget_destroy (dialog);
@@ -259,6 +267,7 @@ create_main_dialog (NscConverter *converter)
 	GtkBuilder          *ui = NULL;
 	GtkWidget           *hbox, *label, *edit, *image;
 	gchar               *path;
+	const gchar         *profile_id;
 	GError              *err = NULL;
 	guint                result;
 
@@ -285,6 +294,11 @@ create_main_dialog (NscConverter *converter)
 
 	/* Create the gstreamer audio profile chooser */
 	priv->profile_chooser = gm_audio_profile_choose_new ();
+	
+	/* Set which profile is active */
+	profile_id = gm_audio_profile_get_id (priv->profile);
+	gm_audio_profile_choose_set_active (priv->profile_chooser,
+					    profile_id);
 
 	/* Create the output label */
 	label = gtk_label_new (_("O_utput Format:"));
@@ -302,10 +316,10 @@ create_main_dialog (NscConverter *converter)
 
 	/* Let's pack the widgets */
 	hbox = GTK_WIDGET (gtk_builder_get_object (ui, "format_hbox"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->profile_chooser,
-			    TRUE, TRUE, 5);
-	gtk_box_pack_start (GTK_BOX (hbox), edit, FALSE, FALSE, 5);
+			    FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), edit, FALSE, FALSE, 0);
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (priv->dialog), "response",
@@ -327,6 +341,12 @@ nsc_converter_init (NscConverter *converter)
 	NscConverterPrivate *priv;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+	
+	/*
+	 * Initialize gstreamer, otherwise the
+	 * profile chooser won't show any values.
+	 */
+	gst_init (NULL, NULL);
 
 	/* Get gconf client */
 	priv->gconf = gconf_client_get_default ();
@@ -338,7 +358,10 @@ nsc_converter_init (NscConverter *converter)
 	/* Init gnome-media-profiles */
 	gnome_media_profiles_init (priv->gconf);
 
-	/* Set the profile to the default for now */
+	/* 
+	 * Set the profile to the default for now,
+	 * until code is written to save the value in GConf
+	 */
 	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
 
 	/* Create the dialog */
