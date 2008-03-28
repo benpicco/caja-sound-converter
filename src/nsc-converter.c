@@ -30,6 +30,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtkbuilder.h>
 #include <gtk/gtkbutton.h>
+#include <gtk/gtkfilechooser.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkwidget.h>
 #include <libnautilus-extension/nautilus-file-info.h>
@@ -42,6 +43,10 @@ typedef struct _NscConverterPrivate NscConverterPrivate;
 struct _NscConverterPrivate {
 	GConfClient     *gconf;
 
+	GtkWidget	*dialog;
+	GtkWidget	*path_chooser;
+	GtkWidget       *profile_chooser;
+
 	/* The current audio profile */
 	GMAudioProfile *profile;
 	
@@ -49,9 +54,8 @@ struct _NscConverterPrivate {
 	GList		*files;
 	gint		 total_files;
 
-	GtkWidget	*dialog;
-	GtkWidget	*path_chooser;
-	GtkWidget       *profile_chooser;
+	/* Directory to save new file */
+	gchar           *new_path;
 };
 
 /* Default profile name */
@@ -77,6 +81,8 @@ nsc_converter_finalize (GObject *object)
 	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Put clean-up code here */
+	g_free (priv->new_path);
+
 	g_object_unref (priv->gconf);
 
 	G_OBJECT_CLASS (nsc_converter_parent_class)->finalize(object);
@@ -135,14 +141,60 @@ nsc_converter_class_init (NscConverterClass *klass)
 	object_class->set_property = nsc_converter_set_property;
 	object_class->get_property = nsc_converter_get_property;
 
-	files_param_spec = g_param_spec_pointer ("files",
-						 "Files",
-						 "Set selected files",
-						 G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
+	files_param_spec =
+		g_param_spec_pointer ("files",
+				      "Files",
+				      "Set selected files",
+				      G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
 
 	g_object_class_install_property (object_class,
 					 PROP_FILES,
 					 files_param_spec);
+}
+
+/**
+ * Create the new file.
+ */
+static GFile *
+create_new_file (NscConverter *converter, GFile *file)
+{
+	NscConverterPrivate *priv;
+	GFile               *new_file;
+	gchar               *old_basename, *new_basename;
+	gchar               *extension, *new_uri;
+
+	g_return_val_if_fail (G_IS_FILE (file), NULL);	
+	g_return_val_if_fail (NSC_IS_CONVERTER (converter), NULL);
+
+	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+	/* Let's the get the basename from the original file */
+	old_basename = g_file_get_basename (file);
+
+	/* Now let's remove the extension from the basename. */
+	extension = g_strdup (strrchr (old_basename, '.'));
+	if (extension != NULL)
+		old_basename[strlen (old_basename) - strlen (extension)] = '\0';
+	g_free (extension);
+
+	/* Get the new extension from the audio profie */
+	extension = g_strdup (gm_audio_profile_get_extension (priv->profile));
+
+	/* Create the new basename */
+	new_basename = g_strdup_printf ("%s.%s", old_basename, extension);
+	g_free (old_basename);
+	g_free (extension);
+
+	/* Now let's create the new files uri */
+	new_uri = g_strconcat (priv->new_path, G_DIR_SEPARATOR_S,
+			       new_basename, NULL);
+	g_free (new_basename);
+
+	/* And now finally let's create the new GFile */
+	new_file = g_file_new_for_uri (new_uri);
+	g_free (new_uri);
+
+	return new_file;
 }
 
 /**
@@ -159,6 +211,11 @@ converter_response_cb (GtkWidget *dialog,
 
 		converter = NSC_CONVERTER (user_data);
 		priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+		/* Grab the save path */
+		priv->new_path =
+			g_strdup (gtk_file_chooser_get_uri
+				  (GTK_FILE_CHOOSER (priv->path_chooser)));
 
 		/* Ok, let's get ready to rumble */
 	}
@@ -223,8 +280,8 @@ create_main_dialog (NscConverter *converter)
 
 	/* Grab some widgets */
 	priv->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "main_dialog"));
-	priv->path_chooser = GTK_WIDGET (gtk_builder_get_object
-					 (ui, "path_chooser"));
+	priv->path_chooser =
+		GTK_WIDGET (gtk_builder_get_object (ui, "path_chooser"));
 
 	/* Create the gstreamer audio profile chooser */
 	priv->profile_chooser = gm_audio_profile_choose_new ();

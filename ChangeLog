@@ -1,3 +1,9 @@
+2008-03-28  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-converter.c (create_new_file):
+	Add function to create new GFile based on the audio
+	profile & save path.
+
 2008-03-19  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* po/POTFILES.in:
