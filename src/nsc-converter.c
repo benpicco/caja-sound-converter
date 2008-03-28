@@ -27,8 +27,11 @@
 #include <string.h>
 
 #include <gconf/gconf-client.h>
-#include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gtk/gtkbuilder.h>
+#include <gtk/gtkbutton.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtkwidget.h>
 #include <libnautilus-extension/nautilus-file-info.h>
 #include <profiles/gnome-media-profiles.h>
 
