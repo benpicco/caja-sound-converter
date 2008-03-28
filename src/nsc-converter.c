@@ -38,6 +38,9 @@ typedef struct _NscConverterPrivate NscConverterPrivate;
 
 struct _NscConverterPrivate {
 	GConfClient     *gconf;
+
+	/* The current audio profile */
+	GMAudioProfile *profile;
 	
 	/* Files to be convertered */
 	GList		*files;
@@ -47,6 +50,9 @@ struct _NscConverterPrivate {
 	GtkWidget	*path_chooser;
 	GtkWidget       *profile_chooser;
 };
+
+/* Default profile name */
+#define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
 
 #define NSC_CONVERTER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
 
@@ -187,14 +193,78 @@ converter_edit_profile (GtkButton *button,
 }
 
 static void
-nsc_converter_init (NscConverter *converter)
+create_main_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
 	GtkBuilder          *ui = NULL;
-	GtkWidget           *hbox;
-	GtkWidget           *profile;
-	GError              *err = NULL;
+	GtkWidget           *hbox, *label, *edit, *image;
 	gchar               *path;
+	GError              *err = NULL;
+	guint                result;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+	/* Let's create our gtkbuilder and load the xml file */
+	ui = gtk_builder_new ();
+	gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
+	path = g_build_filename (DATADIR, PACKAGE, "main.xml", NULL);
+	result = gtk_builder_add_from_file (ui, path, &err);
+	g_free (path);
+
+	/* If we're unable to load the xml file */
+	if (result == 0) {
+		g_warning ("Unable to load xml file: %s", err->message);
+		g_error_free (err);
+		return;
+	}
+
+	/* Grab some widgets */
+	priv->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "main_dialog"));
+	priv->path_chooser = GTK_WIDGET (gtk_builder_get_object
+					 (ui, "path_chooser"));
+
+	/* Create the gstreamer audio profile chooser */
+	priv->profile_chooser = gm_audio_profile_choose_new ();
+
+	/* Create the output label */
+	label = gtk_label_new (_("O_utput Format:"));
+	gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+
+	/* Create edit profile button */
+	edit = gtk_button_new_with_mnemonic (_("Edit _Profiles"));
+	image = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
+
+	g_object_set (edit,
+		      "gtk-button-images", TRUE,
+		      NULL);
+
+	gtk_button_set_image (GTK_BUTTON (edit), image);
+
+	/* Let's pack the widgets */
+	hbox = GTK_WIDGET (gtk_builder_get_object (ui, "format_hbox"));
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+	gtk_box_pack_start (GTK_BOX (hbox), priv->profile_chooser,
+			    TRUE, TRUE, 5);
+	gtk_box_pack_start (GTK_BOX (hbox), edit, FALSE, FALSE, 5);
+
+	/* Connect signals */
+	g_signal_connect (G_OBJECT (priv->dialog), "response",
+			  (GCallback) converter_response_cb,
+			  converter);
+
+	g_signal_connect (G_OBJECT (edit), "clicked",
+			  (GCallback) converter_edit_profile,
+			  converter);
+
+	g_signal_connect (G_OBJECT (priv->profile_chooser), "changed",
+			  (GCallback) converter_profile_changed,
+			  converter);
+}
+
+static void
+nsc_converter_init (NscConverter *converter)
+{
+	NscConverterPrivate *priv;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
@@ -208,42 +278,11 @@ nsc_converter_init (NscConverter *converter)
 	/* Init gnome-media-profiles */
 	gnome_media_profiles_init (priv->gconf);
 
-	/* Let's create our gtkbuilder and load the xml file */
-	ui = gtk_builder_new ();
-	path = g_build_filename (DATADIR, PACKAGE, "main.xml", NULL);
-	gtk_builder_add_from_file (ui, path, &err);
-	g_free (path);
-	gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
+	/* Set the profile to the default for now */
+	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
 
-	/* Grab some widgets */
-	priv->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "main_dialog"));
-	priv->path_chooser = GTK_WIDGET (gtk_builder_get_object (ui, "path_chooser"));
-
-	/* Create the gstreamer audio profile chooser */
-	priv->profile_chooser = GTK_WIDGET (gm_audio_profile_choose_new ());
-
-	/* Let's pack the profile chooser, and show it */
-	hbox = GTK_WIDGET (gtk_builder_get_object (ui, "hbox_format"));
-	gtk_box_pack_start (GTK_BOX (hbox), priv->profile_chooser,
-			    FALSE, FALSE, 5);
-	gtk_widget_show (priv->profile_chooser);
-
-	/* Edit Profile button */
-	profile = GTK_WIDGET (gtk_builder_get_object (ui,
-						      "button_edit_profiles"));
-
-	/* Connect signals */
-	g_signal_connect (G_OBJECT (priv->dialog), "response",
-			  (GCallback) converter_response_cb,
-			  converter);
-
-	g_signal_connect (G_OBJECT (profile), "clicked",
-			  (GCallback) converter_edit_profile,
-			  converter);
-
-	g_signal_connect (G_OBJECT (priv->profile_chooser), "changed",
-			  (GCallback) converter_profile_changed,
-			  converter);
+	/* Create the dialog */
+	create_main_dialog (converter);	
 }
 
 NscConverter *
