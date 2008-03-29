@@ -94,7 +94,7 @@ nsc_gstreamer_set_property (GObject      *object,
 		if (priv->profile)
 			g_object_unref (priv->profile);
 
-		priv->profile = GM_AUDIO_PROFILE (g_value_dup_value (value));
+		priv->profile = GM_AUDIO_PROFILE (g_value_dup_object (value));
 		priv->rebuild_pipeline = TRUE;
 
 		g_object_notify (object, "profile");
@@ -397,7 +397,7 @@ tick_timeout_cb (NscGStreamer *gstreamer)
 	GstState             pending_state;
 	static GstFormat     format = GST_FORMAT_TIME;
 
-	g_return_val_if_val (NSC_IS_GSTREAMER (gstreamer), FALSE);
+	g_return_val_if_fail (NSC_IS_GSTREAMER (gstreamer), FALSE);
 
 	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
 
@@ -445,7 +445,7 @@ nsc_gstreamer_get_new_error (NscGStreamer *gstreamer)
 
 	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
 
-	if (gstreamer == NULL | priv == NULL) {
+	if (gstreamer == NULL || priv == NULL) {
 		g_set_error (&error,
 			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
 			     _("Converter object is not valid."));

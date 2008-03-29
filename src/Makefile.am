@@ -4,8 +4,7 @@ AM_CPPFLAGS =						\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-I$(top_srcdir)					\
 	-I$(top_builddir)				\
-	-Werror                                         \
-	$(NSC_CFLAGS)
+	$(NSC_CFLAGS) $(WARN_CFLAGS)
 
 nautilus_extensiondir=$(NAUTILUS_EXTENSION_DIR)
 

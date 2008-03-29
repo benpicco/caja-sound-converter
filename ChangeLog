@@ -1,5 +1,12 @@
 2008-03-29  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* src/nsc-extension.c:
+	* src/nsc-module.c:
+	* src/nsc-gstreamer.c:
+	* src/Makefile.am: clean up some compiler errors.
+	
+2008-03-29  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* src/nsc-converter.c (create_main_dialog): 
 	* src/nsc-xml.[ch]:
 	* src/Makefile.am:

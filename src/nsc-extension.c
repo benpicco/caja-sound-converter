@@ -35,8 +35,11 @@
 
 #include <string.h> /* For strcmp */
 
-static void nsc_extension_instance_init (NscExtension      *sound);
-static void nsc_extension_class_init    (NscExtensionClass *class);
+static void  nsc_extension_instance_init  (NscExtension         *sound);
+static void  nsc_extension_class_init     (NscExtensionClass    *class);
+GList       *nsc_extension_get_file_items (NautilusMenuProvider *provider,
+					   GtkWidget            *window,
+					   GList                *files);
 
 static GType sound_converter_type = 0;
 
