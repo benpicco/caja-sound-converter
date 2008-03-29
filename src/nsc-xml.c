@@ -32,7 +32,7 @@ xml_get_file (const gchar *filename,
               va_list      args)
 {
 	GObject    **pointer;
-	GtkBuilder  *ui;
+	GtkBuilder  *ui = NULL;
 	const char  *name;
 	gchar       *path;
 	GError      *err = NULL;
