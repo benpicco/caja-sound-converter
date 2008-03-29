@@ -168,9 +168,9 @@ create_new_file (NscConverter *converter, GFile *file)
 	GFile               *new_file;
 	gchar               *old_basename, *new_basename;
 	gchar               *extension, *new_uri;
+	const gchar         *new_extension;
 
-	g_return_val_if_fail (G_IS_FILE (file), NULL);	
-	g_return_val_if_fail (NSC_IS_CONVERTER (converter), NULL);
+	g_return_val_if_fail (G_IS_FILE (file), NULL);
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
@@ -184,12 +184,11 @@ create_new_file (NscConverter *converter, GFile *file)
 	g_free (extension);
 
 	/* Get the new extension from the audio profie */
-	extension = g_strdup (gm_audio_profile_get_extension (priv->profile));
-
+	/* new_extension = gm_audio_profile_get_extension (priv->profile); */
+	new_extension = "ogg";
 	/* Create the new basename */
-	new_basename = g_strdup_printf ("%s.%s", old_basename, extension);
+	new_basename = g_strdup_printf ("%s.%s", old_basename, new_extension);
 	g_free (old_basename);
-	g_free (extension);
 
 	/* Now let's create the new files uri */
 	new_uri = g_strconcat (priv->new_path, G_DIR_SEPARATOR_S,
