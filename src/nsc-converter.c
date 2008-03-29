@@ -39,6 +39,7 @@
 #include <profiles/gnome-media-profiles.h>
 
 #include "nsc-converter.h"
+#include "nsc-gstreamer.h"
 
 typedef struct _NscConverterPrivate NscConverterPrivate;
 
@@ -202,6 +203,33 @@ create_new_file (NscConverter *converter, GFile *file)
 	return new_file;
 }
 
+static void
+convert_file (NscConverter *convert)
+{
+	NscConverterPrivate *priv;
+	GObject		    *streamer;
+	NautilusFileInfo    *file_info;
+	GFile               *old_file, *new_file;
+	gchar               *old_file_path, *new_file_path;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (convert);
+
+	g_return_if_fail (priv->files != NULL);
+
+	/* TODO: Create progress dialog */
+
+	file_info = NAUTILUS_FILE_INFO (priv->files->data);
+	old_file = nautilus_file_info_get_location (file_info);
+	new_file = create_new_file (convert, old_file);
+
+	old_file_path = g_file_get_path (old_file);
+	new_file_path = g_file_get_path (new_file);
+	g_object_unref (old_file);
+	g_object_unref (new_file);
+
+	streamer = nsc_gstreamer_new ();
+}
+
 /**
  * The OK or Cancel button was pressed on the main dialog.
  */
@@ -226,6 +254,7 @@ converter_response_cb (GtkWidget *dialog,
 			gm_audio_profile_choose_get_active (priv->path_chooser);
 
 		/* Ok, let's get ready to rumble */
+		convert_file (converter);
 	}
 	gtk_widget_destroy (dialog);
 }
