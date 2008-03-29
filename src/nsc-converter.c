@@ -22,7 +22,7 @@
  * 
  */
 
-#include <config.h> /* for GETTEXT_PACKAGE */
+#include <config.h>
 
 #include <string.h>
 
