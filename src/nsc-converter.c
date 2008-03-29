@@ -40,6 +40,7 @@
 
 #include "nsc-converter.h"
 #include "nsc-gstreamer.h"
+#include "nsc-xml.h"
 
 typedef struct _NscConverterPrivate NscConverterPrivate;
 
@@ -294,31 +295,15 @@ create_main_dialog (NscConverter *converter)
 	NscConverterPrivate *priv;
 	GtkBuilder          *ui = NULL;
 	GtkWidget           *hbox, *label, *edit, *image;
-	gchar               *path;
 	const gchar         *profile_id;
-	GError              *err = NULL;
-	guint                result;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
-	/* Let's create our gtkbuilder and load the xml file */
-	ui = gtk_builder_new ();
-	gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
-	path = g_build_filename (DATADIR, PACKAGE, "main.xml", NULL);
-	result = gtk_builder_add_from_file (ui, path, &err);
-	g_free (path);
-
-	/* If we're unable to load the xml file */
-	if (result == 0) {
-		g_warning ("Unable to load xml file: %s", err->message);
-		g_error_free (err);
-		return;
-	}
-
-	/* Grab some widgets */
-	priv->dialog = GTK_WIDGET (gtk_builder_get_object (ui, "main_dialog"));
-	priv->path_chooser =
-		GTK_WIDGET (gtk_builder_get_object (ui, "path_chooser"));
+	/* Create the gtkbuilder and grab some widgets */
+	ui = nsc_xml_get_file ("main.xml",
+			       "main_dialog", &priv->dialog,
+			       "path_chooser", &priv->path_chooser,
+			       NULL);
 
 	/* Create the gstreamer audio profile chooser */
 	priv->profile_chooser = gm_audio_profile_choose_new ();
@@ -349,15 +334,16 @@ create_main_dialog (NscConverter *converter)
 			    FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), edit, FALSE, FALSE, 0);
 
+	/* Free the gtkbuilder */
+	g_object_unref (ui);
+
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (priv->dialog), "response",
 			  (GCallback) converter_response_cb,
 			  converter);
-
 	g_signal_connect (G_OBJECT (edit), "clicked",
 			  (GCallback) converter_edit_profile,
 			  converter);
-
 	g_signal_connect (G_OBJECT (priv->profile_chooser), "changed",
 			  (GCallback) converter_profile_changed,
 			  converter);

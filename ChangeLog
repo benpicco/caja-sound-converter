@@ -1,5 +1,15 @@
 2008-03-29  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* src/nsc-converter.c (create_main_dialog): 
+	* src/nsc-xml.[ch]:
+	* src/Makefile.am:
+	Add help functions for gtkbuiler.
+
+	* data/main.glade:
+	* data/main.xml: Use better title in dialog.
+	
+2008-03-29  Brian Pepple  <bpepple@fedoraproject.org> 
+
 	* data/progress.xml:
 	* data/progress.glade:
 	* data/Makefile.am (builder_DATA): 
