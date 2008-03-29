@@ -1,3 +1,10 @@
+2008-03-29  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* data/progress.xml:
+	* data/progress.glade:
+	* data/Makefile.am (builder_DATA): 
+	Add progress dialog ui files.
+
 2008-03-28  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* src/nsc-converter.c (create_new_file):
