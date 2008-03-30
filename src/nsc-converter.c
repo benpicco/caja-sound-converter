@@ -318,7 +318,7 @@ create_main_dialog (NscConverter *converter)
 					    profile_id);
 
 	/* Create edit profile button */
-	edit = gtk_button_new_with_mnemonic (_("Edit _Profile..."));
+	edit = gtk_button_new_with_mnemonic (_("Edit _Profiles..."));
 	image = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
 	g_object_set (edit,
 		      "gtk-button-images", TRUE,
