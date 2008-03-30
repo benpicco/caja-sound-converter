@@ -16,6 +16,7 @@ libnautilus_sound_converter_la_SOURCES =		\
 	nsc-extension.c		nsc-extension.h		\
 	nsc-converter.c		nsc-converter.h		\
 	nsc-gstreamer.c		nsc-gstreamer.h		\
+	nsc-progress.c		nsc-progress.h		\
 	nsc-xml.c		nsc-xml.h
 
 libnautilus_sound_converter_la_LDFLAGS = -module -avoid-version

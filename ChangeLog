@@ -1,3 +1,9 @@
+2008-03-30  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-progress.[ch]:
+	* src/Makefile.am (libnautilus_sound_converter_la_SOURCES):
+	Add initial work on progress dialog objects.
+
 2008-03-29  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* src/nsc-extension.c:
