@@ -294,7 +294,7 @@ create_main_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
 	GtkBuilder          *ui = NULL;
-	GtkWidget           *hbox, *label, *edit, *image;
+	GtkWidget           *hbox, *edit, *image;
 	const gchar         *profile_id;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
@@ -303,39 +303,32 @@ create_main_dialog (NscConverter *converter)
 	ui = nsc_xml_get_file ("main.xml",
 			       "main_dialog", &priv->dialog,
 			       "path_chooser", &priv->path_chooser,
+			       "format_hbox", &hbox,
 			       NULL);
+
+        /* Free the gtkbuilder */
+	g_object_unref (ui);
 
 	/* Create the gstreamer audio profile chooser */
 	priv->profile_chooser = gm_audio_profile_choose_new ();
-	
+
 	/* Set which profile is active */
 	profile_id = gm_audio_profile_get_id (priv->profile);
 	gm_audio_profile_choose_set_active (priv->profile_chooser,
 					    profile_id);
 
-	/* Create the output label */
-	label = gtk_label_new (_("O_utput Format:"));
-	gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-
 	/* Create edit profile button */
-	edit = gtk_button_new_with_mnemonic (_("Edit _Profiles"));
+	edit = gtk_button_new_with_mnemonic (_("Edit _Profile..."));
 	image = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
-
 	g_object_set (edit,
 		      "gtk-button-images", TRUE,
 		      NULL);
-
 	gtk_button_set_image (GTK_BUTTON (edit), image);
 
-	/* Let's pack the widgets */
-	hbox = GTK_WIDGET (gtk_builder_get_object (ui, "format_hbox"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	/* Let's pack the audio profile chooseer */
 	gtk_box_pack_start (GTK_BOX (hbox), priv->profile_chooser,
 			    FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), edit, FALSE, FALSE, 0);
-
-	/* Free the gtkbuilder */
-	g_object_unref (ui);
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (priv->dialog), "response",
