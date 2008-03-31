@@ -33,6 +33,7 @@
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkfilechooser.h>
 #include <gtk/gtklabel.h>
+#include <gtk/gtkprogressbar.h>
 #include <gtk/gtkwidget.h>
 #include <gst/gst.h>
 #include <libnautilus-extension/nautilus-file-info.h>
@@ -54,9 +55,12 @@ struct _NscConverterPrivate {
 	GtkWidget	*dialog;
 	GtkWidget	*path_chooser;
 	GtkWidget       *profile_chooser;
+	GtkWidget       *progress_dlg;
+	GtkWidget       *progressbar;
 	
 	/* Files to be convertered */
 	GList		*files;
+	gint             files_converted;
 	gint		 total_files;
 
 	/* Directory to save new file */
@@ -159,6 +163,26 @@ nsc_converter_class_init (NscConverterClass *klass)
 }
 
 /**
+ * Create the progress dialog
+ */
+static void
+create_progress_dialog (NscConverter *converter)
+{
+	NscConverterPrivate *priv;
+	GtkBuilder          *ui;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+	/* Create the gtkbuilder, and grab the widgets */
+	ui = nsc_xml_get_file ("progress.xml",
+			       "progress_dialog", &priv->progress_dlg,
+			       "file_progressbar", &priv->progressbar,
+			       NULL);
+
+	g_object_unref (ui);
+}
+
+/**
  * Create the new file.
  */
 static GFile *
@@ -240,17 +264,32 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 {
 	NscConverter	    *converter;
 	NscConverterPrivate *priv;
+	gdouble              fraction;
+	gchar               *text;
 
 	converter = NSC_CONVERTER (data);
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
-
+	
+	/* Increment converted total & point to next file */
+	priv->files_converted++;
 	priv->files = priv->files->next;
+
+	/* Update the progress dialog */
+	fraction = (double) priv->files_converted / priv->total_files;
+	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progressbar),
+				       fraction);
+	text = g_strdup_printf (_("Converting: %d of %d"),
+				priv->files_converted +1, priv->total_files);
+	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
+				   text);
+	g_free (text);
 
 	if (priv->files != NULL) {
 		convert_file (converter);
 	} else {
+		/* No more files to convert time to do some cleanup */
 		g_object_unref (priv->gst);
-		/* Destroy the progress dialog */
+		gtk_widget_destroy (priv->progress_dlg);
 	}
 
 }
@@ -266,6 +305,7 @@ converter_response_cb (GtkWidget *dialog,
 	if (response_id == GTK_RESPONSE_OK) {
 		NscConverter	    *converter;
 		NscConverterPrivate *priv;
+		gchar               *text;
 
 		converter = NSC_CONVERTER (user_data);
 		priv = NSC_CONVERTER_GET_PRIVATE (converter);
@@ -284,6 +324,16 @@ converter_response_cb (GtkWidget *dialog,
 		g_signal_connect (G_OBJECT (priv->gst), "completion",
 				  (GCallback) on_completion_cb,
 				  converter);
+
+		/* Create the progress window */
+		create_progress_dialog (converter);
+
+		text = g_strdup_printf (_("Converting: %d of %d"),
+					priv->files_converted +1,
+					priv->total_files);
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
+					   text);
+		g_free (text);
 
 		/* Ok, let's get ready to rumble */
 		convert_file (converter);
@@ -392,7 +442,9 @@ nsc_converter_init (NscConverter *converter)
 	/* Unreference the gconf client */
 	g_object_unref (gconf);
 
+	/* Set init values */
 	priv->gst = NULL;
+	priv->files_converted = 0;
 
 	/* Set the profile to the default. */
 	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
