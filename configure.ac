@@ -24,6 +24,7 @@ GNOME_MAINTAINER_MODE_DEFINES
 dnl -----------------------------------------------------------
 dnl Set variables for minimum versions needed.
 dnl -----------------------------------------------------------
+GLIB_REQUIRED=2.16.0
 NAUTILUS_REQUIRED=2.12.0
 GCONF_REQUIRED=1.2.0
 GTK_REQUIRED=2.12.0
@@ -35,7 +36,7 @@ dnl Check for required libraries
 dnl -----------------------------------------------------------
 PKG_CHECK_MODULES(NSC,
 [
-	glib-2.0
+	glib-2.0 >= $GLIB_REQUIRED
 	gconf-2.0 >= $GCONF_REQUIRED
 	libnautilus-extension >= $NAUTILUS_REQUIRED
 	gtk+-2.0 >= $GTK_REQUIRED

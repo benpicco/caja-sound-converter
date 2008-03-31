@@ -1,5 +1,9 @@
 2008-03-31  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* configure.ac: Set min version of glib2.
+
+2008-03-31  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* Release 0.1.0
 
 2008-03-31  Brian Pepple  <bpepple@fedoraproject.org>
