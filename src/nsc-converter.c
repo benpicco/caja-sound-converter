@@ -91,8 +91,10 @@ nsc_converter_finalize (GObject *object)
 	NscConverter 	    *converter = NSC_CONVERTER (object);
 	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
-	/* Put clean-up code here */
 	g_free (priv->new_path);
+
+	if (priv->gst)
+		g_object_unref (priv->gst);
 
 	if (priv->profile)
 		g_object_unref (priv->profile);
@@ -184,7 +186,7 @@ create_progress_dialog (NscConverter *converter)
 }
 
 /**
- * Create the new file.
+ * Create the new GFile.  This will need to be unreferenced.
  */
 static GFile *
 create_new_file (NscConverter *converter, GFile *file)
@@ -244,19 +246,23 @@ convert_file (NscConverter *convert)
 
 	g_return_if_fail (priv->files != NULL);
 
-	/* TODO: Create progress dialog */
-
+	/* Get the files */
 	file_info = NAUTILUS_FILE_INFO (priv->files->data);
 	old_file = nautilus_file_info_get_location (file_info);
 	new_file = create_new_file (convert, old_file);
 
+	/* Grab the path from the files */
 	old_file_path = g_file_get_path (old_file);
 	new_file_path = g_file_get_path (new_file);
+
+	/* Free the files since we do not need them anymore */
 	g_object_unref (old_file);
 	g_object_unref (new_file);
 
+	/* Let's get ready to rumble! */
 	nsc_gstreamer_convert_file (priv->gst, old_file_path, new_file_path,
 				    &err);
+	
 	g_free (old_file_path);
 	g_free (new_file_path);
 }
@@ -317,6 +323,7 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 				   text);
 	g_free (text);
 
+	/* If there are more files let's go ahead and convert them */
 	if (priv->files != NULL) {
 		convert_file (converter);
 	} else {
@@ -362,7 +369,8 @@ converter_response_cb (GtkWidget *dialog,
 
 		/* Create the gstreamer converter object */
 		priv->gst = nsc_gstreamer_new (priv->profile);
-
+	
+		/* Connect to the gstreamer object signals */
 		g_signal_connect (G_OBJECT (priv->gst), "completion",
 				  (GCallback) on_completion_cb,
 				  converter);
@@ -373,6 +381,7 @@ converter_response_cb (GtkWidget *dialog,
 		/* Create the progress window */
 		create_progress_dialog (converter);
 
+		/* Let's put some text in the progressbar */
 		text = g_strdup_printf (_("Converting: %d of %d"),
 					priv->files_converted +1,
 					priv->total_files);
@@ -380,7 +389,7 @@ converter_response_cb (GtkWidget *dialog,
 					   text);
 		g_free (text);
 
-		/* Ok, let's get ready to rumble */
+		/* Alright we're finally ready to start converting */
 		convert_file (converter);
 	}
 	gtk_widget_destroy (dialog);
