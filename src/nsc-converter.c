@@ -3,6 +3,7 @@
  *  nsc-converter.c
  * 
  *  Copyright (C) 2008 Brian Pepple
+ *  Copyright (C) 2003 Ross Burton
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public
@@ -19,6 +20,7 @@
  *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *  Author: Brian Pepple <bpepple@fedoraproject.org>
+ *          Ross Burton <ross@burtonini.com>
  * 
  */
 
