@@ -280,7 +280,7 @@ error_cb (GstBus     *bus,
 
 	/* Make sure the pipeline is not running any more */
 	gst_element_set_state (priv->pipeline, GST_STATE_NULL);
-	gstreamer->priv->rebuild_pipeline = TRUE;
+	priv->rebuild_pipeline = TRUE;
 
 	if (priv->tick_id) {
 		g_source_remove (priv->tick_id);
