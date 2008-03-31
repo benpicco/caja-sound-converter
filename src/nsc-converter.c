@@ -45,8 +45,6 @@
 typedef struct _NscConverterPrivate NscConverterPrivate;
 
 struct _NscConverterPrivate {
-	GConfClient     *gconf;
-
 	GtkWidget	*dialog;
 	GtkWidget	*path_chooser;
 	GtkWidget       *profile_chooser;
@@ -89,8 +87,6 @@ nsc_converter_finalize (GObject *object)
 
 	if (priv->profile)
 		g_object_unref (priv->profile);
-
-	g_object_unref (priv->gconf);
 
 	G_OBJECT_CLASS (nsc_converter_parent_class)->finalize(object);
 }
@@ -264,18 +260,6 @@ converter_response_cb (GtkWidget *dialog,
 	gtk_widget_destroy (dialog);
 }
 
-static void
-converter_profile_changed (GtkWidget *widget,
-			   gpointer   user_data)
-{
-	if (gtk_combo_box_get_active (GTK_COMBO_BOX (widget))!= -1) {
-		GMAudioProfile *profile;
-
-		profile = gm_audio_profile_choose_get_active (widget);
-		/* TODO: save the change in gconf */
-	}
-}
-
 /**
  * The Edit Profiles button was pressed.
  */
@@ -284,12 +268,18 @@ converter_edit_profile (GtkButton *button,
 			gpointer   user_data)
 {
 	NscConverterPrivate *priv;
+	GConfClient         *gconf;
 	GtkWidget           *dialog;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (user_data);
 
-	dialog = gm_audio_profiles_edit_new (priv->gconf,
+	gconf = gconf_client_get_default ();
+
+	dialog = gm_audio_profiles_edit_new (gconf,
 					     GTK_WINDOW (priv->dialog));
+
+	g_object_unref (gconf);
+
 	gtk_widget_show_all (dialog);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 }
@@ -342,15 +332,13 @@ create_main_dialog (NscConverter *converter)
 	g_signal_connect (G_OBJECT (edit), "clicked",
 			  (GCallback) converter_edit_profile,
 			  converter);
-	g_signal_connect (G_OBJECT (priv->profile_chooser), "changed",
-			  (GCallback) converter_profile_changed,
-			  converter);
 }
 
 static void
 nsc_converter_init (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
+	GConfClient         *gconf;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 	
@@ -361,18 +349,20 @@ nsc_converter_init (NscConverter *converter)
 	gst_init (NULL, NULL);
 
 	/* Get gconf client */
-	priv->gconf = gconf_client_get_default ();
-	if (priv->gconf == NULL) {
+	gconf = gconf_client_get_default ();
+	if (gconf == NULL) {
 		/* Should probably do more than just give a warning */
 		g_warning (_("Could not create GConf client.\n"));
 	}
 
 	/* Init gnome-media-profiles */
-	gnome_media_profiles_init (priv->gconf);
+	gnome_media_profiles_init (gconf);
+
+	/* Unreference the gconf client */
+	g_object_unref (gconf);
 
 	/* 
-	 * Set the profile to the default for now,
-	 * until code is written to save the value in GConf
+	 * Set the profile to the default.
 	 */
 	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
 
