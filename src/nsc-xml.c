@@ -66,7 +66,7 @@ xml_get_file (const gchar *filename,
 	return ui;
 }
 
-GtkBuilder *
+gboolean
 nsc_xml_get_file (const gchar *filename,
 		  const gchar *first_widget,
 		  ...)
@@ -81,40 +81,10 @@ nsc_xml_get_file (const gchar *filename,
 	va_end (args);
 
 	if (!ui) {
-		return NULL;
+		return FALSE;
 	}
 
-	return ui;
+	g_object_unref (ui);
+
+	return TRUE;
 }
-
-void
-nsc_xml_connect (GtkBuilder *ui,
-		 gpointer    user_data,
-		 gchar      *first_widget,
-		 ...)
-{
-	GObject     *pointer;
-	gpointer    *callback;
-	const gchar *signal;
-	const gchar *name;
-	va_list      args;
-
-	va_start (args, first_widget);
-	
-	for (name = first_widget; name; name = va_arg (args, char *)) {
-		signal = va_arg (args, void *);
-		callback = va_arg (args, void *);
-
-		pointer = gtk_builder_get_object (ui, name);
-		if (!pointer) {
-			g_warning ("Missing widget '%s'", name);
-			continue;
-		}
-		g_signal_connect (pointer, signal,
-				  G_CALLBACK (callback),
-				  user_data);
-	}
-
-	va_end (args);
-}
-

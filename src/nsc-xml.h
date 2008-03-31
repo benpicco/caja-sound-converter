@@ -22,15 +22,10 @@
 #ifndef __NSC_XML_H__
 #define __NSC_XML_H__
 
-#include <gtk/gtkbuilder.h>
+#include <glib/gtypes.h>
 
-GtkBuilder *nsc_xml_get_file (const gchar *filename,
+gboolean    nsc_xml_get_file (const gchar *filename,
 			      const gchar *first_widget,
-			      ...);
-
-void        nsc_xml_connect  (GtkBuilder  *gui,
-			      gpointer     user_data,
-			      gchar       *first_widget,
 			      ...);
 
 #endif /*  __NSC_XML_H__ */

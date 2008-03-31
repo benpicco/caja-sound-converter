@@ -29,7 +29,6 @@
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
 #include <gtk/gtkbox.h>
-#include <gtk/gtkbuilder.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkfilechooser.h>
 #include <gtk/gtklabel.h>
@@ -169,17 +168,16 @@ static void
 create_progress_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
-	GtkBuilder          *ui;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Create the gtkbuilder, and grab the widgets */
-	ui = nsc_xml_get_file ("progress.xml",
-			       "progress_dialog", &priv->progress_dlg,
-			       "file_progressbar", &priv->progressbar,
-			       NULL);
+	nsc_xml_get_file ("progress.xml",
+			  "progress_dialog", &priv->progress_dlg,
+			  "file_progressbar", &priv->progressbar,
+			  NULL);
 
-	g_object_unref (ui);
+	/* TODO: connect the signals */
 }
 
 /**
@@ -369,21 +367,22 @@ static void
 create_main_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
-	GtkBuilder          *ui = NULL;
 	GtkWidget           *hbox, *edit, *image;
 	const gchar         *profile_id;
+	gboolean             result;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Create the gtkbuilder and grab some widgets */
-	ui = nsc_xml_get_file ("main.xml",
-			       "main_dialog", &priv->dialog,
-			       "path_chooser", &priv->path_chooser,
-			       "format_hbox", &hbox,
-			       NULL);
+	result = nsc_xml_get_file ("main.xml",
+				   "main_dialog", &priv->dialog,
+				   "path_chooser", &priv->path_chooser,
+				   "format_hbox", &hbox,
+				   NULL);
 
-        /* Free the gtkbuilder */
-	g_object_unref (ui);
+	if (!result) {
+		return;
+	}
 
 	/* Create the gstreamer audio profile chooser */
 	priv->profile_chooser = gm_audio_profile_choose_new ();
