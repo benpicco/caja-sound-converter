@@ -4,7 +4,7 @@ AC_COPYRIGHT([Copyright (C) 2008 Brian Pepple])
 
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-bzip2])
+AM_INIT_AUTOMAKE([1.9 dist-bzip2])
 
 AM_MAINTAINER_MODE
 
