@@ -233,6 +233,29 @@ convert_file (NscConverter *convert)
 }
 
 /**
+ * Callback to report completion.
+ */
+static void
+on_completion_cb (NscGStreamer *gstream, gpointer data)
+{
+	NscConverter	    *converter;
+	NscConverterPrivate *priv;
+
+	converter = NSC_CONVERTER (data);
+	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+	priv->files = priv->files->next;
+
+	if (priv->files != NULL) {
+		convert_file (converter);
+	} else {
+		g_object_unref (priv->gst);
+		/* Destroy the progress dialog */
+	}
+
+}
+
+/**
  * The OK or Cancel button was pressed on the main dialog.
  */
 static void
@@ -257,6 +280,10 @@ converter_response_cb (GtkWidget *dialog,
 		
 		/* Create the gstreamer converter object */
 		priv->gst = nsc_gstreamer_new (priv->profile);
+
+		g_signal_connect (G_OBJECT (priv->gst), "completion",
+				  (GCallback) on_completion_cb,
+				  converter);
 
 		/* Ok, let's get ready to rumble */
 		convert_file (converter);
