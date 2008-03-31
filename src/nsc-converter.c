@@ -185,8 +185,8 @@ create_new_file (NscConverter *converter, GFile *file)
 	g_free (extension);
 
 	/* Get the new extension from the audio profie */
-	/* new_extension = gm_audio_profile_get_extension (priv->profile); */
-	new_extension = "ogg";
+	new_extension = gm_audio_profile_get_extension (priv->profile);
+
 	/* Create the new basename */
 	new_basename = g_strdup_printf ("%s.%s", old_basename, new_extension);
 	g_free (old_basename);
@@ -251,7 +251,7 @@ converter_response_cb (GtkWidget *dialog,
 				  (GTK_FILE_CHOOSER (priv->path_chooser)));
 
 		priv->profile =
-			gm_audio_profile_choose_get_active (priv->path_chooser);
+			gm_audio_profile_choose_get_active (priv->profile_chooser);
 
 		/* Ok, let's get ready to rumble */
 		convert_file (converter);
