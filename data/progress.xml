@@ -3,7 +3,7 @@
 <interface>
   <object class="GtkDialog" id="progress_dialog">
     <property name="width_request">290</property>
-    <property name="height_request">120</property>
+    <property name="height_request">100</property>
     <property name="visible">True</property>
     <property name="title" translatable="yes">Converting Progress</property>
     <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -31,6 +31,7 @@
             <child>
               <object class="GtkButton" id="cancel_button">
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_default">True</property>
                 <property name="can_focus">True</property>
                 <property name="label">gtk-cancel</property>
@@ -62,13 +63,10 @@
                 <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
               </object>
               <packing>
-                <property name="padding">0</property>
-                <property name="expand">True</property>
+                <property name="padding">6</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
           </object>
           <packing>
