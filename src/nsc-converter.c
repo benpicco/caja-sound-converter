@@ -34,6 +34,7 @@
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkfilechooser.h>
 #include <gtk/gtklabel.h>
+#include <gtk/gtkmessagedialog.h>
 #include <gtk/gtkprogressbar.h>
 #include <gtk/gtkwidget.h>
 #include <gst/gst.h>
@@ -226,6 +227,10 @@ create_new_file (NscConverter *converter, GFile *file)
 	return new_file;
 }
 
+/**
+ * Function to get orginal & new files, and pass
+ * them to the gstreamer object.
+ */
 static void
 convert_file (NscConverter *convert)
 {
@@ -256,6 +261,34 @@ convert_file (NscConverter *convert)
 	g_free (new_file_path);
 }
 
+/** 
+ * Callback to report errors.  The error passed in does not
+ * need to be freed.
+ */
+static void
+on_error_cb (NscGStreamer *gstream, GError *error, gpointer data)
+{
+	NscConverter	    *converter;
+	NscConverterPrivate *priv;
+	GtkWidget           *dialog;
+	gchar               *text;
+
+	converter = NSC_CONVERTER (data);
+	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+	text = g_strdup_printf (_("Nautilus Sound Converter could "
+				  "not converter this file.\nReason: %s"),
+				error->message);
+
+	dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog), 0,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_CLOSE,
+					 text);
+	g_free (text);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+}
 /**
  * Callback to report completion.
  */
@@ -317,12 +350,24 @@ converter_response_cb (GtkWidget *dialog,
 		
 		priv->profile =
 			gm_audio_profile_choose_get_active (priv->profile_chooser);
-		
+	      
+		/* Is the profile supported? */
+		if (!(nsc_gstreamer_supports_profile (priv->profile))) {
+			/*
+			 * TODO: Add a message dialog to tell the user
+			 *       the selected profile is not supported.
+			 */
+			return;
+		}
+
 		/* Create the gstreamer converter object */
 		priv->gst = nsc_gstreamer_new (priv->profile);
 
 		g_signal_connect (G_OBJECT (priv->gst), "completion",
 				  (GCallback) on_completion_cb,
+				  converter);
+		g_signal_connect (G_OBJECT (priv->gst), "error",
+				  (GCallback) on_error_cb,
 				  converter);
 
 		/* Create the progress window */
