@@ -10,3 +10,11 @@ Bug reporting:
 
 Please report bugs to:
 http://code.google.com/p/nautilus-sound-converter/issues/list
+
+Hacking:
+========
+
+n-s-c can be check out w/:
+svn checkout http://nautilus-sound-converter.googlecode.com/svn/trunk/ nautilus-sound-converter
+
+Patches welcomed!
