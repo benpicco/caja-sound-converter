@@ -1,3 +1,12 @@
-The Nautilus-Sounder-Converter extension allows you to convert audio files to different formats using the GStreamer framework.
+Nautilus-Sound-Converter
+========================
 
-Currently only is flac-to-new format is supported, but that should change fairly quickly (possibly the next release).
+The Nautilus-Sound-Converter extension allows you to convert audio files to different formats using the GStreamer framework.
+
+Currently only is flac-to-new format is supported, but that should change fairly quickly (possibly the next release).  Also, id3tags aren't written to the new files yet, but it's at the top of my list of things to do.
+
+Bug reporting:
+==============
+
+Please report bugs to:
+http://code.google.com/p/nautilus-sound-converter/issues/list
