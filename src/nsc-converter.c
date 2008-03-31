@@ -45,12 +45,15 @@
 typedef struct _NscConverterPrivate NscConverterPrivate;
 
 struct _NscConverterPrivate {
-	GtkWidget	*dialog;
-	GtkWidget	*path_chooser;
-	GtkWidget       *profile_chooser;
+	/* GStreamer Object */
+	NscGStreamer	*gst;
 
 	/* The current audio profile */
 	GMAudioProfile *profile;
+
+	GtkWidget	*dialog;
+	GtkWidget	*path_chooser;
+	GtkWidget       *profile_chooser;
 	
 	/* Files to be convertered */
 	GList		*files;
@@ -203,7 +206,6 @@ static void
 convert_file (NscConverter *convert)
 {
 	NscConverterPrivate *priv;
-	NscGStreamer	    *streamer;
 	NautilusFileInfo    *file_info;
 	GFile               *old_file, *new_file;
 	gchar               *old_file_path, *new_file_path;
@@ -224,8 +226,7 @@ convert_file (NscConverter *convert)
 	g_object_unref (old_file);
 	g_object_unref (new_file);
 
-	streamer = nsc_gstreamer_new (priv->profile);
-	nsc_gstreamer_convert_file (streamer, old_file_path, new_file_path,
+	nsc_gstreamer_convert_file (priv->gst, old_file_path, new_file_path,
 				    &err);
 	g_free (old_file_path);
 	g_free (new_file_path);
@@ -250,9 +251,12 @@ converter_response_cb (GtkWidget *dialog,
 		priv->new_path =
 			g_strdup (gtk_file_chooser_get_uri
 				  (GTK_FILE_CHOOSER (priv->path_chooser)));
-
+		
 		priv->profile =
 			gm_audio_profile_choose_get_active (priv->profile_chooser);
+		
+		/* Create the gstreamer converter object */
+		priv->gst = nsc_gstreamer_new (priv->profile);
 
 		/* Ok, let's get ready to rumble */
 		convert_file (converter);
@@ -361,9 +365,9 @@ nsc_converter_init (NscConverter *converter)
 	/* Unreference the gconf client */
 	g_object_unref (gconf);
 
-	/* 
-	 * Set the profile to the default.
-	 */
+	priv->gst = NULL;
+
+	/* Set the profile to the default. */
 	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
 
 	/* Create the dialog */
