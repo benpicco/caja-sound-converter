@@ -53,9 +53,6 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-/* Default profile name */
-#define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
-
 /* Element names */
 #define FILE_SOURCE "gnomevfssrc"
 #define FILE_SINK   "gnomevfssink"
@@ -215,7 +212,6 @@ nsc_gstreamer_init (NscGStreamer *gstreamer)
 
 	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
 
-	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
 	priv->rebuild_pipeline = TRUE;
 }
 
@@ -431,10 +427,10 @@ tick_timeout_cb (NscGStreamer *gstreamer)
 /*
  * Public Methods
  */
-GObject *
-nsc_gstreamer_new (void)
+NscGStreamer *
+nsc_gstreamer_new (GMAudioProfile *profile)
 {
-	return g_object_new (NSC_TYPE_GSTREAMER, NULL);
+	return g_object_new (NSC_TYPE_GSTREAMER, "profile", profile, NULL);
 }
 
 GError *

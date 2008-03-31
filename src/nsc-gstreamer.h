@@ -53,19 +53,19 @@ typedef struct {
 	void (*error)      (NscGStreamer *gstreamer, GError *error);
 } NscGStreamerClass;
 
-GType     nsc_gstreamer_get_type         (void);
+GType         nsc_gstreamer_get_type          (void);
 
-GObject *nsc_gstreamer_new               (void);
-GError  *nsc_gstreamer_get_new_error     (NscGStreamer    *gstreamer);
+NscGStreamer *nsc_gstreamer_new               (GMAudioProfile  *profile);
+GError       *nsc_gstreamer_get_new_error     (NscGStreamer    *gstreamer);
 
-void     nsc_gstreamer_convert_file      (NscGStreamer    *gstreamer,
-					  const gchar     *src_url,
-					  const gchar     *sink_url,
-					  GError         **error);
-void     nsc_gstreamer_cancel_convert    (NscGStreamer    *gstreamer);
+void          nsc_gstreamer_convert_file      (NscGStreamer    *gstreamer,
+					       const gchar     *src_url,
+					       const gchar     *sink_url,
+					       GError         **error);
+void          nsc_gstreamer_cancel_convert    (NscGStreamer    *gstreamer);
 
-gboolean nsc_gstreamer_supports_profile  (GMAudioProfile  *profile);
-gboolean nsc_gstreamer_supports_encoding (GError         **error);
+gboolean      nsc_gstreamer_supports_profile  (GMAudioProfile  *profile);
+gboolean      nsc_gstreamer_supports_encoding (GError         **error);
 
 G_END_DECLS
 

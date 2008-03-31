@@ -207,10 +207,11 @@ static void
 convert_file (NscConverter *convert)
 {
 	NscConverterPrivate *priv;
-	GObject		    *streamer;
+	NscGStreamer	    *streamer;
 	NautilusFileInfo    *file_info;
 	GFile               *old_file, *new_file;
 	gchar               *old_file_path, *new_file_path;
+	GError              *err = NULL;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (convert);
 
@@ -227,7 +228,11 @@ convert_file (NscConverter *convert)
 	g_object_unref (old_file);
 	g_object_unref (new_file);
 
-	streamer = nsc_gstreamer_new ();
+	streamer = nsc_gstreamer_new (priv->profile);
+	nsc_gstreamer_convert_file (streamer, old_file_path, new_file_path,
+				    &err);
+	g_free (old_file_path);
+	g_free (new_file_path);
 }
 
 /**
