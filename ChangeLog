@@ -1,3 +1,10 @@
+2008-04-05  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-gstreamer.[ch]:
+	* src/nsc-extension.c (file_is_sound): 
+	Add support for convertering from vorbis, mp3,
+	and wav files.
+
 2008-04-04  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* src/nsc-gstreamer.c (connect_decodebin_cb): 

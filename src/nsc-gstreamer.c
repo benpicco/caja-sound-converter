@@ -631,6 +631,58 @@ nsc_gstreamer_supports_encoding (GError **error)
 }
 
 gboolean
+nsc_gstreamer_supports_mp3 (GError **error)
+{
+	GstElement *element = NULL;
+
+	element = gst_element_factory_make ("mad", "test");
+	if (element == NULL) {
+		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
+			     _("The plugin necessary for mp3 file access was not found"));
+		return FALSE;
+	}
+
+	g_object_unref (element);
+
+	return TRUE;
+}
+
+gboolean
+nsc_gstreamer_supports_wav (GError **error)
+{
+	GstElement *element = NULL;
+
+	element = gst_element_factory_make ("wavpackenc", "test");
+	if (element == NULL) {
+		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
+			     _("The plugin necessary for wav file access was not found"));
+		return FALSE;
+	}
+
+	g_object_unref (element);
+
+	return TRUE;
+}
+
+/* This function doesn't work */
+gboolean
+nsc_gstreamer_supports_aac (GError **error)
+{
+	GstElement *element = NULL;
+
+	element = gst_element_factory_make ("ffdec_libfaad", "test");
+	if (element == NULL) {
+		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
+			     _("The plugin necessary for aac file access was not found"));
+		return FALSE;
+	}
+
+	g_object_unref (element);
+
+	return TRUE;
+}
+
+gboolean
 nsc_gstreamer_supports_profile (GMAudioProfile *profile)
 {
 	GstElement *element;

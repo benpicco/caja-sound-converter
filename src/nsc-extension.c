@@ -24,14 +24,16 @@
 
 #include <config.h> /* for GETTEXT_PACKAGE */
 
-#include "nsc-extension.h"
 #include "nsc-converter.h"
+#include "nsc-extension.h"
+#include "nsc-gstreamer.h"
 
 #include <libnautilus-extension/nautilus-menu-provider.h>
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtkicontheme.h>
 #include <gtk/gtkwidget.h>
+#include <gst/gst.h>
 
 #include <string.h> /* For strcmp */
 
@@ -46,7 +48,8 @@ static GType sound_converter_type = 0;
 static gboolean
 file_is_sound (NautilusFileInfo *file_info)
 {
-	gchar    *tmp;
+	gchar          *tmp;
+	GError         *error = NULL;
 
 	/* Is this a file? */
 	tmp = nautilus_file_info_get_uri_scheme (file_info);
@@ -57,15 +60,44 @@ file_is_sound (NautilusFileInfo *file_info)
 	}
 	g_free (tmp);
 
-	/* Now lets get the mime type, and only convert flac files */
+	/* Now lets get the mime type */
 	tmp = nautilus_file_info_get_mime_type (file_info);
-	if (strncmp (tmp, "audio/x-flac", 12) != 0) {
+	
+	/*
+	 * This is a format we require, so
+	 * no check of plugin support is needed
+	 */
+	if (strncmp (tmp, "audio/x-flac", 12) == 0) {
 		g_free (tmp);
-		return FALSE;
+		return TRUE;
+	}
+
+	if (strncmp (tmp, "audio/x-vorbis+ogg", 18) == 0) {
+		g_free (tmp);
+		return TRUE;
+	}
+
+
+	/* Check for mp3 support */
+	if (nsc_gstreamer_supports_mp3 (&error)) {
+		if (strncmp (tmp, "audio/mpeg", 10) == 0) {
+			g_error_free (error);
+			g_free (tmp);
+			return TRUE;
+		}
+	}
+
+	/* Check for wav support */
+	if (nsc_gstreamer_supports_wav (&error)) {
+		if (strncmp (tmp, "audio/x-wav", 11) == 0) {
+			g_error_free (error);
+			g_free (tmp);
+			return TRUE;
+		}
 	}
 	g_free (tmp);
 
-	return TRUE;
+	return FALSE;
 }
 
 static GList *
@@ -141,6 +173,13 @@ nsc_extension_menu_provider_iface_init (NautilusMenuProviderIface *iface)
 static void
 nsc_extension_instance_init (NscExtension *sound)
 {
+	/*
+	 * Initialize gstreamer, otherwise the
+	 * profile chooser won't show any values.
+	 */
+	gst_init (NULL, NULL);
+
+
 }
 
 static void

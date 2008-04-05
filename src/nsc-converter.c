@@ -477,12 +477,10 @@ nsc_converter_init (NscConverter *converter)
 	GConfClient         *gconf;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
-	
-	/*
-	 * Initialize gstreamer, otherwise the
-	 * profile chooser won't show any values.
-	 */
-	gst_init (NULL, NULL);
+
+	/* Set init values */
+	priv->gst = NULL;
+	priv->files_converted = 0;
 
 	/* Get gconf client */
 	gconf = gconf_client_get_default ();
@@ -496,10 +494,6 @@ nsc_converter_init (NscConverter *converter)
 
 	/* Unreference the gconf client */
 	g_object_unref (gconf);
-
-	/* Set init values */
-	priv->gst = NULL;
-	priv->files_converted = 0;
 
 	/* Set the profile to the default. */
 	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
