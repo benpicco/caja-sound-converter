@@ -7,7 +7,7 @@
 <widget class="GtkDialog" id="main_dialog">
   <property name="height_request">215</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Convert Audio File</property>
+  <property name="title" translatable="yes">Convert Sound File</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
