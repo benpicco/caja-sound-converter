@@ -68,7 +68,7 @@ struct NscGStreamerPrivate {
 	GstElement     *pipeline;
 	GstElement     *filesrc;
 	GstElement     *queue;
-	GstElement     *thread;
+	GstElement     *decode;
 	GstElement     *encode;
 	GstElement     *filesink;
 
@@ -263,11 +263,7 @@ build_encoder (NscGStreamer *gstreamer)
 	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
 	g_return_val_if_fail (priv->profile != NULL, NULL);
 
-	/* 
-	 * Drop the flacdec from this, once we support more than
-	 * just flac files.
-	 */
-	pipeline = g_strdup_printf ("flacdec ! audioresample ! audioconvert ! %s",
+	pipeline = g_strdup_printf ("audioresample ! audioconvert ! %s",
 				    gm_audio_profile_get_pipeline (priv->profile));
 	element = gst_parse_bin_from_description (pipeline, TRUE, NULL);
 	g_free (pipeline);
@@ -345,6 +341,15 @@ build_pipeline (NscGStreamer *gstreamer)
 		      "max-size-time", 120 * GST_SECOND,
 		      NULL);
 
+	/* Decode */
+	priv->decode = gst_element_factory_make ("flacdec", "decode");
+	if (priv->decode == NULL) {
+		g_set_error (&priv->construct_error,
+			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
+			     _("Could not create GStreamer file input"));
+		return;
+	}
+
 	/* Encode */
 	priv->encode = build_encoder (gstreamer);
 	if (priv->encode == NULL) {
@@ -375,12 +380,12 @@ build_pipeline (NscGStreamer *gstreamer)
 
 	/* Add the elements to the pipeline */
 	gst_bin_add_many (GST_BIN (priv->pipeline),
-			  priv->filesrc, priv->queue,
+			  priv->filesrc, priv->queue, priv->decode,
 			  priv->encode, priv->filesink,
 			  NULL);
 
 	/* Link it all together */
-	if (!gst_element_link_many (priv->filesrc, priv->queue,
+	if (!gst_element_link_many (priv->filesrc, priv->queue, priv->decode,
 				    priv->encode, priv->filesink,
 				    NULL)) {
 		g_set_error (&priv->construct_error,
