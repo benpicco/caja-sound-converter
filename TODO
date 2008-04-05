@@ -1,3 +1,2 @@
-1. Pull id3tag info from original files.
+1. Pull metadata (vorbistag, id3tag, etc) info from original files.
 2. More error checking.
-3. Convert from more audio files, than just flac.

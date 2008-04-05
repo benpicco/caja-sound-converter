@@ -3,7 +3,7 @@
 	* src/nsc-gstreamer.[ch]:
 	* src/nsc-extension.c (file_is_sound): 
 	Add support for converting from vorbis, mp3,
-	aac, and wav files.
+	aac, and wav files. (Bug #1)
 
 2008-04-04  Brian Pepple  <bpepple@fedoraproject.org>
 
@@ -13,7 +13,7 @@
 
 2008-03-31  Brian Pepple  <bpepple@fedoraproject.org>
 
-	* configure.ac: Set min version of glib2.
+	* configure.ac: Set min version of glib2. (Bug #3)
 
 2008-03-31  Brian Pepple  <bpepple@fedoraproject.org>
 
