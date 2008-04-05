@@ -81,19 +81,34 @@ file_is_sound (NautilusFileInfo *file_info)
 	/* Check for mp3 support */
 	if (nsc_gstreamer_supports_mp3 (&error)) {
 		if (strncmp (tmp, "audio/mpeg", 10) == 0) {
-			g_error_free (error);
 			g_free (tmp);
 			return TRUE;
 		}
+	} else {
+		g_error_free (error);
+		error = NULL;
+	}
+
+	/* Check for aac suppport */
+	if (nsc_gstreamer_supports_aac (&error)) {
+		if (strncmp (tmp, "audio/mp4", 9) == 0) {
+			g_free (tmp);
+			return TRUE;
+		}
+	} else {
+		g_error_free (error);
+		error = NULL;
 	}
 
 	/* Check for wav support */
 	if (nsc_gstreamer_supports_wav (&error)) {
 		if (strncmp (tmp, "audio/x-wav", 11) == 0) {
-			g_error_free (error);
 			g_free (tmp);
 			return TRUE;
 		}
+	} else {
+		g_error_free (error);
+		error = NULL;
 	}
 	g_free (tmp);
 

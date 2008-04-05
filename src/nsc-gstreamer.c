@@ -664,13 +664,13 @@ nsc_gstreamer_supports_wav (GError **error)
 	return TRUE;
 }
 
-/* This function doesn't work */
 gboolean
 nsc_gstreamer_supports_aac (GError **error)
 {
 	GstElement *element = NULL;
 
-	element = gst_element_factory_make ("ffdec_libfaad", "test");
+	element = gst_element_factory_make ("ffdemux_mov_mp4_m4a_3gp_3g2_mj2",
+					    "test");
 	if (element == NULL) {
 		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
 			     _("The plugin necessary for aac file access was not found"));

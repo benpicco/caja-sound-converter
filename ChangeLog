@@ -2,8 +2,8 @@
 
 	* src/nsc-gstreamer.[ch]:
 	* src/nsc-extension.c (file_is_sound): 
-	Add support for convertering from vorbis, mp3,
-	and wav files.
+	Add support for converting from vorbis, mp3,
+	aac, and wav files.
 
 2008-04-04  Brian Pepple  <bpepple@fedoraproject.org>
 
