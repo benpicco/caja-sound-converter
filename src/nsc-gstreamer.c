@@ -316,14 +316,14 @@ connect_decodebin_cb (GstElement *decodebin,
 
 
         /* Only link once */
-        audiopad = gst_element_get_pad(data, "sink");
-        if (GST_PAD_IS_LINKED(audiopad)) {
-                g_object_unref(audiopad);
+        audiopad = gst_element_get_pad (data, "sink");
+        if (GST_PAD_IS_LINKED (audiopad)) {
+                g_object_unref (audiopad);
                 return;
         }
 
-        if (gst_pad_link(pad, audiopad) != GST_PAD_LINK_OK) {
-                g_print("Failed to link elements decodebin-encode\n");
+        if (gst_pad_link (pad, audiopad) != GST_PAD_LINK_OK) {
+                g_print ("Failed to link elements decodebin-encode\n");
         }
 }
 
@@ -602,32 +602,6 @@ nsc_gstreamer_cancel_convert (NscGStreamer *gstreamer)
 	gst_element_set_state (priv->pipeline, GST_STATE_NULL);
 
 	priv->rebuild_pipeline = TRUE;
-}
-
-gboolean
-nsc_gstreamer_supports_encoding (GError **error)
-{
-	GstElement *element = NULL;
-
-	element = gst_element_factory_make (FILE_SOURCE, "test");
-	if (element == NULL) {
-		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
-			     _("The plugin necessary for source file access was not found"));
-		return FALSE;
-	}
-
-	g_object_unref (element);
-
-	element = gst_element_factory_make (FILE_SINK, "test");
-	if (element == NULL) {
-		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
-			     _("The plugin necessary for file access was not found"));
-		return FALSE;
-	}
-
-	g_object_unref (element);
-
-	return TRUE;
 }
 
 gboolean

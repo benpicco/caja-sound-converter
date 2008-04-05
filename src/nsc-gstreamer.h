@@ -65,7 +65,6 @@ void          nsc_gstreamer_convert_file      (NscGStreamer    *gstreamer,
 void          nsc_gstreamer_cancel_convert    (NscGStreamer    *gstreamer);
 
 gboolean      nsc_gstreamer_supports_profile  (GMAudioProfile  *profile);
-gboolean      nsc_gstreamer_supports_encoding (GError         **error);
 gboolean      nsc_gstreamer_supports_mp3      (GError         **error);
 gboolean      nsc_gstreamer_supports_wav      (GError         **error);
 gboolean      nsc_gstreamer_supports_aac      (GError         **error);
