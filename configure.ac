@@ -61,6 +61,9 @@ AM_GST_ELEMENT_CHECK(vorbisenc,,AC_MSG_WARN([The 'vorbisenc' element was not fou
 AM_GST_ELEMENT_CHECK(flacdec,,AC_MSG_WARN([The 'flacdec' element was not found. This will cause encoding to FLAC to fail.]))
 AM_GST_ELEMENT_CHECK(gnomevfssink,,AC_MSG_WARN([The 'gnomevfssink' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(gnomevfssrc,,AC_MSG_WARN([The 'gnomevfssrc' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(decodebin,,AC_MSG_WARN([The 'decodebin' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(audioresample,,AC_MSG_WARN([The 'audioresample' element was not found.  This will cause Nautilus-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(audioconvert,,AC_MSG_WARN([The 'audioconvert' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 
 
 dnl -----------------------------------------------------------
