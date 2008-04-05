@@ -1,5 +1,9 @@
 2008-04-05  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* Release 0.5.0
+
+2008-04-05  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* data/progress.glade:
 	* data/progress.xml:
 	* src/nsc-converter.c (progress_cancel_cb): 

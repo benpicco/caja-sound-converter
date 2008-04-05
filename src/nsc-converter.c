@@ -59,7 +59,6 @@ struct _NscConverterPrivate {
 	GtkWidget       *profile_chooser;
 	GtkWidget       *progress_dlg;
 	GtkWidget       *progressbar;
-	GtkWidget       *progress_cancel;
 	
 	/* Files to be convertered */
 	GList		*files;
@@ -80,11 +79,6 @@ G_DEFINE_TYPE (NscConverter, nsc_converter, G_TYPE_OBJECT)
 enum {
 	PROP_FILES = 1,
 };
-
-typedef enum {
-	SIGNAL_TYPE_EXAMPLE,
-	LAST_SIGNAL
-} NscConverterSignalType;
 
 static void
 nsc_converter_finalize (GObject *object)
@@ -182,6 +176,8 @@ progress_cancel_cb (GtkWidget *widget, gpointer user_data)
 	nsc_gstreamer_cancel_convert (priv->gst);
 	g_object_unref (priv->gst);
 
+	/* TODO: Remove the file that was partially converted */
+
 	gtk_widget_destroy (priv->progress_dlg);
 }
 
@@ -192,6 +188,7 @@ static void
 create_progress_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
+	GtkWidget           *button;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
@@ -199,10 +196,11 @@ create_progress_dialog (NscConverter *converter)
 	nsc_xml_get_file ("progress.xml",
 			  "progress_dialog", &priv->progress_dlg,
 			  "file_progressbar", &priv->progressbar,
-			  "cancel_button", &priv->progress_cancel,
+			  "cancel_button", button,
 			  NULL);
 
-	g_signal_connect (G_OBJECT (priv->progress_cancel), "clicked",
+	/* Connect the signal for the cancel button */
+	g_signal_connect (G_OBJECT (button), "clicked",
 			  (GCallback) progress_cancel_cb,
 			  converter);
 }
@@ -281,7 +279,7 @@ convert_file (NscConverter *convert)
 	g_object_unref (old_file);
 	g_object_unref (new_file);
 
-	/* Let's get ready to rumble! */
+	/* Let's finally get to the fun stuff */
 	nsc_gstreamer_convert_file (priv->gst, old_file_path, new_file_path,
 				    &err);
 	
@@ -380,7 +378,7 @@ converter_response_cb (GtkWidget *dialog,
 		priv->profile =
 			gm_audio_profile_choose_get_active (priv->profile_chooser);
 	      
-		/* Is the profile supported? */
+		/* This probably isn't necessary, but let's leave it for now */
 		if (!(nsc_gstreamer_supports_profile (priv->profile))) {
 			/*
 			 * TODO: Add a message dialog to tell the user
@@ -399,6 +397,11 @@ converter_response_cb (GtkWidget *dialog,
 		g_signal_connect (G_OBJECT (priv->gst), "error",
 				  (GCallback) on_error_cb,
 				  converter);
+
+		/*
+		 * TODO: Connect to the progress signal
+		 *       to show progress of file being converted.
+		 */
 
 		/* Create the progress window */
 		create_progress_dialog (converter);
