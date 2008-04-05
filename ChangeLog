@@ -1,3 +1,9 @@
+2008-04-04  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-gstreamer.c (connect_decodebin_cb): 
+	Add code to use decodebin so that we can convert
+	more than just flacs.
+
 2008-03-31  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* configure.ac: Set min version of glib2.

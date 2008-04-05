@@ -305,6 +305,29 @@ just_say_yes (GstElement *element,
 	return TRUE;
 }
 
+/* Callback for when decodebin exposes a source pad */
+static void
+connect_decodebin_cb (GstElement *decodebin,
+		      GstPad     *pad,
+		      gboolean    last,
+		      gpointer    data)
+{
+        GstPad *audiopad;
+
+
+        /* Only link once */
+        audiopad = gst_element_get_pad(data, "sink");
+        if (GST_PAD_IS_LINKED(audiopad)) {
+                g_object_unref(audiopad);
+                return;
+        }
+
+        if (gst_pad_link(pad, audiopad) != GST_PAD_LINK_OK) {
+                g_print("Failed to link elements decodebin-encode\n");
+        }
+}
+
+
 static void
 build_pipeline (NscGStreamer *gstreamer)
 {
@@ -342,7 +365,7 @@ build_pipeline (NscGStreamer *gstreamer)
 		      NULL);
 
 	/* Decode */
-	priv->decode = gst_element_factory_make ("flacdec", "decode");
+	priv->decode = gst_element_factory_make ("decodebin", "decode");
 	if (priv->decode == NULL) {
 		g_set_error (&priv->construct_error,
 			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
@@ -384,10 +407,22 @@ build_pipeline (NscGStreamer *gstreamer)
 			  priv->encode, priv->filesink,
 			  NULL);
 
-	/* Link it all together */
-	if (!gst_element_link_many (priv->filesrc, priv->queue, priv->decode,
-				    priv->encode, priv->filesink,
-				    NULL)) {
+	/* Link filessrc, queue, and decoder */
+	if (!gst_element_link_many (priv->filesrc, priv->queue,
+				    priv->decode, NULL)) {
+		g_set_error (&priv->construct_error,
+			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
+			     _("Could not link pipeline"));
+		return;
+	}
+
+	/* Decodebin uses dynamic pads, so lets set up a callback. */
+	g_signal_connect (G_OBJECT (priv->decode), "new-decoded-pad",
+			  G_CALLBACK (connect_decodebin_cb),
+			  priv->encode);
+
+	/* Link the rest */
+	if (!gst_element_link (priv->encode, priv->filesink)) {
 		g_set_error (&priv->construct_error,
 			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
 			     _("Could not link pipeline"));
