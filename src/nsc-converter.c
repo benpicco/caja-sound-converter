@@ -196,7 +196,7 @@ create_progress_dialog (NscConverter *converter)
 	nsc_xml_get_file ("progress.xml",
 			  "progress_dialog", &priv->progress_dlg,
 			  "file_progressbar", &priv->progressbar,
-			  "cancel_button", button,
+			  "cancel_button", &button,
 			  NULL);
 
 	/* Connect the signal for the cancel button */
