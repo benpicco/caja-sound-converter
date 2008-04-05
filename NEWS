@@ -1,3 +1,8 @@
+NEW in 0.5.0 - "Repeater" :
+==============
+- Add support for convertering vorbis, mp3, and wav files. (#1)
+- Fixed: check for minimum version of glib2 needed. (#3)
+
 NEW in 0.1.0 - "Losing Skin" :
 ==============
 - First release.
