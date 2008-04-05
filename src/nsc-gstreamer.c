@@ -60,13 +60,22 @@ static guint signals[LAST_SIGNAL] = { 0 };
 struct NscGStreamerPrivate {
 	/* The current audio profile */
 	GMAudioProfile *profile;
+
 	/* If the pipeline needs to be re-created */
-	gboolean rebuild_pipeline;
+	gboolean        rebuild_pipeline;
+
 	/* The gstreamer pipline elements */
-	GstElement *pipeline, *filesrc, *queue, *thread, *encode, *filesink;
-	int seconds;
-	GError *construct_error;
-	guint tick_id;
+	GstElement     *pipeline;
+	GstElement     *filesrc;
+	GstElement     *queue;
+	GstElement     *thread;
+	GstElement     *encode;
+	GstElement     *filesink;
+
+	/* Misc */
+	int             seconds;
+	GError         *construct_error;
+	guint           tick_id;
 };
 
 /*
