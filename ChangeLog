@@ -1,5 +1,12 @@
 2008-04-05  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* data/progress.glade:
+	* data/progress.xml:
+	* src/nsc-converter.c (progress_cancel_cb): 
+	Add function to cancel file conversion.
+	
+2008-04-05  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* configure.ac: Add checks for decodebin, audioconvert,
 	and audioresample gstreamer elements.
 

@@ -59,6 +59,7 @@ struct _NscConverterPrivate {
 	GtkWidget       *profile_chooser;
 	GtkWidget       *progress_dlg;
 	GtkWidget       *progressbar;
+	GtkWidget       *progress_cancel;
 	
 	/* Files to be convertered */
 	GList		*files;
@@ -167,6 +168,24 @@ nsc_converter_class_init (NscConverterClass *klass)
 }
 
 /**
+ * Cancel converting the files.
+ */
+static void
+progress_cancel_cb (GtkWidget *widget, gpointer user_data)
+{
+	NscConverter        *conv;
+	NscConverterPrivate *priv;
+
+	conv =  NSC_CONVERTER (user_data);
+	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+
+	nsc_gstreamer_cancel_convert (priv->gst);
+	g_object_unref (priv->gst);
+
+	gtk_widget_destroy (priv->progress_dlg);
+}
+
+/**
  * Create the progress dialog
  */
 static void
@@ -180,9 +199,12 @@ create_progress_dialog (NscConverter *converter)
 	nsc_xml_get_file ("progress.xml",
 			  "progress_dialog", &priv->progress_dlg,
 			  "file_progressbar", &priv->progressbar,
+			  "cancel_button", &priv->progress_cancel,
 			  NULL);
 
-	/* TODO: connect the signals */
+	g_signal_connect (G_OBJECT (priv->progress_cancel), "clicked",
+			  (GCallback) progress_cancel_cb,
+			  converter);
 }
 
 /**
