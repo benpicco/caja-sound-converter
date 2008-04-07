@@ -52,7 +52,7 @@ struct _NscConverterPrivate {
 	NscGStreamer	*gst;
 
 	/* The current audio profile */
-	GMAudioProfile  *profile;
+	GMAudioProfile *profile;
 
 	GtkWidget	*dialog;
 	GtkWidget	*path_chooser;
@@ -72,8 +72,7 @@ struct _NscConverterPrivate {
 /* Default profile name */
 #define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
 
-#define NSC_CONVERTER_GET_PRIVATE(o)               \
-	(G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
+#define NSC_CONVERTER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
 
 G_DEFINE_TYPE (NscConverter, nsc_converter, G_TYPE_OBJECT)
 
