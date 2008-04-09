@@ -314,7 +314,6 @@ connect_decodebin_cb (GstElement *decodebin,
 {
         GstPad *audiopad;
 
-
         /* Only link once */
         audiopad = gst_element_get_pad (data, "sink");
         if (GST_PAD_IS_LINKED (audiopad)) {
@@ -346,8 +345,12 @@ build_pipeline (NscGStreamer *gstreamer)
 	bus = gst_element_get_bus (priv->pipeline);
 	gst_bus_add_signal_watch (bus);
 
+	/* Connect the signals we want to listen to on the bus */
 	g_signal_connect (G_OBJECT (bus), "message::error",
 			  G_CALLBACK (error_cb),
+			  gstreamer);
+	g_signal_connect (bus, "message::eos",
+			  G_CALLBACK(eos_cb),
 			  gstreamer);
 
 	/* Read from disk */
@@ -383,10 +386,10 @@ build_pipeline (NscGStreamer *gstreamer)
 		return;
 	}
 
-	/* Connect to the eos, so we know when it's finished */
-	g_signal_connect (bus, "message::eos",
-			  G_CALLBACK(eos_cb),
-			  gstreamer);
+	/* Decodebin uses dynamic pads, so lets set up a callback. */
+	g_signal_connect (G_OBJECT (priv->decode), "new-decoded-pad",
+			  G_CALLBACK (connect_decodebin_cb),
+			  priv->encode);
 
 	/* Write to disk */
 	priv->filesink = gst_element_factory_make (FILE_SINK, "file_sink");
@@ -415,11 +418,6 @@ build_pipeline (NscGStreamer *gstreamer)
 			     _("Could not link pipeline"));
 		return;
 	}
-
-	/* Decodebin uses dynamic pads, so lets set up a callback. */
-	g_signal_connect (G_OBJECT (priv->decode), "new-decoded-pad",
-			  G_CALLBACK (connect_decodebin_cb),
-			  priv->encode);
 
 	/* Link the rest */
 	if (!gst_element_link (priv->encode, priv->filesink)) {
