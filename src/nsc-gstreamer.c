@@ -227,7 +227,6 @@ nsc_gstreamer_init (NscGStreamer *gstreamer)
 /* 
  * Private Methods
  */
-
 static void
 eos_cb (GstBus     *bus,
 	GstMessage *message,
@@ -349,8 +348,8 @@ build_pipeline (NscGStreamer *gstreamer)
 	g_signal_connect (G_OBJECT (bus), "message::error",
 			  G_CALLBACK (error_cb),
 			  gstreamer);
-	g_signal_connect (bus, "message::eos",
-			  G_CALLBACK(eos_cb),
+	g_signal_connect (G_OBJECT (bus), "message::eos",
+			  G_CALLBACK (eos_cb),
 			  gstreamer);
 
 	/* Read from disk */
