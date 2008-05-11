@@ -1,0 +1,4 @@
+2008-05-11  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* POTFILES.in: Mark xml files as glade files for translation.
+
