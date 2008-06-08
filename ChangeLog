@@ -1,3 +1,8 @@
+2008-06-08  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* data/main.xml: Use gtk-convert button instead of
+	gtk-ok button.
+
 2008-04-05  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* Release 0.5.0
