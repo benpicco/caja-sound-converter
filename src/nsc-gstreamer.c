@@ -399,6 +399,10 @@ build_pipeline (NscGStreamer *gstreamer)
 		return;
 	}
 
+	/*
+	 * TODO: Eventually, we should ask the user if they want to 
+	 *       overwrite any existing file.
+	 */
 	g_signal_connect (G_OBJECT (priv->filesink), "allow-overwrite",
 			  G_CALLBACK (just_say_yes),
 			  gstreamer);

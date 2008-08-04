@@ -83,10 +83,11 @@ enum {
 static void
 nsc_converter_finalize (GObject *object)
 {
-	NscConverter 	    *converter = NSC_CONVERTER (object);
-	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (converter);
+	NscConverter 	    *conv = NSC_CONVERTER (object);
+	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (conv);
 
-	g_free (priv->new_path);
+	if (priv->new_path)
+		g_free (priv->new_path);
 
 	if (priv->gst)
 		g_object_unref (priv->gst);
@@ -171,7 +172,7 @@ progress_cancel_cb (GtkWidget *widget, gpointer user_data)
 	NscConverterPrivate *priv;
 
 	conv =  NSC_CONVERTER (user_data);
-	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+	priv =  NSC_CONVERTER_GET_PRIVATE (conv);
 
 	nsc_gstreamer_cancel_convert (priv->gst);
 	g_object_unref (priv->gst);
@@ -315,6 +316,7 @@ on_error_cb (NscGStreamer *gstream, GError *error, gpointer data)
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
+
 /**
  * Callback to report completion.
  */
@@ -338,7 +340,7 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progressbar),
 				       fraction);
 	text = g_strdup_printf (_("Converting: %d of %d"),
-				priv->files_converted +1, priv->total_files);
+				priv->files_converted + 1, priv->total_files);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
 				   text);
 	g_free (text);
