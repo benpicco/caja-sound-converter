@@ -140,6 +140,7 @@ nsc_gstreamer_dispose (GObject *object)
 	}
 
 	if (priv->pipeline) {
+		gst_element_set_state (priv->pipeline, GST_STATE_NULL);
 		g_object_unref (priv->pipeline);
 		priv->pipeline = NULL;
 	}
@@ -152,9 +153,6 @@ nsc_gstreamer_finalize (GObject *object)
 {
 	NscGStreamer        *self = NSC_GSTREAMER (object);
 	NscGStreamerPrivate *priv = NSC_GSTREAMER_GET_PRIVATE (self);
-
-	if (priv->pipeline)
-		gst_element_set_state (priv->pipeline, GST_STATE_NULL);
 
 	if (priv->tick_id)
 		g_source_remove (priv->tick_id);
