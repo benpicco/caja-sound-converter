@@ -46,6 +46,7 @@ enum {
 /* Signals */
 enum {
 	PROGRESS,
+	DURATION,
 	COMPLETION,
 	ERROR,
 	LAST_SIGNAL,
@@ -191,6 +192,14 @@ nsc_gstreamer_class_init (NscGStreamerClass *klass)
 			      G_TYPE_FROM_CLASS (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (NscGStreamerClass, progress),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__INT,
+			      G_TYPE_NONE, 1, G_TYPE_INT);
+	signals[DURATION] = 
+		g_signal_new ("duration",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (NscGStreamerClass, duration),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__INT,
 			      G_TYPE_NONE, 1, G_TYPE_INT);
@@ -456,7 +465,7 @@ tick_timeout_cb (NscGStreamer *gstreamer)
 		return FALSE;
 	}
 
-	if (!gst_element_query_position (priv->filesrc,
+	if (!gst_element_query_position (priv->pipeline,
 					 &format,
 					 &nanos)) {
 		g_warning (_("Could not get current file position"));
@@ -507,6 +516,9 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 {
 	GstStateChangeReturn  state_ret;
 	NscGStreamerPrivate  *priv;
+	gint64                nanos;
+	gint                  secs;
+	static GstFormat      format = GST_FORMAT_TIME;
 
 	g_return_if_fail (NSC_IS_GSTREAMER (gstreamer));
 
@@ -573,6 +585,15 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 		priv->rebuild_pipeline = TRUE;
 
 		return;
+	}
+
+	/* Get file duration */
+	if (!gst_element_query_duration (priv->pipeline, &format, &nanos)) {
+		g_warning (_("Could not get current file duration"));
+	} else {
+		secs = nanos / GST_SECOND;
+		g_signal_emit (gstreamer, signals[DURATION],
+			       0, secs);
 	}
 
 	priv->tick_id = g_timeout_add (250, (GSourceFunc)tick_timeout_cb,

@@ -26,6 +26,7 @@
 
 #include <config.h>
 
+#include <sys/time.h>
 #include <string.h>
 
 #include <gconf/gconf-client.h>
@@ -47,6 +48,13 @@
 
 typedef struct _NscConverterPrivate NscConverterPrivate;
 
+typedef struct {
+	int            seconds;
+	struct timeval time;
+	int            ripped;
+	int            taken;
+} Progress;
+
 struct _NscConverterPrivate {
 	/* GStreamer Object */
 	NscGStreamer	*gst;
@@ -59,6 +67,7 @@ struct _NscConverterPrivate {
 	GtkWidget       *profile_chooser;
 	GtkWidget       *progress_dlg;
 	GtkWidget       *progressbar;
+	GtkWidget       *speedbar;
 	
 	/* Files to be convertered */
 	GList		*files;
@@ -67,12 +76,22 @@ struct _NscConverterPrivate {
 
 	/* Directory to save new file */
 	gchar           *new_path;
+
+	/* Snapshots of the progress used to calculate the speed and the ETA */
+	Progress         before;
+
+        /* The duration of the file being converter. */
+	gint             current_duration;
+
+	/* The total duration of the file being converter. */
+	gint             total_duration;
 };
 
 /* Default profile name */
 #define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
 
-#define NSC_CONVERTER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
+#define NSC_CONVERTER_GET_PRIVATE(o)           \
+	(G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
 
 G_DEFINE_TYPE (NscConverter, nsc_converter, G_TYPE_OBJECT)
 
@@ -197,6 +216,7 @@ create_progress_dialog (NscConverter *converter)
 	nsc_xml_get_file ("progress.xml",
 			  "progress_dialog", &priv->progress_dlg,
 			  "file_progressbar", &priv->progressbar,
+			  "speed_progressbar", &priv->speedbar,
 			  "cancel_button", &button,
 			  NULL);
 
@@ -335,6 +355,15 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 	priv->files_converted++;
 	priv->files = priv->files->next;
 
+	/* Reset the progress variables */
+	priv->current_duration =  0;
+	priv->total_duration   =  0;
+	priv->before.seconds   = -1;
+
+	/* Clear the speed label */
+	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
+				   (_("Speed: Unknown")));
+
 	/* Update the progress dialog */
 	fraction = (double) priv->files_converted / priv->total_files;
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progressbar),
@@ -353,7 +382,99 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 		g_object_unref (priv->gst);
 		gtk_widget_destroy (priv->progress_dlg);
 	}
+}
 
+/**
+ * Callback to set file total duration.
+ */
+static void
+on_duration_cb (NscGStreamer *gstream,
+		const int     seconds,
+		gpointer      data)
+{
+	NscConverter        *conv;
+	NscConverterPrivate *priv;
+
+	conv = NSC_CONVERTER (data);
+	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+
+	priv->total_duration = seconds;
+}
+
+/**
+ * Update the ETA and Speed labels
+ */
+static void
+update_speed_progress (NscConverter *conv,
+		       float         speed,
+		       int           eta)
+{
+	NscConverterPrivate *priv;
+	gchar               *eta_str;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+
+	if (eta >= 0) {
+		eta_str =
+			g_strdup_printf (_("Estimated time left: %d:%02d (at %0.1f\303\227)"),
+					 eta / 60,
+					 eta % 60,
+					 speed);
+	} else {
+		eta_str = g_strdup (_("Estimated time left: unknown"));
+	}
+
+	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
+				   eta_str);
+	g_free (eta_str);
+}
+
+/**
+ * Callback to report on file conversion progress.
+ */
+static void
+on_progress_cb (NscGStreamer *gstream,
+		const int     seconds,
+		gpointer      data)
+{
+	NscConverter        *conv;
+	NscConverterPrivate *priv;
+
+	conv = NSC_CONVERTER (data);
+	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+
+	if (priv->total_duration != 0) {
+		float percent;
+
+		percent =
+			CLAMP ((float) (priv->current_duration + seconds)
+			       / (float) priv->total_duration, 0, 1);
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->speedbar), percent);
+
+		if (priv->before.seconds == -1) {
+			priv->before.seconds = priv->current_duration + seconds;
+			gettimeofday (&priv->before.time, NULL);
+		} else {
+			struct timeval time;
+			gint           taken;
+			float          speed;
+
+			gettimeofday (&time, NULL);
+			taken = time.tv_sec + (time.tv_usec / 1000000.0)
+				- (priv->before.time.tv_sec + (priv->before.time.tv_usec / 1000000.0));
+
+			if (taken >= 4) {
+				priv->before.taken += taken;
+				priv->before.ripped += priv->current_duration + seconds - priv->before.seconds;
+				speed = (float) priv->before.ripped / (float) priv->before.taken;
+				update_speed_progress (conv, speed,
+						       (int) ((priv->total_duration - priv->current_duration - seconds)
+							      / speed));
+				priv->before.seconds = priv->current_duration + seconds;
+				gettimeofday (&priv->before.time, NULL);
+			}
+		}
+	}
 }
 
 /**
@@ -399,6 +520,12 @@ converter_response_cb (GtkWidget *dialog,
 		g_signal_connect (G_OBJECT (priv->gst), "error",
 				  (GCallback) on_error_cb,
 				  converter);
+		g_signal_connect (G_OBJECT (priv->gst), "progress",
+				  (GCallback) on_progress_cb,
+				  converter);
+		g_signal_connect (G_OBJECT (priv->gst), "duration",
+				  (GCallback) on_duration_cb,
+				  converter);
 
 		/*
 		 * TODO: Connect to the progress signal
@@ -415,6 +542,8 @@ converter_response_cb (GtkWidget *dialog,
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
 					   text);
 		g_free (text);
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
+					   (_("Speed: Unknown")));
 
 		/* Alright we're finally ready to start converting */
 		convert_file (converter);
@@ -508,6 +637,9 @@ nsc_converter_init (NscConverter *converter)
 	/* Set init values */
 	priv->gst = NULL;
 	priv->files_converted = 0;
+	priv->current_duration = 0;
+	priv->total_duration = 0;
+	priv->before.seconds = -1;
 
 	/* Get gconf client */
 	gconf = gconf_client_get_default ();

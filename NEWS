@@ -1,3 +1,8 @@
+NEW in 0.7.0 - "Breaking the Broken" :
+==============
+- Add  progess bar to show eta & speed of file conversion.
+- Minor tweeks to progress dialog.
+
 NEW in 0.5.0 - "Wig Out at Denko's" :
 ==============
 - Add support for convertering vorbis, mp3, aac, and wav files. (Bug #1)

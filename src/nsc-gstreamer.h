@@ -49,6 +49,7 @@ typedef struct {
 typedef struct {
 	GObjectClass        parent_class;
 	void (*progress)   (NscGStreamer *gstreamer, const int seconds);
+	void (*duration)   (NscGStreamer *gstreamer, const int seconds);
 	void (*completion) (NscGStreamer *gstreamer);
 	void (*error)      (NscGStreamer *gstreamer, GError *error);
 } NscGStreamerClass;
