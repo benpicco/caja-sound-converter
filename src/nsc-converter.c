@@ -75,7 +75,7 @@ struct _NscConverterPrivate {
 	gint		 total_files;
 
 	/* Directory to save new file */
-	gchar           *new_path;
+	gchar           *save_path;
 
 	/* Snapshots of the progress used to calculate the speed and the ETA */
 	Progress         before;
@@ -105,8 +105,8 @@ nsc_converter_finalize (GObject *object)
 	NscConverter 	    *conv = NSC_CONVERTER (object);
 	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (conv);
 
-	if (priv->new_path)
-		g_free (priv->new_path);
+	if (priv->save_path)
+		g_free (priv->save_path);
 
 	if (priv->gst)
 		g_object_unref (priv->gst);
@@ -259,7 +259,7 @@ create_new_file (NscConverter *converter, GFile *file)
 	g_free (old_basename);
 
 	/* Now let's create the new files uri */
-	new_uri = g_strconcat (priv->new_path, G_DIR_SEPARATOR_S,
+	new_uri = g_strconcat (priv->save_path, G_DIR_SEPARATOR_S,
 			       new_basename, NULL);
 	g_free (new_basename);
 
@@ -324,7 +324,7 @@ on_error_cb (NscGStreamer *gstream, GError *error, gpointer data)
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	text = g_strdup_printf (_("Nautilus Sound Converter could "
-				  "not converter this file.\nReason: %s"),
+				  "not convert this file.\nReason: %s"),
 				error->message);
 
 	dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog), 0,
@@ -463,7 +463,7 @@ on_progress_cb (NscGStreamer *gstream,
 			taken = time.tv_sec + (time.tv_usec / 1000000.0)
 				- (priv->before.time.tv_sec + (priv->before.time.tv_usec / 1000000.0));
 
-			if (taken >= 4) {
+			if (taken >= 2) {
 				priv->before.taken += taken;
 				priv->before.ripped += priv->current_duration + seconds - priv->before.seconds;
 				speed = (float) priv->before.ripped / (float) priv->before.taken;
@@ -494,7 +494,7 @@ converter_response_cb (GtkWidget *dialog,
 		priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 		/* Grab the save path */
-		priv->new_path =
+		priv->save_path =
 			g_strdup (gtk_file_chooser_get_uri
 				  (GTK_FILE_CHOOSER (priv->path_chooser)));
 		
