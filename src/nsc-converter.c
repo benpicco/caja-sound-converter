@@ -308,6 +308,26 @@ convert_file (NscConverter *convert)
 	g_free (new_file_path);
 }
 
+/**
+ * Update progressbar text
+ */
+static void
+update_progressbar_text (NscConverter *convert)
+{
+	NscConverterPrivate *priv;
+	gchar               *text;
+
+	g_return_if_fail (NSC_IS_CONVERTER (convert));
+
+	priv = NSC_CONVERTER_GET_PRIVATE (convert);
+
+	text = g_strdup_printf (_("Converting: %d of %d"),
+				priv->files_converted + 1, priv->total_files);
+	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
+				   text);
+	g_free (text);
+}
+
 /** 
  * Callback to report errors.  The error passed in does not
  * need to be freed.
@@ -346,7 +366,6 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 	NscConverter	    *converter;
 	NscConverterPrivate *priv;
 	gdouble              fraction;
-	gchar               *text;
 
 	converter = NSC_CONVERTER (data);
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
@@ -368,11 +387,7 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 	fraction = (double) priv->files_converted / priv->total_files;
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progressbar),
 				       fraction);
-	text = g_strdup_printf (_("Converting: %d of %d"),
-				priv->files_converted + 1, priv->total_files);
-	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
-				   text);
-	g_free (text);
+	update_progressbar_text (converter);
 
 	/* If there are more files let's go ahead and convert them */
 	if (priv->files != NULL) {
@@ -488,7 +503,6 @@ converter_response_cb (GtkWidget *dialog,
 	if (response_id == GTK_RESPONSE_OK) {
 		NscConverter	    *converter;
 		NscConverterPrivate *priv;
-		gchar               *text;
 
 		converter = NSC_CONVERTER (user_data);
 		priv = NSC_CONVERTER_GET_PRIVATE (converter);
@@ -527,21 +541,11 @@ converter_response_cb (GtkWidget *dialog,
 				  (GCallback) on_duration_cb,
 				  converter);
 
-		/*
-		 * TODO: Connect to the progress signal
-		 *       to show progress of file being converted.
-		 */
-
 		/* Create the progress window */
 		create_progress_dialog (converter);
 
 		/* Let's put some text in the progressbar */
-		text = g_strdup_printf (_("Converting: %d of %d"),
-					priv->files_converted +1,
-					priv->total_files);
-		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
-					   text);
-		g_free (text);
+		update_progressbar_text (converter);
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
 					   (_("Speed: Unknown")));
 
