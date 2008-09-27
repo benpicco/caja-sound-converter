@@ -280,7 +280,6 @@ convert_file (NscConverter *convert)
 	NscConverterPrivate *priv;
 	NautilusFileInfo    *file_info;
 	GFile               *old_file, *new_file;
-	gchar               *old_file_path, *new_file_path;
 	GError              *err = NULL;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (convert);
@@ -292,20 +291,13 @@ convert_file (NscConverter *convert)
 	old_file = nautilus_file_info_get_location (file_info);
 	new_file = create_new_file (convert, old_file);
 
-	/* Grab the path from the files */
-	old_file_path = g_file_get_path (old_file);
-	new_file_path = g_file_get_path (new_file);
+	/* Let's finally get to the fun stuff */
+	nsc_gstreamer_convert_file (priv->gst, old_file, new_file,
+				    &err);
 
 	/* Free the files since we do not need them anymore */
 	g_object_unref (old_file);
 	g_object_unref (new_file);
-
-	/* Let's finally get to the fun stuff */
-	nsc_gstreamer_convert_file (priv->gst, old_file_path, new_file_path,
-				    &err);
-	
-	g_free (old_file_path);
-	g_free (new_file_path);
 }
 
 /**
@@ -665,6 +657,9 @@ nsc_converter_init (NscConverter *converter)
 	create_main_dialog (converter);	
 }
 
+/*
+ * Public Methods
+ */
 NscConverter *
 nsc_converter_new (GList *files)
 {

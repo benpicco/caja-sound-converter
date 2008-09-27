@@ -55,8 +55,8 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 /* Element names */
-#define FILE_SOURCE "gnomevfssrc"
-#define FILE_SINK   "gnomevfssink"
+#define FILE_SOURCE "giosrc"
+#define FILE_SINK   "giosink"
 
 struct NscGStreamerPrivate {
 	/* The current audio profile */
@@ -510,20 +510,21 @@ nsc_gstreamer_get_new_error (NscGStreamer *gstreamer)
 
 void
 nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
-			    const char   *src_url,
-			    const char   *sink_url,
+			    GFile        *src,
+			    GFile        *sink,
 			    GError      **error)
 {
 	GstStateChangeReturn  state_ret;
 	NscGStreamerPrivate  *priv;
 	gint64                nanos;
 	gint                  secs;
+	gchar                *uri;
 	static GstFormat      format = GST_FORMAT_TIME;
 
 	g_return_if_fail (NSC_IS_GSTREAMER (gstreamer));
 
-	g_return_if_fail (src_url != NULL);
-	g_return_if_fail (sink_url != NULL);
+	g_return_if_fail (src != NULL);
+	g_return_if_fail (sink != NULL);
        
 	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
 	
@@ -538,17 +539,29 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 		}
 	}
 
+	/* NOTE: Once gstreamer-plugins-base 0.10.20 is more widely
+	 *       available we can just set the object with the file
+	 *       instead of the uri.
+	 */
+	uri = g_file_get_uri (src);
 	/* Set the input filename */
 	gst_element_set_state (priv->filesrc, GST_STATE_NULL);
 	g_object_set (G_OBJECT (priv->filesrc),
-		      "location", src_url,
+		      "location", uri,
 		      NULL);
+	g_free (uri);
 
+	/* NOTE: Once gstreamer-plugins-base 0.10.20 is more widely
+	 *       available we can just set the object with the file
+	 *       instead of the uri.
+	 */
+	uri = g_file_get_uri (sink);
 	/* Set the output filename */
 	gst_element_set_state (priv->filesink, GST_STATE_NULL);
 	g_object_set (G_OBJECT (priv->filesink),
-		      "location", sink_url,
+		      "location", uri,
 		      NULL);
+	g_free (uri);
 
 	/* Let's get ready to rumble! */
 	state_ret = gst_element_set_state (priv->pipeline,

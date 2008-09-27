@@ -1,6 +1,7 @@
 NEW in 0.7.0 - "Breaking the Broken" :
 ==============
 - Add  progess bar to show eta & speed of file conversion.
+- Use gstreamer gio plugins.
 - Minor tweeks to progress dialog.
 
 NEW in 0.5.0 - "Wig Out at Denko's" :

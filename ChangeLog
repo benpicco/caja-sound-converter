@@ -1,3 +1,10 @@
+2008-09-27  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* configure.ac:
+	* src/nsc-converter.c:
+	* src/nsc-gstreamer.[ch]: Use gio sink & source,
+	instead of the gnomevfs src & sink.
+
 2008-08-05  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* configure.ac: Bump version.

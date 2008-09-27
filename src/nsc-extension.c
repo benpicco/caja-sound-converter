@@ -193,8 +193,6 @@ nsc_extension_instance_init (NscExtension *sound)
 	 * profile chooser won't show any values.
 	 */
 	gst_init (NULL, NULL);
-
-
 }
 
 static void

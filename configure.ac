@@ -28,7 +28,7 @@ GLIB_REQUIRED=2.16.0
 NAUTILUS_REQUIRED=2.12.0
 GCONF_REQUIRED=1.2.0
 GTK_REQUIRED=2.12.0
-GSTREAMER_REQUIRED=0.10.3
+GSTREAMER_REQUIRED=0.10.19
 GNOME_MEDIA_PROFILES_REQUIRED=2.11.91
 
 dnl -----------------------------------------------------------
@@ -41,7 +41,7 @@ PKG_CHECK_MODULES(NSC,
 	libnautilus-extension >= $NAUTILUS_REQUIRED
 	gtk+-2.0 >= $GTK_REQUIRED
 	gstreamer-0.10 >= $GSTREAMER_REQUIRED
-	gstreamer-plugins-base-0.10
+	gstreamer-plugins-base-0.10 >= $GSTREAMER_REQUIRED
 	gnome-media-profiles >= $GNOME_MEDIA_PROFILES_REQUIRED
 ])
 AC_SUBST(NSC_CFLAGS)
@@ -59,8 +59,8 @@ dnl not present.
 dnl -----------------------------------------------------------
 AM_GST_ELEMENT_CHECK(vorbisenc,,AC_MSG_WARN([The 'vorbisenc' element was not found. This will cause encoding to Ogg Vorbis to fail.]))
 AM_GST_ELEMENT_CHECK(flacdec,,AC_MSG_WARN([The 'flacdec' element was not found. This will cause encoding to FLAC to fail.]))
-AM_GST_ELEMENT_CHECK(gnomevfssink,,AC_MSG_WARN([The 'gnomevfssink' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
-AM_GST_ELEMENT_CHECK(gnomevfssrc,,AC_MSG_WARN([The 'gnomevfssrc' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(giosink,,AC_MSG_WARN([The 'giosink' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(giosrc,,AC_MSG_WARN([The 'giosrc' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(decodebin,,AC_MSG_WARN([The 'decodebin' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(audioresample,,AC_MSG_WARN([The 'audioresample' element was not found.  This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(audioconvert,,AC_MSG_WARN([The 'audioconvert' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))

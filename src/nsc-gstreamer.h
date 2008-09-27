@@ -26,6 +26,7 @@
 #ifndef NSC_GSTREAMER_H
 #define NSC_GSTREAMER_H
 
+#include <gio/gio.h>
 #include <glib/gmacros.h>
 #include <glib-object.h>
 #include <profiles/audio-profile.h>
@@ -60,8 +61,8 @@ NscGStreamer *nsc_gstreamer_new               (GMAudioProfile  *profile);
 GError       *nsc_gstreamer_get_new_error     (NscGStreamer    *gstreamer);
 
 void          nsc_gstreamer_convert_file      (NscGStreamer    *gstreamer,
-					       const gchar     *src_url,
-					       const gchar     *sink_url,
+					       GFile           *src,
+					       GFile           *sink,
 					       GError         **error);
 void          nsc_gstreamer_cancel_convert    (NscGStreamer    *gstreamer);
 
