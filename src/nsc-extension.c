@@ -77,6 +77,11 @@ file_is_sound (NautilusFileInfo *file_info)
 		return TRUE;
 	}
 
+	/* Mime type for new GNOME audio profile .oga */
+	if (strncmp (tmp, "audio/ogg", 9) == 0) {
+		g_free (tmp);
+		return TRUE;
+	}
 
 	/* Check for mp3 support */
 	if (nsc_gstreamer_supports_mp3 (&error)) {

@@ -1,3 +1,8 @@
+2008-11-28  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-extension.c (file_is_sound):
+	Add support for 'audio/ogg' mime type.
+
 2008-10-27  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* Release 0.7.0
