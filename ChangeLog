@@ -1,3 +1,8 @@
+2008-12-29  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-gstreamer.c (build_encoder):
+	Rearrange pipeline to fix wavpack conversions.
+
 2008-11-28  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* src/nsc-extension.c (file_is_sound):

@@ -269,7 +269,7 @@ build_encoder (NscGStreamer *gstreamer)
 	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
 	g_return_val_if_fail (priv->profile != NULL, NULL);
 
-	pipeline = g_strdup_printf ("audioresample ! audioconvert ! %s",
+	pipeline = g_strdup_printf ("audioconvert ! audioresample ! %s",
 				    gm_audio_profile_get_pipeline (priv->profile));
 	element = gst_parse_bin_from_description (pipeline, TRUE, NULL);
 	g_free (pipeline);
