@@ -1,3 +1,8 @@
+NEW in 1.0.0 - "Mass Nerder"
+==============
+- Fix pipeline, so flacs tags are converted.
+- Add support for 'audio/ogg' mime type.
+
 NEW in 0.7.0 - "Breaking the Broken" :
 ==============
 - Add  progess bar to show eta & speed of file conversion.

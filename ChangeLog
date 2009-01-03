@@ -1,5 +1,12 @@
 2009-01-03  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* Release 1.0.0
+	* README:
+	* NEWS:
+	* configure.ac: Update for release.
+
+2009-01-03  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* src/nsc-gstreamer.c: Use default value for queue
 	plugin.  This will fix tags for flacs.
 

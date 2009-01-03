@@ -3,8 +3,6 @@ Nautilus-Sound-Converter
 
 The Nautilus-Sound-Converter extension allows you to convert audio files to different formats using the GStreamer framework.
 
-Metadata tags should be written, though flac tag support will need gstreamer-plugins-good >= 0.10.11 (I haven't had a chance to test that this works, but based on the changelog it looks like flac tags have finally been ported to 0.10.x)
-
 Bug reporting:
 ==============
 
