@@ -1,3 +1,8 @@
+2009-01-03  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-gstreamer.c: Use default value for queue
+	plugin.  This will fix tags for flacs.
+
 2008-12-29  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* src/nsc-gstreamer.c (build_encoder):

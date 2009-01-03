@@ -68,7 +68,6 @@ struct NscGStreamerPrivate {
 	/* The gstreamer pipline elements */
 	GstElement     *pipeline;
 	GstElement     *filesrc;
-	GstElement     *queue;
 	GstElement     *decode;
 	GstElement     *encode;
 	GstElement     *filesink;
@@ -368,11 +367,6 @@ build_pipeline (NscGStreamer *gstreamer)
 		return;
 	}
 
-	priv->queue = gst_element_factory_make ("queue", "queue");
-	g_object_set (priv->queue,
-		      "max-size-time", 120 * GST_SECOND,
-		      NULL);
-
 	/* Decode */
 	priv->decode = gst_element_factory_make ("decodebin", "decode");
 	if (priv->decode == NULL) {
@@ -416,13 +410,12 @@ build_pipeline (NscGStreamer *gstreamer)
 
 	/* Add the elements to the pipeline */
 	gst_bin_add_many (GST_BIN (priv->pipeline),
-			  priv->filesrc, priv->queue, priv->decode,
+			  priv->filesrc, priv->decode,
 			  priv->encode, priv->filesink,
 			  NULL);
 
-	/* Link filessrc, queue, and decoder */
-	if (!gst_element_link_many (priv->filesrc, priv->queue,
-				    priv->decode, NULL)) {
+	/* Link filessrc and decoder */
+	if (!gst_element_link_many (priv->filesrc, priv->decode, NULL)) {
 		g_set_error (&priv->construct_error,
 			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
 			     _("Could not link pipeline"));
