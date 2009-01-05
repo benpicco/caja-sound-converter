@@ -1,3 +1,10 @@
+2009-01-04  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* configure.ac:
+	* src/nsc-gstreamer.c (nsc_gstreamer_convert_file): 
+	Use gstreamer gio plugins file property. Bump minimum
+	version of gstreamer needed to 0.10.20.
+
 2009-01-03  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* Release 1.0.0

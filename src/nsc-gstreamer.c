@@ -467,8 +467,7 @@ tick_timeout_cb (NscGStreamer *gstreamer)
 
 	secs = nanos / GST_SECOND;
 	if (secs != priv->seconds) {
-		g_signal_emit (gstreamer, signals[PROGRESS],
-			       0, secs);
+		g_signal_emit (gstreamer, signals[PROGRESS], 0, secs);
 	}
 
 	return TRUE;
@@ -510,8 +509,6 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 	GstStateChangeReturn  state_ret;
 	NscGStreamerPrivate  *priv;
 	gint64                nanos;
-	gint                  secs;
-	gchar                *uri;
 	static GstFormat      format = GST_FORMAT_TIME;
 
 	g_return_if_fail (NSC_IS_GSTREAMER (gstreamer));
@@ -532,29 +529,17 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 		}
 	}
 
-	/* NOTE: Once gstreamer-plugins-base 0.10.20 is more widely
-	 *       available we can just set the object with the file
-	 *       instead of the uri.
-	 */
-	uri = g_file_get_uri (src);
-	/* Set the input filename */
+	/* Set the input file */
 	gst_element_set_state (priv->filesrc, GST_STATE_NULL);
 	g_object_set (G_OBJECT (priv->filesrc),
-		      "location", uri,
+		      "file", src,
 		      NULL);
-	g_free (uri);
 
-	/* NOTE: Once gstreamer-plugins-base 0.10.20 is more widely
-	 *       available we can just set the object with the file
-	 *       instead of the uri.
-	 */
-	uri = g_file_get_uri (sink);
 	/* Set the output filename */
 	gst_element_set_state (priv->filesink, GST_STATE_NULL);
 	g_object_set (G_OBJECT (priv->filesink),
-		      "location", uri,
+		      "file", sink,
 		      NULL);
-	g_free (uri);
 
 	/* Let's get ready to rumble! */
 	state_ret = gst_element_set_state (priv->pipeline,
@@ -597,9 +582,10 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 	if (!gst_element_query_duration (priv->pipeline, &format, &nanos)) {
 		g_warning (_("Could not get current file duration"));
 	} else {
+		gint secs;
+
 		secs = nanos / GST_SECOND;
-		g_signal_emit (gstreamer, signals[DURATION],
-			       0, secs);
+		g_signal_emit (gstreamer, signals[DURATION], 0, secs);
 	}
 
 	priv->tick_id = g_timeout_add (250, (GSourceFunc)tick_timeout_cb,
