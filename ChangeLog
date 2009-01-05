@@ -1,3 +1,8 @@
+2009-01-05  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* configure.ac:
+	Drop package check module for gstreamer-plugins-base-0.10.
+
 2009-01-04  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* configure.ac:

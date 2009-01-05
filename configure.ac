@@ -41,7 +41,6 @@ PKG_CHECK_MODULES(NSC,
 	libnautilus-extension >= $NAUTILUS_REQUIRED
 	gtk+-2.0 >= $GTK_REQUIRED
 	gstreamer-0.10 >= $GSTREAMER_REQUIRED
-	gstreamer-plugins-base-0.10 >= $GSTREAMER_REQUIRED
 	gnome-media-profiles >= $GNOME_MEDIA_PROFILES_REQUIRED
 ])
 AC_SUBST(NSC_CFLAGS)
