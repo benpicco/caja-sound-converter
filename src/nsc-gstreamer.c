@@ -482,24 +482,6 @@ nsc_gstreamer_new (GMAudioProfile *profile)
 	return g_object_new (NSC_TYPE_GSTREAMER, "profile", profile, NULL);
 }
 
-GError *
-nsc_gstreamer_get_new_error (NscGStreamer *gstreamer)
-{
-	NscGStreamerPrivate *priv;
-	GError              *error;
-
-	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
-
-	if (gstreamer == NULL || priv == NULL) {
-		g_set_error (&error,
-			     NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
-			     _("Converter object is not valid."));
-		return error;
-	}
-
-	return priv->construct_error;
-}
-
 void
 nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 			    GFile        *src,

@@ -56,16 +56,12 @@ typedef struct {
 } NscGStreamerClass;
 
 GType         nsc_gstreamer_get_type          (void);
-
 NscGStreamer *nsc_gstreamer_new               (GMAudioProfile  *profile);
-GError       *nsc_gstreamer_get_new_error     (NscGStreamer    *gstreamer);
-
 void          nsc_gstreamer_convert_file      (NscGStreamer    *gstreamer,
 					       GFile           *src,
 					       GFile           *sink,
 					       GError         **error);
 void          nsc_gstreamer_cancel_convert    (NscGStreamer    *gstreamer);
-
 gboolean      nsc_gstreamer_supports_profile  (GMAudioProfile  *profile);
 gboolean      nsc_gstreamer_supports_mp3      (GError         **error);
 gboolean      nsc_gstreamer_supports_wav      (GError         **error);
