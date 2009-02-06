@@ -114,6 +114,9 @@ nsc_converter_finalize (GObject *object)
 	if (priv->profile)
 		g_object_unref (priv->profile);
 
+	if (priv->files)
+		g_list_free (priv->files);
+
 	G_OBJECT_CLASS (nsc_converter_parent_class)->finalize(object);
 }
 
