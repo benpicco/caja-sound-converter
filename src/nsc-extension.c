@@ -115,6 +115,17 @@ file_is_sound (NautilusFileInfo *file_info)
 		g_error_free (error);
 		error = NULL;
 	}
+
+	/* Check for Musepack support */
+	if (nsc_gstreamer_supports_musepack (&error)) {
+		if (strncmp (tmp, "audio/x-musepack", 16) == 0) {
+			g_free (tmp);
+			return TRUE;
+		}
+	} else {
+		g_error_free (error);
+		error = NULL;
+	}
 	g_free (tmp);
 
 	return FALSE;

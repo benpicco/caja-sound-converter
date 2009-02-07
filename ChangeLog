@@ -1,3 +1,9 @@
+2009-02-06  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-extension.c:
+	* src/nsc-gstreamer.[ch] (nsc_gstreamer_supports_musepack): 
+	Add musepack support. (Bug #10)
+
 2009-01-05  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* configure.ac:
