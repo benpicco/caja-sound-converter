@@ -2,6 +2,7 @@ New in 1.0.x -
 ==============
 - Add support for 'audio/x-musepack' mime type. (Bug #10)
 - Bump minimum version of gstreamer needed to 0.10.20.
+- Use status icon, so the user can hide progress dialog if they want.
 
 NEW in 1.0.0 - "Mass Nerder"
 ==============
