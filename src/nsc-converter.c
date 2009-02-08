@@ -31,13 +31,7 @@
 
 #include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
-#include <gtk/gtkbox.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkfilechooser.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtkprogressbar.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include <gst/gst.h>
 #include <libnautilus-extension/nautilus-file-info.h>
 #include <profiles/gnome-media-profiles.h>
@@ -68,6 +62,9 @@ struct _NscConverterPrivate {
 	GtkWidget       *progress_dlg;
 	GtkWidget       *progressbar;
 	GtkWidget       *speedbar;
+
+	/* Status icon */
+	GtkStatusIcon   *status_icon;
 	
 	/* Files to be convertered */
 	GList		*files;
@@ -203,6 +200,9 @@ progress_cancel_cb (GtkWidget *widget, gpointer user_data)
 	/* TODO: Remove the file that was partially converted */
 
 	gtk_widget_destroy (priv->progress_dlg);
+	if (gtk_status_icon_is_embedded (priv->status_icon)) {
+		gtk_status_icon_set_visible (priv->status_icon, FALSE);
+	}
 }
 
 /**
@@ -321,6 +321,10 @@ update_progressbar_text (NscConverter *convert)
 				priv->files_converted + 1, priv->total_files);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
 				   text);
+	if (priv->status_icon) {
+		gtk_status_icon_set_tooltip (priv->status_icon,
+					     text);
+	}
 	g_free (text);
 }
 
@@ -392,7 +396,11 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 		/* No more files to convert time to do some cleanup */
 		g_object_unref (priv->gst);
 		priv->gst = NULL;
+
 		gtk_widget_destroy (priv->progress_dlg);
+		if (gtk_status_icon_is_embedded (priv->status_icon)) {
+			gtk_status_icon_set_visible (priv->status_icon, FALSE);
+		}
 	}
 }
 
@@ -489,6 +497,64 @@ on_progress_cb (NscGStreamer *gstream,
 	}
 }
 
+static void
+converter_status_icon_activate_cb (GtkStatusIcon *status_icon,
+				   NscConverter  *converter)
+{
+	NscConverterPrivate *priv;
+	gboolean             visible;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+
+	g_object_get (priv->progress_dlg,
+		      "visible", &visible,
+		      NULL);
+
+	if (visible && gtk_status_icon_is_embedded (status_icon)) {
+		gtk_widget_hide (priv->progress_dlg);
+	} else {
+		gtk_widget_show_all (priv->progress_dlg);
+	}
+}
+
+static void
+create_gst (NscConverter *conv)
+{
+	NscConverterPrivate *priv;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+
+	priv->gst = nsc_gstreamer_new (priv->profile);
+	
+	/* Connect to the gstreamer object signals */
+	g_signal_connect (G_OBJECT (priv->gst), "completion",
+			  (GCallback) on_completion_cb,
+			  conv);
+	g_signal_connect (G_OBJECT (priv->gst), "error",
+			  (GCallback) on_error_cb,
+			  conv);
+	g_signal_connect (G_OBJECT (priv->gst), "progress",
+			  (GCallback) on_progress_cb,
+			  conv);
+	g_signal_connect (G_OBJECT (priv->gst), "duration",
+			  (GCallback) on_duration_cb,
+			  conv);
+}
+
+static void
+create_status_icon (NscConverter *conv)
+{
+	NscConverterPrivate *priv;
+
+	priv = NSC_CONVERTER_GET_PRIVATE (conv);
+
+	priv->status_icon = gtk_status_icon_new_from_icon_name ("gtk-convert");
+	g_signal_connect (priv->status_icon,
+			  "activate",
+			  G_CALLBACK (converter_status_icon_activate_cb),
+			  conv);
+}
+	
 /**
  * The OK or Cancel button was pressed on the main dialog.
  */
@@ -522,24 +588,16 @@ converter_response_cb (GtkWidget *dialog,
 		}
 
 		/* Create the gstreamer converter object */
-		priv->gst = nsc_gstreamer_new (priv->profile);
-	
-		/* Connect to the gstreamer object signals */
-		g_signal_connect (G_OBJECT (priv->gst), "completion",
-				  (GCallback) on_completion_cb,
-				  converter);
-		g_signal_connect (G_OBJECT (priv->gst), "error",
-				  (GCallback) on_error_cb,
-				  converter);
-		g_signal_connect (G_OBJECT (priv->gst), "progress",
-				  (GCallback) on_progress_cb,
-				  converter);
-		g_signal_connect (G_OBJECT (priv->gst), "duration",
-				  (GCallback) on_duration_cb,
-				  converter);
+		create_gst (converter);
 
 		/* Create the progress window */
 		create_progress_dialog (converter);
+
+		/* Only create the status icon if we haven't already */
+		if (!priv->status_icon) {
+			create_status_icon (converter);
+		}
+		gtk_status_icon_set_visible (priv->status_icon, TRUE);
 
 		/* Let's put some text in the progressbar */
 		update_progressbar_text (converter);
