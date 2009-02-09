@@ -1,5 +1,11 @@
 2009-02-08  Brian Pepple  <bpepple@fedoraproject.org>
 
+	* Release 1.0.1
+	* NEWS:
+	* configure.ac: Update for release.
+
+2009-02-08  Brian Pepple  <bpepple@fedoraproject.org>
+
 	* src/nsc-converter.c (converter_response_cb):
 	Add status icon to allow hide/show of progress dialog.
 

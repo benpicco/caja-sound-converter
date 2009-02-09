@@ -1,6 +1,6 @@
-AC_INIT([nautilus-sound-converter], [1.0.0], [http://code.google.com/p/nautilus-sound-converter/issues/entry], [nautilus-sound-converter])
+AC_INIT([nautilus-sound-converter], [1.0.1], [http://code.google.com/p/nautilus-sound-converter/issues/entry], [nautilus-sound-converter])
 AC_PREREQ([2.59])
-AC_COPYRIGHT([Copyright (C) 2008 Brian Pepple])
+AC_COPYRIGHT([Copyright (C) 2008-2009 Brian Pepple])
 
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_HEADERS(config.h)
@@ -56,8 +56,10 @@ dnl -----------------------------------------------------------
 dnl Find the GStreamer elements we use, and warn if they are
 dnl not present.
 dnl -----------------------------------------------------------
+AM_GST_ELEMENT_CHECK(vorbisdec,,AC_MSG_WARN([The 'vorbisdec' element was not found. This will cause decoding from Ogg Vorbis to fail.]))
 AM_GST_ELEMENT_CHECK(vorbisenc,,AC_MSG_WARN([The 'vorbisenc' element was not found. This will cause encoding to Ogg Vorbis to fail.]))
-AM_GST_ELEMENT_CHECK(flacdec,,AC_MSG_WARN([The 'flacdec' element was not found. This will cause encoding to FLAC to fail.]))
+AM_GST_ELEMENT_CHECK(flacdec,,AC_MSG_WARN([The 'flacdec' element was not found. This will cause decoding from FLAC to fail.]))
+AM_GST_ELEMENT_CHECK(flacenc,,AC_MSG_WARN([The 'flacenc' element was not found. This will cause encoding to FLAC to fail.]))
 AM_GST_ELEMENT_CHECK(giosink,,AC_MSG_WARN([The 'giosink' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(giosrc,,AC_MSG_WARN([The 'giosrc' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(decodebin,,AC_MSG_WARN([The 'decodebin' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
