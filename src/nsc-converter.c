@@ -2,7 +2,7 @@
 /*
  *  nsc-converter.c
  * 
- *  Copyright (C) 2008 Brian Pepple
+ *  Copyright (C) 2008-2009 Brian Pepple
  *  Copyright (C) 2003 Ross Burton
  *
  *  This library is free software; you can redistribute it and/or
@@ -200,9 +200,8 @@ progress_cancel_cb (GtkWidget *widget, gpointer user_data)
 	/* TODO: Remove the file that was partially converted */
 
 	gtk_widget_destroy (priv->progress_dlg);
-	if (gtk_status_icon_is_embedded (priv->status_icon)) {
-		gtk_status_icon_set_visible (priv->status_icon, FALSE);
-	}
+	if (priv->status_icon)
+		g_object_unref (priv->status_icon);
 }
 
 /**
@@ -394,13 +393,11 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 		convert_file (converter);
 	} else {
 		/* No more files to convert time to do some cleanup */
+		gtk_widget_destroy (priv->progress_dlg);
+		if (priv->status_icon)
+			g_object_unref (priv->status_icon);
 		g_object_unref (priv->gst);
 		priv->gst = NULL;
-
-		gtk_widget_destroy (priv->progress_dlg);
-		if (gtk_status_icon_is_embedded (priv->status_icon)) {
-			gtk_status_icon_set_visible (priv->status_icon, FALSE);
-		}
 	}
 }
 
@@ -553,6 +550,7 @@ create_status_icon (NscConverter *conv)
 			  "activate",
 			  G_CALLBACK (converter_status_icon_activate_cb),
 			  conv);
+	gtk_status_icon_set_visible (priv->status_icon, TRUE);
 }
 	
 /**
@@ -590,14 +588,9 @@ converter_response_cb (GtkWidget *dialog,
 		/* Create the gstreamer converter object */
 		create_gst (converter);
 
-		/* Create the progress window */
+		/* Create the progress window & status icon */
 		create_progress_dialog (converter);
-
-		/* Only create the status icon if we haven't already */
-		if (!priv->status_icon) {
-			create_status_icon (converter);
-		}
-		gtk_status_icon_set_visible (priv->status_icon, TRUE);
+		create_status_icon (converter);
 
 		/* Let's put some text in the progressbar */
 		update_progressbar_text (converter);
