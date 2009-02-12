@@ -1,3 +1,10 @@
+New in 1.x.x -
+==============
+- 
+
+Translations:
+- Added Swedish translation (Daniel Nylander)
+
 New in 1.0.1 - "Collect from Clark Kent" :
 ==============
 - Add support for 'audio/x-musepack' mime type. (Bug #10)

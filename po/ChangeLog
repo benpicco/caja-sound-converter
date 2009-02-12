@@ -1,3 +1,8 @@
+2009-02-22  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* sv.po:
+	Add swedish translation provided by Daniel Nylander.
+
 2008-05-11  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* POTFILES.in: Mark xml files as glade files for translation.
