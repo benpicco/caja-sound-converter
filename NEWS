@@ -1,11 +1,11 @@
-New in 1.x.x -
+NEW in 1.x.x -
 ==============
 - 
 
 Translations:
 - Added Swedish translation (Daniel Nylander)
 
-New in 1.0.1 - "Collect from Clark Kent" :
+NEW in 1.0.1 - "Collect from Clark Kent" :
 ==============
 - Add support for 'audio/x-musepack' mime type. (Bug #10)
 - Bump minimum version of gstreamer needed to 0.10.20.
