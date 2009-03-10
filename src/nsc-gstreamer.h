@@ -43,8 +43,10 @@ G_BEGIN_DECLS
 typedef struct NscGStreamerPrivate NscGStreamerPrivate;
 
 typedef struct {
-	GObject              object;
-	NscGStreamerPrivate *priv;
+	/* Parent object */
+	GObject  object;
+	/* Private data pointer */
+	gpointer priv;
 } NscGStreamer;
 
 typedef struct {

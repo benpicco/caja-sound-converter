@@ -84,7 +84,7 @@ struct NscGStreamerPrivate {
 G_DEFINE_TYPE (NscGStreamer, nsc_gstreamer, G_TYPE_OBJECT);
 
 #define NSC_GSTREAMER_GET_PRIVATE(o)                           \
-	(G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_GSTREAMER, NscGStreamerPrivate))
+	((NscGStreamerPrivate *)((NSC_GSTREAMER(o))->priv))
 
 static void
 nsc_gstreamer_set_property (GObject      *object,
@@ -131,18 +131,21 @@ nsc_gstreamer_get_property (GObject    *object,
 static void
 nsc_gstreamer_dispose (GObject *object)
 {
-	NscGStreamer        *self = NSC_GSTREAMER (object);
+	NscGStreamer        *self = (NscGStreamer *) object;
 	NscGStreamerPrivate *priv = NSC_GSTREAMER_GET_PRIVATE (self);
 
-	if (priv->profile) {
-		g_object_unref (priv->profile);
-		priv->profile = NULL;
-	}
+	/* Check if not NULL! To avoid calling dispose multiple times */
+	if (priv != NULL) {
+		if (priv->profile) {
+			g_object_unref (priv->profile);
+			priv->profile = NULL;
+		}
 
-	if (priv->pipeline) {
-		gst_element_set_state (priv->pipeline, GST_STATE_NULL);
-		g_object_unref (priv->pipeline);
-		priv->pipeline = NULL;
+		if (priv->pipeline) {
+			gst_element_set_state (priv->pipeline, GST_STATE_NULL);
+			g_object_unref (priv->pipeline);
+			priv->pipeline = NULL;
+		}
 	}
 
 	G_OBJECT_CLASS (nsc_gstreamer_parent_class)->dispose (object);
@@ -151,14 +154,21 @@ nsc_gstreamer_dispose (GObject *object)
 static void
 nsc_gstreamer_finalize (GObject *object)
 {
-	NscGStreamer        *self = NSC_GSTREAMER (object);
+	NscGStreamer        *self = (NscGStreamer *) object;
 	NscGStreamerPrivate *priv = NSC_GSTREAMER_GET_PRIVATE (self);
 
-	if (priv->tick_id)
-		g_source_remove (priv->tick_id);
+	if (priv != NULL) {
+		if (priv->tick_id)
+			g_source_remove (priv->tick_id);
 
-	if (priv->construct_error)
-		g_error_free (priv->construct_error);
+		if (priv->construct_error)
+			g_error_free (priv->construct_error);
+
+
+		g_free (priv);
+
+		(NSC_GSTREAMER (self))->priv = NULL;
+	}
 
 	G_OBJECT_CLASS (nsc_gstreamer_parent_class)->finalize (object);
 }
@@ -221,13 +231,18 @@ nsc_gstreamer_class_init (NscGStreamerClass *klass)
 }
 
 static void
-nsc_gstreamer_init (NscGStreamer *gstreamer)
+nsc_gstreamer_init (NscGStreamer *self)
 {
-	NscGStreamerPrivate *priv;
+	/* Allocate Private data structure */
+	(NSC_GSTREAMER (self))->priv = \
+		(NscGStreamerPrivate *) g_malloc0 (sizeof (NscGStreamerPrivate));
 
-	priv = NSC_GSTREAMER_GET_PRIVATE (gstreamer);
-
-	priv->rebuild_pipeline = TRUE;
+	/* If correctly allocated, initialize parameters */
+	if ((NSC_GSTREAMER (self))->priv != NULL) {
+		NscGStreamerPrivate *priv = NSC_GSTREAMER_GET_PRIVATE (self);
+		/* Initialize private data */
+		priv->rebuild_pipeline = TRUE;
+	}
 }
 
 /* 

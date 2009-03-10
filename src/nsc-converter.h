@@ -39,7 +39,10 @@ typedef struct _NscConverter      NscConverter;
 typedef struct _NscConverterClass NscConverterClass;
 
 struct _NscConverter {
-	GObject parent;
+	/* Parent object */
+	GObject  parent;
+	/* Private data pointer */
+	gpointer priv;
 };
 
 struct _NscConverterClass {

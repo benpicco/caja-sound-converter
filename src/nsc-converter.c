@@ -88,7 +88,7 @@ struct _NscConverterPrivate {
 #define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
 
 #define NSC_CONVERTER_GET_PRIVATE(o)           \
-	(G_TYPE_INSTANCE_GET_PRIVATE ((o), NSC_TYPE_CONVERTER, NscConverterPrivate))
+	((NscConverterPrivate *)((NSC_CONVERTER(o))->priv))
 
 G_DEFINE_TYPE (NscConverter, nsc_converter, G_TYPE_OBJECT)
 
@@ -99,20 +99,26 @@ enum {
 static void
 nsc_converter_finalize (GObject *object)
 {
-	NscConverter 	    *conv = NSC_CONVERTER (object);
-	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (conv);
+	NscConverter 	    *self = (NscConverter *) object;
+	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
 
-	if (priv->save_path)
-		g_free (priv->save_path);
+	if (priv != NULL) {
+		if (priv->save_path)
+			g_free (priv->save_path);
 
-	if (priv->gst)
-		g_object_unref (priv->gst);
+		if (priv->gst)
+			g_object_unref (priv->gst);
 
-	if (priv->profile)
-		g_object_unref (priv->profile);
+		if (priv->profile)
+			g_object_unref (priv->profile);
 
-	if (priv->files)
-		g_list_free (priv->files);
+		if (priv->files)
+			g_list_free (priv->files);
+
+		g_free (priv);
+
+		(NSC_CONVERTER (self))->priv = NULL;
+	}
 
 	G_OBJECT_CLASS (nsc_converter_parent_class)->finalize(object);
 }
@@ -679,38 +685,43 @@ create_main_dialog (NscConverter *converter)
 }
 
 static void
-nsc_converter_init (NscConverter *converter)
+nsc_converter_init (NscConverter *self)
 {
-	NscConverterPrivate *priv;
-	GConfClient         *gconf;
+	/* Allocate private data structure */
+	(NSC_CONVERTER (self))->priv = \
+		(NscConverterPrivate *) g_malloc0 (sizeof (NscConverterPrivate));
 
-	priv = NSC_CONVERTER_GET_PRIVATE (converter);
+	/* If correctly allocated, initialize parameters */
+	if ((NSC_CONVERTER (self))->priv != NULL) {
+		NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
+		GConfClient         *gconf;
 
-	/* Set init values */
-	priv->gst = NULL;
-	priv->files_converted = 0;
-	priv->current_duration = 0;
-	priv->total_duration = 0;
-	priv->before.seconds = -1;
+		/* Set init values */
+		priv->gst = NULL;
+		priv->files_converted = 0;
+		priv->current_duration = 0;
+		priv->total_duration = 0;
+		priv->before.seconds = -1;
 
-	/* Get gconf client */
-	gconf = gconf_client_get_default ();
-	if (gconf == NULL) {
-		/* Should probably do more than just give a warning */
-		g_warning (_("Could not create GConf client.\n"));
+		/* Get gconf client */
+		gconf = gconf_client_get_default ();
+		if (gconf == NULL) {
+			/* Should probably do more than just give a warning */
+			g_warning (_("Could not create GConf client.\n"));
+		}
+
+		/* Init gnome-media-profiles */
+		gnome_media_profiles_init (gconf);
+
+		/* Unreference the gconf client */
+		g_object_unref (gconf);
+
+		/* Set the profile to the default. */
+		priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
+
+		/* Create the dialog */
+		create_main_dialog (self);
 	}
-
-	/* Init gnome-media-profiles */
-	gnome_media_profiles_init (gconf);
-
-	/* Unreference the gconf client */
-	g_object_unref (gconf);
-
-	/* Set the profile to the default. */
-	priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
-
-	/* Create the dialog */
-	create_main_dialog (converter);	
 }
 
 /*

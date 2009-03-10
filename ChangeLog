@@ -1,3 +1,10 @@
+2009-03-09  Brian Pepple  <bpepple@fedoraproject.org>
+
+	* src/nsc-converter.[ch]:
+	* src/nsc-gstreamer.[ch]:
+	Use opaque pointer in GObject's public structure, and
+	avoid using G_TYPE_INSTANCE_GET_PRIVATE();
+
 2009-02-08  Brian Pepple  <bpepple@fedoraproject.org>
 
 	* Release 1.0.1
