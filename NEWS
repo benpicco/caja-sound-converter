@@ -1,6 +1,6 @@
-NEW in 1.x.x -
+NEW in 1.0.2 - "Strong Reaction" :
 ==============
-- 
+- Use opaque pointer instead of G_TYPE_INSTANCE_GET_PRIVATE.
 
 Translations:
 - Added Swedish translation (Daniel Nylander)

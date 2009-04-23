@@ -1,7 +1,7 @@
 /*
  *  nsc-converter.h
  * 
- *  Copyright (C) 2008 Brian Pepple
+ *  Copyright (C) 2008-2009 Brian Pepple
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public
