@@ -1,3 +1,8 @@
+NEW in 1.0.3 - " " :
+==============
+- Squashed a memory leak.
+- Change menu text based on the number of files selected.
+
 NEW in 1.0.2 - "Strong Reaction" :
 ==============
 - Use opaque pointer instead of G_TYPE_INSTANCE_GET_PRIVATE.
