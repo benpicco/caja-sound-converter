@@ -179,10 +179,22 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 
 	for (scan = files; scan; scan = scan->next) {
 		if (file_is_sound (scan->data)) {
-			item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
-						       _("_Convert Sound File..."),
-						       _("Convert each selected sound file"),
-						       "stock_insert-sound-plugin");
+			gboolean one_item;
+
+			one_item = (files != NULL) && (files->next == NULL);
+			if (one_item &&
+			    !nautilus_file_info_is_directory ((NautilusFileInfo *)files->data)) {
+
+				item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
+							       _("_Convert Sound File..."),
+							       _("Convert selected sound file"),
+							       "stock_insert-sound-plugin");
+			} else {
+				item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
+							       _("_Convert Sound Files..."),
+							       _("Convert each selected sound file"),
+							       "stock_insert-sound-plugin");
+			}
 
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (sound_convert_callback),
