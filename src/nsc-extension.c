@@ -47,45 +47,45 @@ static GType sound_converter_type = 0;
 static gboolean
 file_is_sound (NautilusFileInfo *file_info)
 {
-	gchar          *tmp;
+	gchar          *scheme;
 	GError         *error = NULL;
 
 	/* Is this a file? */
-	tmp = nautilus_file_info_get_uri_scheme (file_info);
+	scheme = nautilus_file_info_get_uri_scheme (file_info);
 
-	if (strcmp (tmp, "file") != 0) {
-		g_free (tmp);
+	if (strcmp (scheme, "file") != 0) {
+		g_free (scheme);
 		return FALSE;
 	}
-	g_free (tmp);
+	g_free (scheme);
 
 	/* Now lets get the mime type */
-	tmp = nautilus_file_info_get_mime_type (file_info);
+	scheme = nautilus_file_info_get_mime_type (file_info);
 	
 	/*
 	 * This is a format we require, so
 	 * no check of plugin support is needed
 	 */
-	if (strncmp (tmp, "audio/x-flac", 12) == 0) {
-		g_free (tmp);
+	if (strncmp (scheme, "audio/x-flac", 12) == 0) {
+		g_free (scheme);
 		return TRUE;
 	}
 
-	if (strncmp (tmp, "audio/x-vorbis+ogg", 18) == 0) {
-		g_free (tmp);
+	if (strncmp (scheme, "audio/x-vorbis+ogg", 18) == 0) {
+		g_free (scheme);
 		return TRUE;
 	}
 
 	/* Mime type for new GNOME audio profile .oga */
-	if (strncmp (tmp, "audio/ogg", 9) == 0) {
-		g_free (tmp);
+	if (strncmp (scheme, "audio/ogg", 9) == 0) {
+		g_free (scheme);
 		return TRUE;
 	}
 
 	/* Check for mp3 support */
 	if (nsc_gstreamer_supports_mp3 (&error)) {
-		if (strncmp (tmp, "audio/mpeg", 10) == 0) {
-			g_free (tmp);
+		if (strncmp (scheme, "audio/mpeg", 10) == 0) {
+			g_free (scheme);
 			return TRUE;
 		}
 	} else {
@@ -95,8 +95,8 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for aac suppport */
 	if (nsc_gstreamer_supports_aac (&error)) {
-		if (strncmp (tmp, "audio/mp4", 9) == 0) {
-			g_free (tmp);
+		if (strncmp (scheme, "audio/mp4", 9) == 0) {
+			g_free (scheme);
 			return TRUE;
 		}
 	} else {
@@ -106,8 +106,8 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for wav support */
 	if (nsc_gstreamer_supports_wav (&error)) {
-		if (strncmp (tmp, "audio/x-wav", 11) == 0) {
-			g_free (tmp);
+		if (strncmp (scheme, "audio/x-wav", 11) == 0) {
+			g_free (scheme);
 			return TRUE;
 		}
 	} else {
@@ -117,15 +117,15 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for Musepack support */
 	if (nsc_gstreamer_supports_musepack (&error)) {
-		if (strncmp (tmp, "audio/x-musepack", 16) == 0) {
-			g_free (tmp);
+		if (strncmp (scheme, "audio/x-musepack", 16) == 0) {
+			g_free (scheme);
 			return TRUE;
 		}
 	} else {
 		g_error_free (error);
 		error = NULL;
 	}
-	g_free (tmp);
+	g_free (scheme);
 
 	return FALSE;
 }
@@ -169,11 +169,14 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 			      GList                *files)
 {
 	NautilusMenuItem *item;
-	GList            *file = NULL;
+	GList            *scan = NULL;
 	GList            *items = NULL;
 
-	for (file = files; file != NULL; file = file->next) {
-		if (file_is_sound (file->data)) {
+	if (files == NULL)
+		return NULL;
+
+	for (scan = files; scan; scan = scan->next) {
+		if (file_is_sound (scan->data)) {
 			item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
 						       _("_Convert Sound File..."),
 						       _("Convert each selected sound file"),
