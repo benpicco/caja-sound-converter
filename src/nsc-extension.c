@@ -44,10 +44,23 @@ static GList *nsc_extension_get_file_items (NautilusMenuProvider *provider,
 
 static GType sound_converter_type = 0;
 
+/*
+ * These are the formats we require, so
+ * no check of plugin support is needed
+ */
+static gchar *mime_types[] = {
+	"audio/x-flac",
+	"audio/x-vorbis+ogg",
+	"audio/ogg",
+	"audio/x-wav",
+	NULL
+};
+
 static gboolean
 file_is_sound (NautilusFileInfo *file_info)
 {
 	gchar          *scheme;
+	gint            i;
 	GError         *error = NULL;
 
 	/* Is this a file? */
@@ -59,35 +72,14 @@ file_is_sound (NautilusFileInfo *file_info)
 	}
 	g_free (scheme);
 
-	/* Now lets get the mime type */
-	scheme = nautilus_file_info_get_mime_type (file_info);
-	
-	/*
-	 * This is a format we require, so
-	 * no check of plugin support is needed
-	 */
-	if (strncmp (scheme, "audio/x-flac", 12) == 0) {
-		g_free (scheme);
-		return TRUE;
-	}
-
-	if (strncmp (scheme, "audio/x-vorbis+ogg", 18) == 0) {
-		g_free (scheme);
-		return TRUE;
-	}
-
-	/* Mime type for new GNOME audio profile .oga */
-	if (strncmp (scheme, "audio/ogg", 9) == 0) {
-		g_free (scheme);
-		return TRUE;
-	}
+	for (i = 0; mime_types[i] != NULL; i++)
+		if (nautilus_file_info_is_mime_type (file_info, mime_types[i]))
+			return TRUE;
 
 	/* Check for mp3 support */
 	if (nsc_gstreamer_supports_mp3 (&error)) {
-		if (strncmp (scheme, "audio/mpeg", 10) == 0) {
-			g_free (scheme);
+		if (nautilus_file_info_is_mime_type (file_info, "audio/mpeg"))
 			return TRUE;
-		}
 	} else {
 		g_error_free (error);
 		error = NULL;
@@ -95,21 +87,8 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for aac suppport */
 	if (nsc_gstreamer_supports_aac (&error)) {
-		if (strncmp (scheme, "audio/mp4", 9) == 0) {
-			g_free (scheme);
+		if (nautilus_file_info_is_mime_type (file_info, "audio/mp4"))
 			return TRUE;
-		}
-	} else {
-		g_error_free (error);
-		error = NULL;
-	}
-
-	/* Check for wav support */
-	if (nsc_gstreamer_supports_wav (&error)) {
-		if (strncmp (scheme, "audio/x-wav", 11) == 0) {
-			g_free (scheme);
-			return TRUE;
-		}
 	} else {
 		g_error_free (error);
 		error = NULL;
@@ -117,15 +96,12 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for Musepack support */
 	if (nsc_gstreamer_supports_musepack (&error)) {
-		if (strncmp (scheme, "audio/x-musepack", 16) == 0) {
-			g_free (scheme);
+		if (nautilus_file_info_is_mime_type (file_info, "audio/x-musepack"))
 			return TRUE;
-		}
 	} else {
 		g_error_free (error);
 		error = NULL;
 	}
-	g_free (scheme);
 
 	return FALSE;
 }
