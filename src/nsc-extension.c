@@ -109,25 +109,23 @@ file_is_sound (NautilusFileInfo *file_info)
 static GList *
 converter_filter_files (GList *files)
 {
-	GList *items = NULL;
-	GList *scan;
+	GList *sounds = NULL;
+	GList *file = NULL;
 
-	for (scan = files; scan; scan = scan->next) {
-		if (file_is_sound (scan->data))
-			items = g_list_prepend (items, scan->data);
+	for (file = files; file != NULL; file = file->next) {
+		if (file_is_sound (file->data))
+			sounds = g_list_prepend (sounds, file->data);
 	}
 
-	return items;
+	return sounds;
 }
 
 static void
 sound_convert_callback (NautilusMenuItem *item,
-			gpointer          user_data)
+		        GList            *files)
 {
 	NscConverter *converter;
-	GList        *files;
 
-	files = g_object_get_data (G_OBJECT (item), "files");
 	converter = nsc_converter_new (converter_filter_files (files));
 
 	nsc_converter_show_dialog (converter);
@@ -174,13 +172,7 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (sound_convert_callback),
-					  provider);
-
-
-			g_object_set_data_full (G_OBJECT (item),
-						"files",
-						nautilus_file_info_list_copy (files),
-						(GDestroyNotify) nautilus_file_info_list_free);
+					  nautilus_file_info_list_copy (files));
 
 			items = g_list_prepend (items, item);
 			items = g_list_reverse (items);
