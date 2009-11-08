@@ -31,8 +31,7 @@
 #include <libnautilus-extension/nautilus-menu-provider.h>
 
 #include <glib/gi18n-lib.h>
-#include <gtk/gtkicontheme.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include <gst/gst.h>
 
 #include <string.h> /* For strcmp */
