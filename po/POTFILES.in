@@ -1,8 +1,8 @@
 # List of source files containing translatable strings.
 # Please keep this list in alphabetic order.
 [encoding: UTF-8]
-[type: gettext/glade]data/main.xml
-[type: gettext/glade]data/progress.xml
+[type: gettext/glade]data/main.ui
+[type: gettext/glade]data/progress.ui
 
 src/nsc-converter.c
 src/nsc-extension.c

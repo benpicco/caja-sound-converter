@@ -15,37 +15,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/main.xml.h:1
+#: ../data/main.ui.h:1
 #: ../data/main.glade.h:1
 msgid "<b>Format</b>"
 msgstr "<b>Format</b>"
 
-#: ../data/main.xml.h:2
+#: ../data/main.ui.h:2
 #: ../data/main.glade.h:2
 msgid "<b>Music Folder</b>"
 msgstr "<b>Musikmapp</b>"
 
-#: ../data/main.xml.h:3
+#: ../data/main.ui.h:3
 #: ../data/main.glade.h:3
 msgid "Convert Sound File"
 msgstr "Konvertera ljudfil"
 
-#: ../data/main.xml.h:4
+#: ../data/main.ui.h:4
 #: ../data/main.glade.h:4
 msgid "O_utput Format:"
 msgstr "_Utdataformat:"
 
-#: ../data/main.xml.h:5
+#: ../data/main.ui.h:5
 #: ../data/main.glade.h:5
 msgid "Select A Folder"
 msgstr "Välj en mapp"
 
-#: ../data/main.xml.h:6
+#: ../data/main.ui.h:6
 #: ../data/main.glade.h:6
 msgid "_Save Folder:"
 msgstr "Mapp att _spara i:"
 
-#: ../data/progress.xml.h:1
+#: ../data/progress.ui.h:1
 #: ../data/progress.glade.h:1
 msgid "Converting Progress"
 msgstr "Förlopp för konvertering"

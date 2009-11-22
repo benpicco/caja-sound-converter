@@ -222,7 +222,7 @@ create_progress_dialog (NscConverter *converter)
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Create the gtkbuilder, and grab the widgets */
-	nsc_xml_get_file ("progress.xml",
+	nsc_xml_get_file ("progress.ui",
 			  "progress_dialog", &priv->progress_dlg,
 			  "file_progressbar", &priv->progressbar,
 			  "speed_progressbar", &priv->speedbar,
@@ -644,7 +644,7 @@ create_main_dialog (NscConverter *converter)
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Create the gtkbuilder and grab some widgets */
-	result = nsc_xml_get_file ("main.xml",
+	result = nsc_xml_get_file ("main.ui",
 				   "main_dialog", &priv->dialog,
 				   "path_chooser", &priv->path_chooser,
 				   "format_hbox", &hbox,
