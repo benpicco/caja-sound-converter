@@ -62,6 +62,8 @@ AM_GST_ELEMENT_CHECK(vorbisdec,,AC_MSG_WARN([The 'vorbisdec' element was not fou
 AM_GST_ELEMENT_CHECK(vorbisenc,,AC_MSG_WARN([The 'vorbisenc' element was not found. This will cause encoding to Ogg Vorbis to fail.]))
 AM_GST_ELEMENT_CHECK(flacdec,,AC_MSG_WARN([The 'flacdec' element was not found. This will cause decoding from FLAC to fail.]))
 AM_GST_ELEMENT_CHECK(flacenc,,AC_MSG_WARN([The 'flacenc' element was not found. This will cause encoding to FLAC to fail.]))
+AM_GST_ELEMENT_CHECK(wavpackenc,,AC_MSG_WARN([The 'wavpackenc' element was not found. This will cause encoding from Wav to fail.]))
+AM_GST_ELEMENT_CHECK(wavpackdec,,AC_MSG_WARN([The 'wavpackdec' element was not found. This will cause decoding to Wav to fail.]))
 AM_GST_ELEMENT_CHECK(giosink,,AC_MSG_WARN([The 'giosink' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(giosrc,,AC_MSG_WARN([The 'giosrc' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
 AM_GST_ELEMENT_CHECK(decodebin,,AC_MSG_WARN([The 'decodebin' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
