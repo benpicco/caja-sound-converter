@@ -1,0 +1,18 @@
+<gconfschemafile>
+  <schemalist>
+    
+    <schema>
+       <key>/schemas/apps/nautilus-sound-converter/source_dir</key>
+       <applyto>/apps/nautilus-sound-converter/source_dir</applyto>
+       <owner>nautilus-sound-converter</owner>
+       <type>bool</type>
+       <default>false</default>
+       <locale name="C">
+          <short>Use source directory as output directory</short>
+          <long>Use the source directory as the default output directory.</long>
+       </locale>
+    </schema>
+
+  </schemalist>  
+</gconfschemafile>
+

@@ -3,6 +3,7 @@
 [encoding: UTF-8]
 [type: gettext/glade]data/main.ui
 [type: gettext/glade]data/progress.ui
+data/nautilus-sound-converter.schemas.in
 
 src/nsc-converter.c
 src/nsc-extension.c
