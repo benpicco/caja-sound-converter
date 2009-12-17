@@ -71,6 +71,9 @@ struct _NscConverterPrivate {
 	gint             files_converted;
 	gint		 total_files;
 
+	/* Use the source directory as the output directory? */
+	gboolean         src_dir;
+
 	/* Directory to save new file */
 	gchar           *save_path;
 
@@ -86,6 +89,12 @@ struct _NscConverterPrivate {
 
 /* Default profile name */
 #define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
+
+/*
+ * gconf key for whether the user wants to use
+ * the source directory for the output directory.
+ */
+#define SOURCE_DIRECTORY "/apps/nautilus-sound-converter/source_dir"
 
 #define NSC_CONVERTER_GET_PRIVATE(o)           \
 	((NscConverterPrivate *)((NSC_CONVERTER(o))->priv))
@@ -654,6 +663,22 @@ create_main_dialog (NscConverter *converter)
 		return;
 	}
 
+	/*
+	 * Set the source directory if the user wants
+	 * to use that as the output destination.
+	 */
+	if (priv->src_dir) {
+		NautilusFileInfo *file_info;
+		gchar            *uri;
+
+		file_info = NAUTILUS_FILE_INFO (priv->files->data);
+		uri = nautilus_file_info_get_uri (file_info);
+
+		gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (priv->path_chooser),
+					  uri);
+		g_free (uri);
+	}
+
 	/* Create the gstreamer audio profile chooser */
 	priv->profile_chooser = gm_audio_profile_choose_new ();
 
@@ -682,6 +707,8 @@ create_main_dialog (NscConverter *converter)
 	g_signal_connect (G_OBJECT (edit), "clicked",
 			  (GCallback) converter_edit_profile,
 			  converter);
+
+	gtk_widget_show_all (priv->dialog);
 }
 
 static void
@@ -695,6 +722,7 @@ nsc_converter_init (NscConverter *self)
 	if ((NSC_CONVERTER (self))->priv != NULL) {
 		NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
 		GConfClient         *gconf;
+		GError              *error = NULL;
 
 		/* Set init values */
 		priv->gst = NULL;
@@ -710,6 +738,15 @@ nsc_converter_init (NscConverter *self)
 			g_warning (_("Could not create GConf client.\n"));
 		}
 
+		priv->src_dir = gconf_client_get_bool (gconf,
+						       SOURCE_DIRECTORY,
+						       &error);
+
+		if (error) {
+			priv->src_dir = FALSE;
+			g_error_free (error);
+		}
+
 		/* Init gnome-media-profiles */
 		gnome_media_profiles_init (gconf);
 
@@ -718,9 +755,6 @@ nsc_converter_init (NscConverter *self)
 
 		/* Set the profile to the default. */
 		priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
-
-		/* Create the dialog */
-		create_main_dialog (self);
 	}
 }
 
@@ -736,8 +770,7 @@ nsc_converter_new (GList *files)
 void
 nsc_converter_show_dialog (NscConverter *converter)
 {
-	NscConverterPrivate *priv;
+	g_return_if_fail (NSC_IS_CONVERTER (converter));
 
-	priv = NSC_CONVERTER_GET_PRIVATE (converter);
-	gtk_widget_show_all (priv->dialog);
+	create_main_dialog (converter);
 }
