@@ -242,6 +242,8 @@ create_progress_dialog (NscConverter *converter)
 	g_signal_connect (G_OBJECT (button), "clicked",
 			  (GCallback) progress_cancel_cb,
 			  converter);
+
+	gtk_widget_show_all (priv->progress_dlg);
 }
 
 /**
