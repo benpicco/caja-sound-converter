@@ -4,6 +4,7 @@ NEW in 1.0.3 - " " :
 - Added gconf key to allow user to have the src directory be the default
   output destination. Read the README to set this. (Bug #11, #14)
 - Tweak the ui. (Bug #15)
+- Updated swedish translation (Daniel Nylander)
 
 NEW in 1.0.2 - "Strong Reaction" :
 ==============
