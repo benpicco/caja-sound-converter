@@ -6,7 +6,7 @@
        <applyto>/apps/nautilus-sound-converter/source_dir</applyto>
        <owner>nautilus-sound-converter</owner>
        <type>bool</type>
-       <default>false</default>
+       <default>true</default>
        <locale name="C">
           <short>Use source directory as output directory</short>
           <long>Use the source directory as the default output directory.</long>

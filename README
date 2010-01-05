@@ -6,8 +6,8 @@ The Nautilus-Sound-Converter extension allows you to convert audio files to diff
 Tips:
 =====
 
-If you want to use the source directory as the default output destination, run the following:
-   gconftool-2 --set /apps/nautilus-sound-converter/source_dir --type bool true
+If you don't want to use the source directory as the default output destination, run the following:
+   gconftool-2 --set /apps/nautilus-sound-converter/source_dir --type bool false
 
 Bug reporting:
 ==============
