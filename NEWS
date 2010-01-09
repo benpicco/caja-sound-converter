@@ -1,3 +1,9 @@
+NEW in 1.0.4 - " " :
+==============
+
+Translations:
+- Added French translation (Christophe Perez)
+
 NEW in 1.0.3 - "Good Luck in Jail" :
 ==============
 - Squashed a memory leak.
