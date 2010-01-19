@@ -1,6 +1,6 @@
 NEW in 1.0.4 - " " :
 ==============
-- Remove partially created files when converting is cancelled.
+- Remove partially created files when converting is canceled.
 
 Translations:
 - Added French translation (Christophe Perez)
@@ -11,7 +11,7 @@ NEW in 1.0.3 - "Good Luck in Jail" :
 - Added gconf key to allow user to have the src directory be the default
   output destination. Read the README to set this. (Bug #11, #14)
 - Tweak the ui. (Bug #15)
-- Updated swedish translation (Daniel Nylander)
+- Updated Swedish translation (Daniel Nylander)
 
 NEW in 1.0.2 - "Strong Reaction" :
 ==============
@@ -33,13 +33,13 @@ NEW in 1.0.0 - "Mass Nerder" :
 
 NEW in 0.7.0 - "Breaking the Broken" :
 ==============
-- Add  progess bar to show eta & speed of file conversion.
+- Add  progress bar to show eta & speed of file conversion.
 - Use gstreamer gio plugins.
-- Minor tweeks to progress dialog.
+- Minor tweaks to progress dialog.
 
 NEW in 0.5.0 - "Wig Out at Denko's" :
 ==============
-- Add support for convertering vorbis, mp3, aac, and wav files. (Bug #1)
+- Add support for converting vorbis, mp3, aac, and wav files. (Bug #1)
 - Fixed: check for minimum version of glib2 needed. (Bug #3)
 
 NEW in 0.1.0 - "Losing Skin" :
