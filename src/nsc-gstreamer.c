@@ -594,6 +594,9 @@ nsc_gstreamer_cancel_convert (NscGStreamer *gstreamer)
 {
 	NscGStreamerPrivate *priv;
 	GstState             state;
+	GFile               *file;
+	gchar               *location;
+	GError              *error = NULL;
 
 	g_return_if_fail (NSC_IS_GSTREAMER (gstreamer));
 
@@ -609,6 +612,27 @@ nsc_gstreamer_cancel_convert (NscGStreamer *gstreamer)
 	}
 
 	gst_element_set_state (priv->pipeline, GST_STATE_NULL);
+
+	/*
+	 * Remove the file that was being converted
+	 * when the cancel button was pressed.
+	 */
+	g_object_get (G_OBJECT (priv->filesink),
+		      "location", &location,
+		      NULL);
+
+	file = g_file_new_for_uri (location);
+	g_file_delete (file, NULL, &error);
+
+	if (error) {
+		g_warning ("Unable to delete file; %s", error->message);
+		g_error_free (error);
+	}
+
+	if (file)
+		g_object_unref (file);
+
+	g_free (location);
 
 	priv->rebuild_pipeline = TRUE;
 }

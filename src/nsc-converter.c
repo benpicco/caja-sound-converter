@@ -209,14 +209,13 @@ progress_cancel_cb (GtkWidget *widget, gpointer user_data)
 	priv =  NSC_CONVERTER_GET_PRIVATE (conv);
 
 	nsc_gstreamer_cancel_convert (priv->gst);
-	g_object_unref (priv->gst);
-	priv->gst = NULL;
-
-	/* TODO: Remove the file that was partially converted */
 
 	gtk_widget_destroy (priv->progress_dlg);
 	if (priv->status_icon)
 		g_object_unref (priv->status_icon);
+
+	g_object_unref (priv->gst);
+	priv->gst = NULL;
 }
 
 /**
