@@ -1,6 +1,6 @@
 AC_INIT([nautilus-sound-converter], [1.0.4], [http://code.google.com/p/nautilus-sound-converter/issues/entry], [nautilus-sound-converter])
 AC_PREREQ([2.59])
-AC_COPYRIGHT([Copyright (C) 2008-2009 Brian Pepple])
+AC_COPYRIGHT([Copyright (C) 2008-2010 Brian Pepple])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([Makefile.am])

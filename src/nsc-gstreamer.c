@@ -2,7 +2,7 @@
 /*
  *  nsc-gstreamer.c
  * 
- *  Copyright (C) 2008-2009 Brian Pepple
+ *  Copyright (C) 2008-2010 Brian Pepple
  *  Copyright (C) 2003-2007 Ross Burton <ross@burtonini.com>
  *
  *  This library is free software; you can redistribute it and/or
