@@ -1,6 +1,7 @@
 NEW in 1.0.4 - " " :
 ==============
 - Remove partially created files when converting is canceled.
+- Add support for 'audio/x-ms-wma' mime type. (Bug #18)
 
 Translations:
 - Added French translation (Christophe Perez)
