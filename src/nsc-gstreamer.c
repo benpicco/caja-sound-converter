@@ -707,6 +707,23 @@ nsc_gstreamer_supports_musepack (GError **error)
 }
 
 gboolean
+nsc_gstreamer_supports_wma (GError **error)
+{
+	GstElement *element = NULL;
+
+	element = gst_element_factory_make ("ffdec_wmav2", "test");
+	if (element == NULL) {
+		g_set_error (error, NSC_ERROR, NSC_ERROR_INTERNAL_ERROR,
+			     _("The plugin necessary for wma file access was not found"));
+		return FALSE;
+	}
+
+	g_object_unref (element);
+
+	return TRUE;
+}
+
+gboolean
 nsc_gstreamer_supports_profile (GMAudioProfile *profile)
 {
 	GstElement *element;

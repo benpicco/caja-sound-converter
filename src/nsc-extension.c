@@ -103,6 +103,15 @@ file_is_sound (NautilusFileInfo *file_info)
 		error = NULL;
 	}
 
+	/* Check for wma support */
+	if (nsc_gstreamer_supports_wma (&error)) {
+		if (nautilus_file_info_is_mime_type (file_info, "audio/x-ms-wma"))
+			return TRUE;
+	} else {
+		g_error_free (error);
+		error = NULL;
+	}
+
 	return FALSE;
 }
 

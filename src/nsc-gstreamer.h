@@ -69,6 +69,7 @@ gboolean      nsc_gstreamer_supports_mp3      (GError         **error);
 gboolean      nsc_gstreamer_supports_wav      (GError         **error);
 gboolean      nsc_gstreamer_supports_aac      (GError         **error);
 gboolean      nsc_gstreamer_supports_musepack (GError         **error);
+gboolean      nsc_gstreamer_supports_wma      (GError         **error);
 
 G_END_DECLS
 
