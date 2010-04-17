@@ -1,4 +1,4 @@
-NEW in 1.0.4 - " " :
+NEW in 1.0.4 - "Jet Set Ready" :
 ==============
 - Remove partially created files when converting is canceled.
 - Add support for 'audio/x-ms-wma' mime type. (Bug #18)
