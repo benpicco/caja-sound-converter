@@ -2,6 +2,9 @@ NEW in 1.0.5 - " " :
 ==============
 -
 
+Translations:
+- Added Italian translation (Gianvito Cavasoli)
+
 NEW in 1.0.4 - "Jet Set Ready" :
 ==============
 - Remove partially created files when converting is canceled.
