@@ -1,6 +1,6 @@
 NEW in 1.0.5 - " " :
 ==============
--
+- Fix bug so translations are actually used.
 
 Translations:
 - Added Italian translation (Gianvito Cavasoli)
