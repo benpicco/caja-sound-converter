@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#include <gtk/gtkbuilder.h>
+#include <gtk/gtk.h>
 
 #include "nsc-xml.h"
 
