@@ -32,7 +32,6 @@ dnl -----------------------------------------------------------
 GLIB_REQUIRED=2.16.0
 NAUTILUS_REQUIRED=2.12.0
 GCONF_REQUIRED=1.2.0
-GTK_REQUIRED=2.16.0
 GSTREAMER_REQUIRED=0.10.20
 GNOME_MEDIA_PROFILES_REQUIRED=2.11.91
 
@@ -44,9 +43,9 @@ PKG_CHECK_MODULES(NSC,
 	glib-2.0 >= $GLIB_REQUIRED
 	gconf-2.0 >= $GCONF_REQUIRED
 	libnautilus-extension >= $NAUTILUS_REQUIRED
-	gtk+-2.0 >= $GTK_REQUIRED
+	gtk+-3.0
 	gstreamer-0.10 >= $GSTREAMER_REQUIRED
-	gnome-media-profiles >= $GNOME_MEDIA_PROFILES_REQUIRED
+	gnome-media-profiles-3.0 >= $GNOME_MEDIA_PROFILES_REQUIRED
 ])
 AC_SUBST(NSC_CFLAGS)
 AC_SUBST(NSC_LIBS)
