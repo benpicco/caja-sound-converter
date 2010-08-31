@@ -19,6 +19,7 @@ Hacking:
 ========
 
 n-s-c can be check out with the following command:
-svn checkout http://nautilus-sound-converter.googlecode.com/svn/trunk/ nautilus-sound-converter
+
+git clone git://git.gnome.org/nautilus-sound-converter
 
 Patches welcomed!
