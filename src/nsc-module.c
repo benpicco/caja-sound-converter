@@ -26,7 +26,7 @@
 
 #include "nsc-extension.h"
 
-#include <libintl.h>
+#include <glib/gi18n-lib.h>
 
 static GType type_list[1];
 
