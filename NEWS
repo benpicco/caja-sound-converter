@@ -1,3 +1,7 @@
+NEW in 2.90.0 - " ":
+===============
+- Port to GTK3.
+
 NEW in 1.0.6 - " " :
 ==============
 - Fix distcheck, so root privilege isn't needed.
