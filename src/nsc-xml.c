@@ -28,63 +28,63 @@
 
 static GtkBuilder *
 xml_get_file (const gchar *filename,
-              const gchar *first_widget,
+              const gchar *first_object,
               va_list      args)
 {
-	GObject    **pointer;
-	GtkBuilder  *ui = NULL;
+	GtkBuilder  *gui = NULL;
 	const char  *name;
 	gchar       *path;
+	GObject    **object_ptr;
 	GError      *err = NULL;
 
 	/* Create the gtkbuilder */
-	ui = gtk_builder_new ();
-	gtk_builder_set_translation_domain (ui, GETTEXT_PACKAGE);
+	gui = gtk_builder_new ();
+	gtk_builder_set_translation_domain (gui, GETTEXT_PACKAGE);
 	path = g_build_filename (DATADIR, PACKAGE, filename, NULL);
 
 	/* Load the xml file */
-	if (gtk_builder_add_from_file (ui, path, &err) == 0) {
-		g_warning ("XML file error: %s", err->message);
-		g_error_free (err);
+	if (!gtk_builder_add_from_file (gui, path, &err)) {
+		g_critical ("XML file error: %s", err->message);
+		g_clear_error (&err);
 		g_free (path);
+		g_object_unref (gui);
+
+		/* we need to iterate and set all of the pointers to NULL */
+		for (name = first_object; name; name = va_arg (args, const gchar *)) {
+			object_ptr = va_arg (args, GObject**);
+
+			*object_ptr = NULL;
+		}
 		return NULL;
 	}
 	g_free (path);
 
 	/* Grab the widgets */
-	for (name = first_widget; name; name = va_arg (args, char *)) {
-		pointer = va_arg (args, void *);
+	for (name = first_object; name; name = va_arg (args, const gchar *)) {
+		object_ptr = va_arg (args, GObject**);
 		
-		*pointer = gtk_builder_get_object (ui, name);
+		*object_ptr = gtk_builder_get_object (gui, name);
 		
-		if (!*pointer) {
+		if (!*object_ptr) {
 			g_warning ("Widget '%s' at '%s' is missing.",
 				   name, filename);
 			continue;
 		}
 	}
-	return ui;
+	return gui;
 }
 
-gboolean
-nsc_xml_get_file (const gchar *filename,
-		  const gchar *first_widget,
-		  ...)
+GtkBuilder *
+nsc_builder_get_file (const gchar *filename,
+		      const gchar *first_object,
+		      ...)
 {
-	GtkBuilder *ui;
+	GtkBuilder *gui;
 	va_list     args;
 
-	va_start (args, first_widget);
-
-	ui = xml_get_file (filename, first_widget, args);
-
+	va_start (args, first_object);
+	gui = xml_get_file (filename, first_object, args);
 	va_end (args);
 
-	if (!ui) {
-		return FALSE;
-	}
-
-	g_object_unref (ui);
-
-	return TRUE;
+	return gui;
 }

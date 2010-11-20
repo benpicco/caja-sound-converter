@@ -225,19 +225,22 @@ static void
 create_progress_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
+	GtkBuilder          *gui;
 	GtkWidget           *button;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Create the gtkbuilder, and grab the widgets */
-	nsc_xml_get_file ("progress.ui",
-			  "progress_dialog", &priv->progress_dlg,
-			  "file_progressbar", &priv->progressbar,
-			  "speed_progressbar", &priv->speedbar,
-			  "cancel_button", &button,
-			  NULL);
+	gui = nsc_builder_get_file ("progress.ui",
+				    "progress_dialog", &priv->progress_dlg,
+				    "file_progressbar", &priv->progressbar,
+				    "speed_progressbar", &priv->speedbar,
+				    "cancel_button", &button,
+				    NULL);
 
-	/* Connect the signal for the cancel button */
+	g_object_unref (gui);
+
+        /* Connect the signal for the cancel button */
 	g_signal_connect (G_OBJECT (button), "clicked",
 			  (GCallback) progress_cancel_cb,
 			  converter);
@@ -647,22 +650,20 @@ static void
 create_main_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
+	GtkBuilder          *gui;
 	GtkWidget           *hbox, *edit, *image;
 	const gchar         *profile_id;
-	gboolean             result;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	/* Create the gtkbuilder and grab some widgets */
-	result = nsc_xml_get_file ("main.ui",
-				   "main_dialog", &priv->dialog,
-				   "path_chooser", &priv->path_chooser,
-				   "format_hbox", &hbox,
-				   NULL);
+	gui = nsc_builder_get_file ("main.ui",
+				    "main_dialog", &priv->dialog,
+				    "path_chooser", &priv->path_chooser,
+				    "format_hbox", &hbox,
+				    NULL);
 
-	if (!result) {
-		return;
-	}
+	g_object_unref (gui);
 
 	/*
 	 * Set the source directory if the user wants

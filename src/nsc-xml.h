@@ -23,10 +23,11 @@
 #define __NSC_XML_H__
 
 #include <glib/gtypes.h>
+#include <gtk/gtk.h>
 
-gboolean    nsc_xml_get_file (const gchar *filename,
-			      const gchar *first_widget,
-			      ...);
+GtkBuilder *nsc_builder_get_file (const gchar *filename,
+				  const gchar *first_widget,
+				  ...);
 
 #endif /*  __NSC_XML_H__ */
 
