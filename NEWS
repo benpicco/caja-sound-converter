@@ -4,6 +4,8 @@ NEW in 2.90.0 - " ":
 
 NEW in 1.0.6 - " " :
 ==============
+- Revert textdomain change from 1.0.5, since this was causing translation
+  problems.
 - Fix distcheck, so root privilege isn't needed.
 
 NEW in 1.0.5 - "Speaking in Tongues" :
