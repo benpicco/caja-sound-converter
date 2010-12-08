@@ -34,7 +34,7 @@
 #include <gtk/gtk.h>
 #include <gst/gst.h>
 #include <libnautilus-extension/nautilus-file-info.h>
-#include <profiles/gnome-media-profiles.h>
+#include <libgnome-media-profiles/gnome-media-profiles.h>
 
 #include "nsc-converter.h"
 #include "nsc-gstreamer.h"

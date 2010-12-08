@@ -29,7 +29,7 @@
 #include <gio/gio.h>
 #include <glib/gmacros.h>
 #include <glib-object.h>
-#include <profiles/audio-profile.h>
+#include <libgnome-media-profiles/audio-profile.h>
 
 G_BEGIN_DECLS
 

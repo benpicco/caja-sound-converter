@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 #include <glib-object.h>
 #include <gst/gst.h>
-#include <profiles/gnome-media-profiles.h>
+#include <libgnome-media-profiles/gnome-media-profiles.h>
 
 #include "nsc-error.h"
 #include "nsc-gstreamer.h"
