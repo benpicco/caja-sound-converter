@@ -340,8 +340,8 @@ update_progressbar_text (NscConverter *convert)
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
 				   text);
 	if (priv->status_icon) {
-		gtk_status_icon_set_tooltip (priv->status_icon,
-					     text);
+		gtk_status_icon_set_tooltip_text (priv->status_icon,
+						  text);
 	}
 	g_free (text);
 }
