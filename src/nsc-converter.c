@@ -335,7 +335,7 @@ update_progressbar_text (NscConverter *convert)
 
 	priv = NSC_CONVERTER_GET_PRIVATE (convert);
 
-	text = g_strdup_printf (_("Converting: %d of %d"),
+	text = g_strdup_printf (dgettext (GETTEXT_PACKAGE, "Converting: %d of %d"),
 				priv->files_converted + 1, priv->total_files);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
 				   text);
@@ -361,8 +361,8 @@ on_error_cb (NscGStreamer *gstream, GError *error, gpointer data)
 	converter = NSC_CONVERTER (data);
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
-	text = g_strdup_printf (_("Nautilus Sound Converter could "
-				  "not convert this file.\nReason: %s"),
+	text = g_strdup_printf (dgettext (GETTEXT_PACKAGE, "Nautilus Sound Converter could "
+					  "not convert this file.\nReason: %s"),
 				error->message);
 
 	dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog), 0,
@@ -399,7 +399,7 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 
 	/* Clear the speed label */
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
-				   (_("Speed: Unknown")));
+				   (dgettext (GETTEXT_PACKAGE, "Speed: Unknown")));
 
 	/* Update the progress dialog */
 	fraction = (double) priv->files_converted / priv->total_files;
@@ -452,12 +452,13 @@ update_speed_progress (NscConverter *conv,
 
 	if (eta >= 0) {
 		eta_str =
-			g_strdup_printf (_("Estimated time left: %d:%02d (at %0.1f\303\227)"),
+			g_strdup_printf (dgettext (GETTEXT_PACKAGE, 
+						   "Estimated time left: %d:%02d (at %0.1f\303\227)"),
 					 eta / 60,
 					 eta % 60,
 					 speed);
 	} else {
-		eta_str = g_strdup (_("Estimated time left: unknown"));
+		eta_str = g_strdup (dgettext (GETTEXT_PACKAGE, "Estimated time left: unknown"));
 	}
 
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
@@ -613,8 +614,8 @@ converter_response_cb (GtkWidget *dialog,
 
 		/* Let's put some text in the progressbar */
 		update_progressbar_text (converter);
-		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
-					   (_("Speed: Unknown")));
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar), 
+					   (dgettext (GETTEXT_PACKAGE, "Speed: Unknown")));
 
 		/* Alright we're finally ready to start converting */
 		convert_file (converter);
@@ -690,7 +691,7 @@ create_main_dialog (NscConverter *converter)
 					    profile_id);
 
 	/* Create edit profile button */
-	edit = gtk_button_new_with_mnemonic (_("Edit _Profiles..."));
+	edit = gtk_button_new_with_mnemonic (dgettext (GETTEXT_PACKAGE, "Edit _Profiles..."));
 	image = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
 	g_object_set (edit,
 		      "gtk-button-images", TRUE,

@@ -163,8 +163,9 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 	for (scan = files; scan; scan = scan->next) {
 		if (file_is_sound (scan->data)) {
 			item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
-                                                       _("_Convert..."),
-                                                       _("Convert each selected audio file"),
+                                                       dgettext (GETTEXT_PACKAGE, "_Convert..."),
+                                                       dgettext (GETTEXT_PACKAGE,
+								 "Convert each selected audio file"),
                                                        "audio-x-generic");
 
 			g_signal_connect (item, "activate",
