@@ -2,6 +2,9 @@ NEW in 2.90.0 - " ":
 ===============
 - Port to GTK3.
 
+Translations:
+- Updated German translation (Mario Blättermann)
+
 NEW in 1.0.6 - " " :
 ==============
 - Really fix the translation issue. Thanks to the gnome-mplayer folks for
