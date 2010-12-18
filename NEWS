@@ -6,8 +6,7 @@ Translations:
 - Added Spanish translation (Jorge González)
 - Updated German translation (Mario Blättermann)
 
-NEW in 1.0.6 - " " :
-==============
+NEW in 1.0.6 - "Hack The Sides Away" :
 - Really fix the translation issue. Thanks to the gnome-mplayer folks for
   providing the solution.
 - Fix distcheck, so root privilege isn't needed.
