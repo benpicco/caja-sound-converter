@@ -1,19 +1,23 @@
-# Swedish translation for nautilus-sound-converter.
-# Copyright (C) 2009 Free Software Foundation, Inc.
+# Hungarian translation for nautilus-sound-converter.
+# Copyright (C) 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-sound-converter package.
-# Daniel Nylander <po@danielnylander.se>, 2009.
-# Peter Bojtos <ptr@ulx.hu>, 2010.
+# 
+# Peter Bojtos <ptr at ulx dot hu>, 2010.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter\n"
+"Project-Id-Version: nautilus-sound-converter master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-03 22:59+0100\n"
-"PO-Revision-Date: 2010-06-18 11:26+0100\n"
-"Last-Translator: Bojtos Péter <ptr@ulx.hu>\n"
-"Language-Team: Hungarian Fedora Translation Team <trans-hu@lists.fedoraproject.org>"
-"MIME-Version: 1.0\n"
+"POT-Creation-Date: 2010-12-26 00:35+0100\n"
+"PO-Revision-Date: 2010-12-26 01:55+0100\n"
+"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
+"Language-Team: Hungarian <gnome at fsf dot hu>\n"
+"Language: \n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"MIME-Version: 1.0\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../data/main.ui.h:1
 msgid "<b>Destination</b>"
@@ -41,14 +45,14 @@ msgstr "Forráskönyvtár használata célként"
 
 #: ../data/nautilus-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
-msgstr "Forráskönyvtár használata alapértelmezett célként"
+msgstr "Forráskönyvtár használata alapértelmezett célként."
 
-#: ../src/nsc-converter.c:336
+#: ../src/nsc-converter.c:338
 #, c-format
 msgid "Converting: %d of %d"
-msgstr "Konvertálás: %d ennyiből: %d"
+msgstr "Konvertálás: %d./%d"
 
-#: ../src/nsc-converter.c:362
+#: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
 "Nautilus Sound Converter could not convert this file.\n"
@@ -57,37 +61,36 @@ msgstr ""
 "A Nautilus hangfájlkonvertáló nem tudta konvertálni ezt a fájlt.\n"
 "Ok: %s"
 
-#: ../src/nsc-converter.c:400
-#: ../src/nsc-converter.c:615
+#: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
 msgid "Speed: Unknown"
 msgstr "Sebesség: ismeretlen"
 
-#: ../src/nsc-converter.c:453
+#: ../src/nsc-converter.c:456
 #, c-format
 msgid "Estimated time left: %d:%02d (at %0.1f×)"
-msgstr "Hátralévő idő: %d:%02d (%0.1f× sebességgel)"
+msgstr "Hátralévő idő: %d.%02d (%0.1f× sebességgel)"
 
-#: ../src/nsc-converter.c:458
+#: ../src/nsc-converter.c:461
 msgid "Estimated time left: unknown"
 msgstr "Hátralévő idő: ismeretlen"
 
 #. Create edit profile button
-#: ../src/nsc-converter.c:693
+#: ../src/nsc-converter.c:694
 msgid "Edit _Profiles..."
-msgstr "_Profilok szerkesztése"
+msgstr "_Profilok szerkesztése…"
 
 #. Should probably do more than just give a warning
-#: ../src/nsc-converter.c:740
+#: ../src/nsc-converter.c:741
 msgid "Could not create GConf client.\n"
 msgstr "GConf-kliens létrehozása sikertelen.\n"
 
-#: ../src/nsc-extension.c:157
+#: ../src/nsc-extension.c:166
 msgid "_Convert..."
-msgstr "_Konvertálás..."
+msgstr "_Konvertálás…"
 
-#: ../src/nsc-extension.c:158
+#: ../src/nsc-extension.c:168
 msgid "Convert each selected audio file"
-msgstr "Minden hangfájl konvertálása"
+msgstr "Minden kijelölt hangfájl konvertálása"
 
 #: ../src/nsc-gstreamer.c:193
 msgid "Audio Profile"
@@ -95,13 +98,12 @@ msgstr "Hangprofil"
 
 #: ../src/nsc-gstreamer.c:194
 msgid "The GNOME Audio Profile used for encoding audio"
-msgstr "A hangkonvertáláshoz használt Gnome audio profil"
+msgstr "A hangkonvertáláshoz használt Gnome hangprofil"
 
-#: ../src/nsc-gstreamer.c:381
-#: ../src/nsc-gstreamer.c:390
+#: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format
 msgid "Could not create GStreamer file input"
-msgstr "GStreamer file-bemenet létrehozása sikertelen"
+msgstr "GStreamer fájlbemenet létrehozása sikertelen"
 
 #: ../src/nsc-gstreamer.c:399
 #, c-format
@@ -111,47 +113,43 @@ msgstr "GStreamer kódoló létrehozása sikertelen ehhez: %s"
 #: ../src/nsc-gstreamer.c:414
 #, c-format
 msgid "Could not create GStreamer file output"
-msgstr "GStreamer file-kimenet létrehozása sikertelen"
+msgstr "GStreamer fájlkimenet létrehozása sikertelen"
 
-#: ../src/nsc-gstreamer.c:436
-#: ../src/nsc-gstreamer.c:444
+#: ../src/nsc-gstreamer.c:436 ../src/nsc-gstreamer.c:444
 #, c-format
 msgid "Could not link pipeline"
-msgstr "Csővezetékek összekapcsolása sikertelen"
+msgstr "Adatcsatornák összekapcsolása sikertelen"
 
 #: ../src/nsc-gstreamer.c:479
 msgid "Could not get current file position"
-msgstr "Aktuális fájlpozíció beállítása sikertelen"
+msgstr "Aktuális fájlpozíció lekérése sikertelen"
 
 #: ../src/nsc-gstreamer.c:580
 msgid "Could not get current file duration"
-msgstr "A fájl időtartama nem megállapítható"
+msgstr "A fájlhossz lekérése sikertelen"
 
-#: ../src/nsc-gstreamer.c:624
+#: ../src/nsc-gstreamer.c:648
 #, c-format
 msgid "The plugin necessary for mp3 file access was not found"
 msgstr "Az mp3 fájl lejátszásához szükséges bővítmény nem található"
 
-#: ../src/nsc-gstreamer.c:641
+#: ../src/nsc-gstreamer.c:665
 #, c-format
 msgid "The plugin necessary for wav file access was not found"
 msgstr "A wav fájl lejátszásához szükséges bővítmény nem található"
 
-#: ../src/nsc-gstreamer.c:659
+#: ../src/nsc-gstreamer.c:683
 #, c-format
 msgid "The plugin necessary for aac file access was not found"
 msgstr "Az aac fájl lejátszásához szükséges bővítmény nem található"
 
-#: ../src/nsc-gstreamer.c:676
+#: ../src/nsc-gstreamer.c:700
 #, c-format
 msgid "The plugin necessary for musepack file access was not found"
 msgstr "A musepack fájl lejátszásához szükséges bővítmény nem található"
 
-#~ msgid "<b>Music Folder</b>"
-#~ msgstr "<b>Zenemappa</b>"
+#: ../src/nsc-gstreamer.c:717
+#, c-format
+msgid "The plugin necessary for wma file access was not found"
+msgstr "A wma fájl lejátszásához szükséges bővítmény nem található"
 
-#~ msgid "O_utput Format:"
-#~ msgstr "_Kimeneti formátum:"
-
-#~ msgid "_Save Folder:"
-#~ msgstr "_Mentési mappa:"
