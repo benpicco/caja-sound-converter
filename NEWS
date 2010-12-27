@@ -4,7 +4,9 @@ NEW in 2.90.0 - " ":
 
 Translations:
 - Added Spanish translation (Jorge González)
+- Added Simplified Chinese translation (lainme)
 - Updated German translation (Mario Blättermann)
+- Updated Hungarian translation (Gabor Kelemen)
 
 NEW in 1.0.6 - "Hack The Sides Away" :
 - Really fix the translation issue. Thanks to the gnome-mplayer folks for
