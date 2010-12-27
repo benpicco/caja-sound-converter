@@ -1,0 +1,151 @@
+# Chinese (China) translation for nautilus-sound-converter.
+# Copyright (C) 2010 nautilus-sound-converter's COPYRIGHT HOLDER
+# This file is distributed under the same license as the nautilus-sound-converter package.
+# lainme <lainme993@gmail.com>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-sound-converter master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=nautilus-sound-converter\n"
+"POT-Creation-Date: 2010-12-15 00:50+0000\n"
+"PO-Revision-Date: 2010-12-27 16:14+0800\n"
+"Last-Translator: lainme <lainme993@gmail.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/main.ui.h:1
+msgid "<b>Destination</b>"
+msgstr "<b>目标文件夹</b>"
+
+#: ../data/main.ui.h:2
+msgid "<b>Format</b>"
+msgstr "<b>格式</b>"
+
+#: ../data/main.ui.h:3
+msgid "Convert Audio File"
+msgstr "转换音频文件"
+
+#: ../data/main.ui.h:4
+msgid "Select A Folder"
+msgstr "选择一个文件夹"
+
+#: ../data/progress.ui.h:1
+msgid "Converting Progress"
+msgstr "转换进度"
+
+#: ../data/nautilus-sound-converter.schemas.in.h:1
+msgid "Use source directory as output directory"
+msgstr "使用源目录作为输出目录"
+
+#: ../data/nautilus-sound-converter.schemas.in.h:2
+msgid "Use the source directory as the default output directory."
+msgstr "使用源目录作为默认输出目录。"
+
+#: ../src/nsc-converter.c:338
+#, c-format
+msgid "Converting: %d of %d"
+msgstr "转换中：%2$d 中的 %1$d"
+
+#: ../src/nsc-converter.c:364
+#, c-format
+msgid ""
+"Nautilus Sound Converter could not convert this file.\n"
+"Reason: %s"
+msgstr ""
+"Nautilus 音频转换器无法转换这个文件。\n"
+"原因：%s"
+
+#: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
+msgid "Speed: Unknown"
+msgstr "速度：未知"
+
+#: ../src/nsc-converter.c:456
+#, c-format
+msgid "Estimated time left: %d:%02d (at %0.1f×)"
+msgstr "估计的剩余时间：%d:%02d (在 %0.1fx)"
+
+#: ../src/nsc-converter.c:461
+msgid "Estimated time left: unknown"
+msgstr "估计的剩余时间：未知"
+
+#. Create edit profile button
+#: ../src/nsc-converter.c:694
+msgid "Edit _Profiles..."
+msgstr "编辑配置文件(_P)..."
+
+#. Should probably do more than just give a warning
+#: ../src/nsc-converter.c:741
+msgid "Could not create GConf client.\n"
+msgstr "无法创建 GConf 客户端。\n"
+
+#: ../src/nsc-extension.c:166
+msgid "_Convert..."
+msgstr "转换(_C)..."
+
+#: ../src/nsc-extension.c:168
+msgid "Convert each selected audio file"
+msgstr "转换每个选择的音频文件"
+
+#: ../src/nsc-gstreamer.c:193
+msgid "Audio Profile"
+msgstr "音频配置文件"
+
+#: ../src/nsc-gstreamer.c:194
+msgid "The GNOME Audio Profile used for encoding audio"
+msgstr "用来编码音频的 GNOME 音频配置文件"
+
+#: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
+#, c-format
+msgid "Could not create GStreamer file input"
+msgstr "无法创建 GStreamer 文件输入"
+
+#: ../src/nsc-gstreamer.c:399
+#, c-format
+msgid "Could not create GStreamer encoders for %s"
+msgstr "无法为 %s 创建 GStreamer 编码器"
+
+#: ../src/nsc-gstreamer.c:414
+#, c-format
+msgid "Could not create GStreamer file output"
+msgstr "无法创建 GStreamer 文件输出"
+
+#: ../src/nsc-gstreamer.c:436 ../src/nsc-gstreamer.c:444
+#, c-format
+msgid "Could not link pipeline"
+msgstr "无法连接管道"
+
+#: ../src/nsc-gstreamer.c:479
+msgid "Could not get current file position"
+msgstr "无法获取当前文件位置"
+
+#: ../src/nsc-gstreamer.c:580
+msgid "Could not get current file duration"
+msgstr "无法获取当前文件持续时间"
+
+#: ../src/nsc-gstreamer.c:648
+#, c-format
+msgid "The plugin necessary for mp3 file access was not found"
+msgstr "处理 mp3 文件需要的插件没有找到"
+
+#: ../src/nsc-gstreamer.c:665
+#, c-format
+msgid "The plugin necessary for wav file access was not found"
+msgstr "处理 wav 文件需要的插件没有找到"
+
+#: ../src/nsc-gstreamer.c:683
+#, c-format
+msgid "The plugin necessary for aac file access was not found"
+msgstr "处理 aac 文件需要的插件没有找到"
+
+#: ../src/nsc-gstreamer.c:700
+#, c-format
+msgid "The plugin necessary for musepack file access was not found"
+msgstr "处理 musepack 文件需要的插件没有找到"
+
+#: ../src/nsc-gstreamer.c:717
+#, c-format
+msgid "The plugin necessary for wma file access was not found"
+msgstr "处理 wma 文件需要的插件没有找到"
