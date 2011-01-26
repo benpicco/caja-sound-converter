@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter 1.0.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-10 20:18+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=nautilus-sound-converter\n"
+"POT-Creation-Date: 2010-12-13 21:16+0000\n"
 "PO-Revision-Date: 2010-01-10 21:04+0100\n"
 "Last-Translator: Christophe Perez <christophe.perez.moure@gmail.com>\n"
 "Language-Team: Language <LL@li.org>\n"
@@ -44,12 +45,12 @@ msgid "Use the source directory as the default output directory."
 msgstr ""
 "Utilise le répertoire source comme répertoire de destination par défaut."
 
-#: ../src/nsc-converter.c:336
+#: ../src/nsc-converter.c:338
 #, c-format
 msgid "Converting: %d of %d"
 msgstr "Conversion: %d de %d"
 
-#: ../src/nsc-converter.c:362
+#: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
 "Nautilus Sound Converter could not convert this file.\n"
@@ -58,34 +59,34 @@ msgstr ""
 "Le fichier n'a pas pu être converti.\n"
 "Raison: %s"
 
-#: ../src/nsc-converter.c:400 ../src/nsc-converter.c:615
+#: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
 msgid "Speed: Unknown"
 msgstr "Vitesse: inconnue"
 
-#: ../src/nsc-converter.c:453
+#: ../src/nsc-converter.c:456
 #, c-format
 msgid "Estimated time left: %d:%02d (at %0.1f×)"
 msgstr "Temps restant estimé: %d:%02d (à %0.1f×)"
 
-#: ../src/nsc-converter.c:458
+#: ../src/nsc-converter.c:461
 msgid "Estimated time left: unknown"
 msgstr "Temps restant estimé: inconnu"
 
 #. Create edit profile button
-#: ../src/nsc-converter.c:693
+#: ../src/nsc-converter.c:694
 msgid "Edit _Profiles..."
 msgstr "_Modifier..."
 
 #. Should probably do more than just give a warning
-#: ../src/nsc-converter.c:740
+#: ../src/nsc-converter.c:741
 msgid "Could not create GConf client.\n"
 msgstr "Impossible de créer le client GConf.\n"
 
-#: ../src/nsc-extension.c:157
+#: ../src/nsc-extension.c:166
 msgid "_Convert..."
 msgstr "_Convertir..."
 
-#: ../src/nsc-extension.c:158
+#: ../src/nsc-extension.c:168
 msgid "Convert each selected audio file"
 msgstr "Convertir les fichiers son sélectionnés"
 
@@ -125,22 +126,28 @@ msgstr "Impossible d'obtenir la position du fichier en cours"
 msgid "Could not get current file duration"
 msgstr "Impossible d'obtenir la durée du fichier en cours"
 
-#: ../src/nsc-gstreamer.c:624
+#: ../src/nsc-gstreamer.c:648
 #, c-format
 msgid "The plugin necessary for mp3 file access was not found"
 msgstr "Le greffon nécessaire pour les fichiers mp3 n'a pas été trouvé"
 
-#: ../src/nsc-gstreamer.c:641
+#: ../src/nsc-gstreamer.c:665
 #, c-format
 msgid "The plugin necessary for wav file access was not found"
 msgstr "Le greffon nécessaire pour les fichiers wav n'a pas été trouvé"
 
-#: ../src/nsc-gstreamer.c:659
+#: ../src/nsc-gstreamer.c:683
 #, c-format
 msgid "The plugin necessary for aac file access was not found"
 msgstr "Le greffon nécessaire pour les fichiers aac n'a pas été trouvé"
 
-#: ../src/nsc-gstreamer.c:676
+#: ../src/nsc-gstreamer.c:700
 #, c-format
 msgid "The plugin necessary for musepack file access was not found"
 msgstr "Le greffon nécessaire pour les fichiers musepack n'a pas été trouvé"
+
+#: ../src/nsc-gstreamer.c:717
+#, c-format
+#| msgid "The plugin necessary for wav file access was not found"
+msgid "The plugin necessary for wma file access was not found"
+msgstr "Le greffon nécessaire pour les fichiers wma n'a pas été trouvé"
