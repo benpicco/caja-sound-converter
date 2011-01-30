@@ -686,9 +686,11 @@ create_main_dialog (NscConverter *converter)
 	priv->profile_chooser = gm_audio_profile_choose_new ();
 
 	/* Set which profile is active */
-	profile_id = gm_audio_profile_get_id (priv->profile);
-	gm_audio_profile_choose_set_active (priv->profile_chooser,
-					    profile_id);
+	if (priv->profile) {
+		profile_id = gm_audio_profile_get_id (priv->profile);
+		gm_audio_profile_choose_set_active (priv->profile_chooser,
+						    profile_id);
+	}
 
 	/* Create edit profile button */
 	edit = gtk_button_new_with_mnemonic (dgettext (GETTEXT_PACKAGE, "Edit _Profiles..."));
