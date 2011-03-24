@@ -1,6 +1,7 @@
-NEW in 2.90.0 - " ":
+NEW in 3.0.0 - "Came Without A Warning":
 ===============
 - Port to GTK3.
+- Fix crash due to user deleting the cdlossy profile (#640931)
 
 Translations:
 - Added Spanish translation (Jorge González)
