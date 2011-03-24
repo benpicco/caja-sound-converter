@@ -1,6 +1,6 @@
-AC_INIT([nautilus-sound-converter], [2.90.0], [https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter], [nautilus-sound-converter])
+AC_INIT([nautilus-sound-converter], [3.0.0], [https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter], [nautilus-sound-converter])
 AC_PREREQ([2.59])
-AC_COPYRIGHT([Copyright (C) 2008-2010 Brian Pepple])
+AC_COPYRIGHT([Copyright (C) 2008-2011 Brian Pepple])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([Makefile.am])
