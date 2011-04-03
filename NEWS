@@ -1,3 +1,10 @@
+NEW in 3.x.x -
+===============
+- Show text in progress bars.
+
+Translations:
+- Added Danish translation (Joe Hansen)
+
 NEW in 3.0.0 - "Came Without A Warning":
 ===============
 - Port to GTK3.
