@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2002-2007 Imendio AB
- * Copyright (C) 2008 Brian Pepple
+ * Copyright (C) 2008-2011 Brian Pepple
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,7 +22,7 @@
 #ifndef __NSC_XML_H__
 #define __NSC_XML_H__
 
-#include <glib/gtypes.h>
+#include <glib.h>
 #include <gtk/gtk.h>
 
 GtkBuilder *nsc_builder_get_file (const gchar *filename,

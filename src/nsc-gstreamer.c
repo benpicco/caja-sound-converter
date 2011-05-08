@@ -2,7 +2,7 @@
 /*
  *  nsc-gstreamer.c
  * 
- *  Copyright (C) 2008-2010 Brian Pepple
+ *  Copyright (C) 2008-2011 Brian Pepple
  *  Copyright (C) 2003-2007 Ross Burton <ross@burtonini.com>
  *
  *  This library is free software; you can redistribute it and/or
@@ -27,8 +27,7 @@
 #include <config.h>
 
 #include <string.h>
-#include <glib/gerror.h>
-#include <glib/gtypes.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <glib-object.h>
 #include <gst/gst.h>
