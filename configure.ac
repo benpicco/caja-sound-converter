@@ -1,5 +1,5 @@
-AC_INIT([nautilus-sound-converter], [3.0.1], [https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter], [nautilus-sound-converter])
-AC_PREREQ([2.59])
+AC_INIT([nautilus-sound-converter],[3.0.1],[https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter],[nautilus-sound-converter])
+AC_PREREQ([2.68])
 AC_COPYRIGHT([Copyright (C) 2008-2011 Brian Pepple])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -15,7 +15,7 @@ dnl Checks for programs.
 dnl -----------------------------------------------------------
 AC_PROG_CC
 IT_PROG_INTLTOOL([0.35.0])
-AC_PROG_LIBTOOL
+LT_INIT
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
