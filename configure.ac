@@ -5,7 +5,7 @@ AC_COPYRIGHT([Copyright (C) 2008-2011 Brian Pepple])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([1.9 dist-bzip2 no-dist-gzip check-news])
+AM_INIT_AUTOMAKE([1.11.1 no-dist-gzip dist-xz tar-pax check-news])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AM_MAINTAINER_MODE
