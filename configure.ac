@@ -14,7 +14,7 @@ dnl -----------------------------------------------------------
 dnl Checks for programs.
 dnl -----------------------------------------------------------
 AC_PROG_CC
-IT_PROG_INTLTOOL([0.35.0])
+IT_PROG_INTLTOOL([0.40.6])
 LT_INIT
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 
@@ -22,7 +22,7 @@ AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
 GNOME_COMPILE_WARNINGS([maximum])
-GNOME_CXX_WARNINGS
+GNOME_CXX_WARNINGS([yes])
 GNOME_DEBUG_CHECK
 GNOME_MAINTAINER_MODE_DEFINES
 
