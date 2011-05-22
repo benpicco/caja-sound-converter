@@ -1,4 +1,4 @@
-AC_INIT([nautilus-sound-converter],[3.0.1],[https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter],[nautilus-sound-converter])
+AC_INIT([nautilus-sound-converter],[3.0.1],[https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter],[nautilus-sound-converter],[http://projects.gnome.org/nautilus-sound-converter/])
 AC_PREREQ([2.68])
 AC_COPYRIGHT([Copyright (C) 2008-2011 Brian Pepple])
 
