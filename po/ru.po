@@ -1,0 +1,157 @@
+# Russian translation for nautilus-sound-converter.
+# Copyright (C) 2011 nautilus-sound-converter's COPYRIGHT HOLDER
+# This file is distributed under the same license as the nautilus-sound-converter package.
+# stmc <whats_up@tut.by>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-sound-converter master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=nautilus-sound-converter&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2011-05-30 19:27+0000\n"
+"PO-Revision-Date: 2011-07-28 20:42+0300\n"
+"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../data/main.ui.h:1
+msgid "<b>Destination</b>"
+msgstr "<b>Назначение</b>"
+
+# msgstr "<b>Назначение</b>"
+#: ../data/main.ui.h:2
+msgid "<b>Format</b>"
+msgstr "<b>Формат</b>"
+
+#: ../data/main.ui.h:3
+msgid "Convert Audio File"
+msgstr "Преобразовать звуковой файл"
+
+#: ../data/main.ui.h:4
+msgid "Select A Folder"
+msgstr "Выберите папку"
+
+# msgstr "Выберите директорию"
+#: ../data/progress.ui.h:1
+msgid "Converting Progress"
+msgstr "Выполнение преобразования"
+
+#: ../data/nautilus-sound-converter.schemas.in.h:1
+msgid "Use source directory as output directory"
+msgstr "Использовать исходный каталог в качестве целевого"
+
+#: ../data/nautilus-sound-converter.schemas.in.h:2
+msgid "Use the source directory as the default output directory."
+msgstr "Использовать исходный каталог в качестве целевого каталога по умолчанию."
+
+#: ../src/nsc-converter.c:338
+#, c-format
+msgid "Converting: %d of %d"
+msgstr "Преобразование: %d из %d"
+
+#: ../src/nsc-converter.c:364
+#, c-format
+msgid ""
+"Nautilus Sound Converter could not convert this file.\n"
+"Reason: %s"
+msgstr ""
+"Nautilus Sound Converter не может преобразовать этот файл.\n"
+"Причина: %s"
+
+#: ../src/nsc-converter.c:402
+#: ../src/nsc-converter.c:618
+msgid "Speed: Unknown"
+msgstr "Скорость: неизвестно"
+
+#: ../src/nsc-converter.c:456
+#, c-format
+msgid "Estimated time left: %d:%02d (at %0.1f×)"
+msgstr "Осталось времени: %d:%02d (скорость — %0.1f×)"
+
+#: ../src/nsc-converter.c:461
+msgid "Estimated time left: unknown"
+msgstr "Осталось времени: неизвестно"
+
+#. Create edit profile button
+#: ../src/nsc-converter.c:696
+msgid "Edit _Profiles..."
+msgstr "Изменить _профили…"
+
+#. Should probably do more than just give a warning
+#: ../src/nsc-converter.c:743
+msgid "Could not create GConf client.\n"
+msgstr "Не удалось создать клиент GConf.\n"
+
+#: ../src/nsc-extension.c:166
+msgid "_Convert..."
+msgstr "_Преобразовать…"
+
+#: ../src/nsc-extension.c:168
+msgid "Convert each selected audio file"
+msgstr "Преобразовать каждый выделенный звуковой файл"
+
+#: ../src/nsc-gstreamer.c:192
+msgid "Audio Profile"
+msgstr "Звуковой профиль"
+
+#: ../src/nsc-gstreamer.c:193
+msgid "The GNOME Audio Profile used for encoding audio"
+msgstr "Профиль GNOME Audio, используемый для кодирования звука"
+
+#: ../src/nsc-gstreamer.c:380
+#: ../src/nsc-gstreamer.c:389
+#, c-format
+msgid "Could not create GStreamer file input"
+msgstr "Не удалось создать входной файл GStreamer"
+
+#: ../src/nsc-gstreamer.c:398
+#, c-format
+msgid "Could not create GStreamer encoders for %s"
+msgstr "Не удалось создать кодировщики GStreamer для %s"
+
+#: ../src/nsc-gstreamer.c:413
+#, c-format
+msgid "Could not create GStreamer file output"
+msgstr "Не удалось создать файл вывода GStreamer"
+
+#: ../src/nsc-gstreamer.c:435
+#: ../src/nsc-gstreamer.c:443
+#, c-format
+msgid "Could not link pipeline"
+msgstr "Не удалось соединить конвейер"
+
+#: ../src/nsc-gstreamer.c:478
+msgid "Could not get current file position"
+msgstr "Не удалось получить текущую позицию в файле"
+
+#: ../src/nsc-gstreamer.c:579
+msgid "Could not get current file duration"
+msgstr "Не удалось получить длительность текущего файла"
+
+#: ../src/nsc-gstreamer.c:647
+#, c-format
+msgid "The plugin necessary for mp3 file access was not found"
+msgstr "Модуль, необходимый для доступа к mp3, не найден"
+
+#: ../src/nsc-gstreamer.c:664
+#, c-format
+msgid "The plugin necessary for wav file access was not found"
+msgstr "Модуль, необходимый для доступа к wav, не найден"
+
+#: ../src/nsc-gstreamer.c:682
+#, c-format
+msgid "The plugin necessary for aac file access was not found"
+msgstr "Модуль, необходимый для доступа к aac, не найден"
+
+#: ../src/nsc-gstreamer.c:699
+#, c-format
+msgid "The plugin necessary for musepack file access was not found"
+msgstr "Модуль, необходимый для доступа к musepack, не найден"
+
+#: ../src/nsc-gstreamer.c:716
+#, c-format
+msgid "The plugin necessary for wma file access was not found"
+msgstr "Модуль, необходимый для доступа к wma, не найден"
+
