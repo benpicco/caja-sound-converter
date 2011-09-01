@@ -76,9 +76,11 @@ file_is_sound (NautilusFileInfo *file_info)
 		if (nautilus_file_info_is_mime_type (file_info, mime_types[i]))
 			return TRUE;
 
-	/* Check for mp3 support */
+	/* Check for mp3 & mp2 support */
 	if (nsc_gstreamer_supports_mp3 (&error)) {
 		if (nautilus_file_info_is_mime_type (file_info, "audio/mpeg"))
+			return TRUE;
+		else if (nautilus_file_info_is_mime_type (file_info, "audio/mp2"))
 			return TRUE;
 	} else {
 		g_error_free (error);
