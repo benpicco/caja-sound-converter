@@ -1,3 +1,2 @@
-1. Drop status icon use since it's not supported in GNOME 3
-2. More error checking.
-3. Add replay-gain support
+1. More error checking.
+2. Add replay-gain support

@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 
 /*
  * Declarations for the caja extension object.  This object will be
- * instantiated by nautilus.  It implements the GInterfaces exported by libnautilus.
+ * instantiated by caja.  It implements the GInterfaces exported by libcaja.
  */
 
 #define NSC_TYPE_EXTENSION	   (nsc_extension_get_type ())

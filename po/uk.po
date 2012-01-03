@@ -1,12 +1,12 @@
 # Ukrainian translation for caja-sound-converter.
 #
-# Copyright (C) 2011 nautilus-sound-converter's COPYRIGHT HOLDER
-# This file is distributed under the same license as the nautilus-sound-converter package.
+# Copyright (C) 2011 caja-sound-converter's COPYRIGHT HOLDER
+# This file is distributed under the same license as the caja-sound-converter package.
 #
 # Serhij Dubyk <dubyk@ukr.net>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter 3.0.0\n"
+"Project-Id-Version: caja-sound-converter 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-12 01:40+0300\n"
 "PO-Revision-Date: 2011-04-02 22:43+0300\n"
@@ -42,11 +42,11 @@ msgstr "Виберіть теку"
 msgid "Converting Progress"
 msgstr "Процес перетворення"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr "Використовувати джерельну теку як вихідну"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr "Використовувати джерельну теку як типову вихідну."
 
@@ -61,7 +61,7 @@ msgid ""
 "Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
-"Перетворювач звуку для Nautilus не може перетворити цей файл.\n"
+"Перетворювач звуку для Caja не може перетворити цей файл.\n"
 "Причина: %s"
 
 #: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
@@ -101,7 +101,7 @@ msgstr "Профіль звуку"
 
 #: ../src/nsc-gstreamer.c:194
 msgid "The MATE Audio Profile used for encoding audio"
-msgstr "Профіль звуку GNOME, використовуваний для кодування аудіо"
+msgstr "Профіль звуку MATE, використовуваний для кодування аудіо"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format

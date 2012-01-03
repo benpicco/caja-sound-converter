@@ -28,7 +28,7 @@
 #include "nsc-extension.h"
 #include "nsc-gstreamer.h"
 
-#include <libcaja-extension/nautilus-menu-provider.h>
+#include <libcaja-extension/caja-menu-provider.h>
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
@@ -57,14 +57,14 @@ static gchar *mime_types[] = {
 };
 
 static gboolean
-file_is_sound (NautilusFileInfo *file_info)
+file_is_sound (CajaFileInfo *file_info)
 {
 	gchar          *scheme;
 	gint            i;
 	GError         *error = NULL;
 
 	/* Is this a file? */
-	scheme = nautilus_file_info_get_uri_scheme (file_info);
+	scheme = caja_file_info_get_uri_scheme (file_info);
 
 	if (strcmp (scheme, "file") != 0) {
 		g_free (scheme);
@@ -73,14 +73,14 @@ file_is_sound (NautilusFileInfo *file_info)
 	g_free (scheme);
 
 	for (i = 0; mime_types[i] != NULL; i++)
-		if (nautilus_file_info_is_mime_type (file_info, mime_types[i]))
+		if (caja_file_info_is_mime_type (file_info, mime_types[i]))
 			return TRUE;
 
 	/* Check for mp3 & mp2 support */
 	if (nsc_gstreamer_supports_mp3 (&error)) {
-		if (nautilus_file_info_is_mime_type (file_info, "audio/mpeg"))
+		if (caja_file_info_is_mime_type (file_info, "audio/mpeg"))
 			return TRUE;
-		else if (nautilus_file_info_is_mime_type (file_info, "audio/mp2"))
+		else if (caja_file_info_is_mime_type (file_info, "audio/mp2"))
 			return TRUE;
 	} else {
 		g_error_free (error);
@@ -89,7 +89,7 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for aac suppport */
 	if (nsc_gstreamer_supports_aac (&error)) {
-		if (nautilus_file_info_is_mime_type (file_info, "audio/mp4"))
+		if (caja_file_info_is_mime_type (file_info, "audio/mp4"))
 			return TRUE;
 	} else {
 		g_error_free (error);
@@ -98,7 +98,7 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for Musepack support */
 	if (nsc_gstreamer_supports_musepack (&error)) {
-		if (nautilus_file_info_is_mime_type (file_info, "audio/x-musepack"))
+		if (caja_file_info_is_mime_type (file_info, "audio/x-musepack"))
 			return TRUE;
 	} else {
 		g_error_free (error);
@@ -107,7 +107,7 @@ file_is_sound (NautilusFileInfo *file_info)
 
 	/* Check for wma support */
 	if (nsc_gstreamer_supports_wma (&error)) {
-		if (nautilus_file_info_is_mime_type (file_info, "audio/x-ms-wma"))
+		if (caja_file_info_is_mime_type (file_info, "audio/x-ms-wma"))
 			return TRUE;
 	} else {
 		g_error_free (error);
@@ -132,7 +132,7 @@ converter_filter_files (GList *files)
 }
 
 static void
-sound_convert_callback (NautilusMenuItem *item,
+sound_convert_callback (CajaMenuItem *item,
 		        GList            *files)
 {
 	NscConverter *converter;
@@ -143,19 +143,19 @@ sound_convert_callback (NautilusMenuItem *item,
 }
 
 static GList *
-nsc_extension_get_background_items (NautilusMenuProvider  *provider,
+nsc_extension_get_background_items (CajaMenuProvider  *provider,
 				    GtkWidget             *window,
-				    NautilusFileInfo      *file_info)
+				    CajaFileInfo      *file_info)
 {
 	return NULL;
 }
 
 static GList *
-nsc_extension_get_file_items (NautilusMenuProvider *provider,
+nsc_extension_get_file_items (CajaMenuProvider *provider,
 			      GtkWidget            *window,
 			      GList                *files)
 {
-	NautilusMenuItem *item;
+	CajaMenuItem *item;
 	GList            *scan = NULL;
 	GList            *items = NULL;
 
@@ -164,7 +164,7 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 
 	for (scan = files; scan; scan = scan->next) {
 		if (file_is_sound (scan->data)) {
-			item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
+			item = caja_menu_item_new ("CajaSoundConverter::convert",
                                                        dgettext (GETTEXT_PACKAGE, "_Convert..."),
                                                        dgettext (GETTEXT_PACKAGE,
 								 "Convert each selected audio file"),
@@ -172,7 +172,7 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 
 			g_signal_connect (item, "activate",
 					  G_CALLBACK (sound_convert_callback),
-					  nautilus_file_info_list_copy (files));
+					  caja_file_info_list_copy (files));
 
 			items = g_list_prepend (items, item);
 			items = g_list_reverse (items);
@@ -185,7 +185,7 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 }
 
 static void
-nsc_extension_menu_provider_iface_init (NautilusMenuProviderIface *iface)
+nsc_extension_menu_provider_iface_init (CajaMenuProviderIface *iface)
 {
 	iface->get_background_items = nsc_extension_get_background_items;
 	iface->get_file_items = nsc_extension_get_file_items;

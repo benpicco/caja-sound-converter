@@ -3,8 +3,8 @@
     
     <schema>
        <key>/schemas/apps/caja-sound-converter/source_dir</key>
-       <applyto>/apps/nautilus-sound-converter/source_dir</applyto>
-       <owner>nautilus-sound-converter</owner>
+       <applyto>/apps/caja-sound-converter/source_dir</applyto>
+       <owner>caja-sound-converter</owner>
        <type>bool</type>
        <default>true</default>
        <locale name="C">

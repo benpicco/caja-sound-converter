@@ -1,13 +1,13 @@
 # Chinese (China) translation for caja-sound-converter.
-# Copyright (C) 2010 nautilus-sound-converter's COPYRIGHT HOLDER
-# This file is distributed under the same license as the nautilus-sound-converter package.
+# Copyright (C) 2010 caja-sound-converter's COPYRIGHT HOLDER
+# This file is distributed under the same license as the caja-sound-converter package.
 # lainme <lainme993@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter master\n"
+"Project-Id-Version: caja-sound-converter master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.mate.org/enter_bug.cgi?"
-"product=nautilus-sound-converter\n"
+"product=caja-sound-converter\n"
 "POT-Creation-Date: 2010-12-15 00:50+0000\n"
 "PO-Revision-Date: 2010-12-27 16:14+0800\n"
 "Last-Translator: lainme <lainme993@gmail.com>\n"
@@ -36,11 +36,11 @@ msgstr "选择一个文件夹"
 msgid "Converting Progress"
 msgstr "转换进度"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr "使用源目录作为输出目录"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr "使用源目录作为默认输出目录。"
 
@@ -55,7 +55,7 @@ msgid ""
 "Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
-"Nautilus 音频转换器无法转换这个文件。\n"
+"Caja 音频转换器无法转换这个文件。\n"
 "原因：%s"
 
 #: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
@@ -95,7 +95,7 @@ msgstr "音频配置文件"
 
 #: ../src/nsc-gstreamer.c:194
 msgid "The MATE Audio Profile used for encoding audio"
-msgstr "用来编码音频的 GNOME 音频配置文件"
+msgstr "用来编码音频的 MATE 音频配置文件"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format

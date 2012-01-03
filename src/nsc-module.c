@@ -31,14 +31,14 @@
 static GType type_list[1];
 
 void caja_module_initialize (GTypeModule  *module);
-void nautilus_module_shutdown   (void);
-void nautilus_module_list_types (const GType **types,
+void caja_module_shutdown   (void);
+void caja_module_list_types (const GType **types,
 				 int          *num_types);
 
 void
-nautilus_module_initialize (GTypeModule *module)
+caja_module_initialize (GTypeModule *module)
 {
-	g_print ("Initializing nautilus-sound-converter extension\n");
+	g_print ("Initializing caja-sound-converter extension\n");
 
 	nsc_extension_register_type (module);
 	type_list[0] = NSC_TYPE_EXTENSION;
@@ -48,13 +48,13 @@ nautilus_module_initialize (GTypeModule *module)
 }
 
 void
-nautilus_module_shutdown (void)
+caja_module_shutdown (void)
 {
-	g_print ("Shutting down nautilus-sound-converter extension\n");
+	g_print ("Shutting down caja-sound-converter extension\n");
 }
 
 void 
-nautilus_module_list_types (const GType **types,
+caja_module_list_types (const GType **types,
 			    int          *num_types)
 {
 	*types = type_list;

@@ -39,11 +39,11 @@ msgstr "נא לבחור תיקייה"
 msgid "Converting Progress"
 msgstr "תהליך ההמרה"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr "שימוש בתיקייה היעד כתיקיית פלט"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr "שימוש בתיקיית המקור כתיקיית הפלט כבררת מחדל"
 
@@ -58,7 +58,7 @@ msgid ""
 "Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
-"ממיר השמע של Nautilus לא הצליח להמיר קובץ זה.\n"
+"ממיר השמע של Caja לא הצליח להמיר קובץ זה.\n"
 "סיבה: %s"
 
 #: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
@@ -98,7 +98,7 @@ msgstr "פרופיל שמע"
 
 #: ../src/nsc-gstreamer.c:194
 msgid "The MATE Audio Profile used for encoding audio"
-msgstr "פרופיל השמע ב־GNOME המשמש להצפנת שמע"
+msgstr "פרופיל השמע ב־MATE המשמש להצפנת שמע"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format

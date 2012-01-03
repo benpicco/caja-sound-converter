@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter\n"
+"Project-Id-Version: caja-sound-converter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-10 08:33+0200\n"
 "PO-Revision-Date: 2010-06-10 09:38+0200\n"
@@ -36,11 +36,11 @@ msgstr "Seleziona una cartella"
 msgid "Converting Progress"
 msgstr "Avanzamento conversione"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr "Usa directory sorgente come directory di destinazione"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr "Usa la directory sorgente come directory di destinazione"
 
@@ -95,7 +95,7 @@ msgstr "Profilo audio"
 
 #: ../src/nsc-gstreamer.c:194
 msgid "The MATE Audio Profile used for encoding audio"
-msgstr "Il profilo Audio GNOME usato per la codifica audio"
+msgstr "Il profilo Audio MATE usato per la codifica audio"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format

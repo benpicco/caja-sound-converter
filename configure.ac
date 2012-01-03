@@ -1,4 +1,4 @@
-AC_INIT([nautilus-sound-converter],[3.0.2],[https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter],[nautilus-sound-converter],[http://projects.gnome.org/nautilus-sound-converter/])
+AC_INIT([caja-sound-converter],[3.0.2],[https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter],[caja-sound-converter],[http://projects.gnome.org/nautilus-sound-converter/])
 AC_PREREQ([2.68])
 AC_COPYRIGHT([Copyright (C) 2008-2011 Brian Pepple])
 
@@ -21,20 +21,20 @@ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
-GNOME_COMPILE_WARNINGS([maximum])
-GNOME_CXX_WARNINGS([yes])
-GNOME_DEBUG_CHECK
-GNOME_MAINTAINER_MODE_DEFINES
+MATE_COMPILE_WARNINGS([maximum])
+MATE_CXX_WARNINGS([yes])
+MATE_DEBUG_CHECK
+MATE_MAINTAINER_MODE_DEFINES
 
 dnl -----------------------------------------------------------
 dnl Set variables for minimum versions needed.
 dnl -----------------------------------------------------------
 GLIB_REQUIRED=2.16.0
-NAUTILUS_REQUIRED=2.12.0
+CAJA_REQUIRED=2.12.0
 GCONF_REQUIRED=1.2.0
 GTK_REQUIRED=2.90.3
 GSTREAMER_REQUIRED=0.10.20
-GNOME_MEDIA_PROFILES_REQUIRED=2.11.91
+MATE_MEDIA_PROFILES_REQUIRED=2.11.91
 
 dnl -----------------------------------------------------------
 dnl Check for required libraries
@@ -43,27 +43,27 @@ PKG_CHECK_MODULES(NSC,
 [
 	glib-2.0 >= $GLIB_REQUIRED
 	gconf-2.0 >= $GCONF_REQUIRED
-	libnautilus-extension >= $NAUTILUS_REQUIRED
+	libcaja-extension >= $CAJA_REQUIRED
 	gtk+-3.0 >= $GTK_REQUIRED
 	gstreamer-0.10 >= $GSTREAMER_REQUIRED
-	libgnome-media-profiles-3.0 >= $GNOME_MEDIA_PROFILES_REQUIRED
+	libmate-media-profiles-3.0 >= $MATE_MEDIA_PROFILES_REQUIRED
 ])
 AC_SUBST(NSC_CFLAGS)
 AC_SUBST(NSC_LIBS)
 
 dnl -----------------------------------------------------------
-dnl Get the correct nautilus extensions directory
+dnl Get the correct caja extensions directory
 dnl -----------------------------------------------------------
-AC_ARG_WITH(nautilusdir,
-	    AS_HELP_STRING([--with-nautilusdir=DIR],[Installation path for Nautilus extension @<:@auto@:>@]),
-	    [ac_with_nautilusdir=$withval],
-	    [ac_with_nautilusdir=""])
-if test "${ac_with_nautilusdir}" = ""; then
-	ac_with_nautilusdir=`pkg-config --variable=extensiondir libnautilus-extension`
+AC_ARG_WITH(cajadir,
+	    AS_HELP_STRING([--with-cajadir=DIR],[Installation path for Caja extension @<:@auto@:>@]),
+	    [ac_with_cajadir=$withval],
+	    [ac_with_cajadir=""])
+if test "${ac_with_cajadir}" = ""; then
+	ac_with_cajadir=`pkg-config --variable=extensiondir libcaja-extension`
 fi
 
-AC_MSG_NOTICE([installing nautilus plugin in ${ac_with_nautilusdir}])
-AC_SUBST([NAUTILUS_EXTENSION_DIR],[${ac_with_nautilusdir}])
+AC_MSG_NOTICE([installing caja plugin in ${ac_with_cajadir}])
+AC_SUBST([CAJA_EXTENSION_DIR],[${ac_with_cajadir}])
 
 
 dnl -----------------------------------------------------------
@@ -76,11 +76,11 @@ AM_GST_ELEMENT_CHECK(flacdec,,AC_MSG_WARN([The 'flacdec' element was not found. 
 AM_GST_ELEMENT_CHECK(flacenc,,AC_MSG_WARN([The 'flacenc' element was not found. This will cause encoding to FLAC to fail.]))
 AM_GST_ELEMENT_CHECK(wavpackenc,,AC_MSG_WARN([The 'wavpackenc' element was not found. This will cause encoding from Wav to fail.]))
 AM_GST_ELEMENT_CHECK(wavpackdec,,AC_MSG_WARN([The 'wavpackdec' element was not found. This will cause decoding to Wav to fail.]))
-AM_GST_ELEMENT_CHECK(giosink,,AC_MSG_WARN([The 'giosink' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
-AM_GST_ELEMENT_CHECK(giosrc,,AC_MSG_WARN([The 'giosrc' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
-AM_GST_ELEMENT_CHECK(decodebin,,AC_MSG_WARN([The 'decodebin' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
-AM_GST_ELEMENT_CHECK(audioresample,,AC_MSG_WARN([The 'audioresample' element was not found.  This will cause Nautilus-Sound-Converter to fail at runtime.]))
-AM_GST_ELEMENT_CHECK(audioconvert,,AC_MSG_WARN([The 'audioconvert' element was not found. This will cause Nautilus-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(giosink,,AC_MSG_WARN([The 'giosink' element was not found. This will cause Caja-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(giosrc,,AC_MSG_WARN([The 'giosrc' element was not found. This will cause Caja-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(decodebin,,AC_MSG_WARN([The 'decodebin' element was not found. This will cause Caja-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(audioresample,,AC_MSG_WARN([The 'audioresample' element was not found.  This will cause Caja-Sound-Converter to fail at runtime.]))
+AM_GST_ELEMENT_CHECK(audioconvert,,AC_MSG_WARN([The 'audioconvert' element was not found. This will cause Caja-Sound-Converter to fail at runtime.]))
 
 
 dnl -----------------------------------------------------------

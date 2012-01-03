@@ -3,7 +3,7 @@ schemas_in_files = caja-sound-converter.schemas.in
 schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 
-builderdir = $(datadir)/nautilus-sound-converter
+builderdir = $(datadir)/caja-sound-converter
 builder_DATA =		\
 	main.ui		\
 	progress.ui

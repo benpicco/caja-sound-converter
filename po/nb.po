@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter\n"
+"Project-Id-Version: caja-sound-converter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-05 15:58+0200\n"
 "PO-Revision-Date: 2011-09-05 16:01+0200\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Last-Translator: Kjartan Maraas <kmaraas@mate.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "Velg en mappe"
 msgid "Converting Progress"
 msgstr "Fremgang for konvertering"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr ""
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr ""
 

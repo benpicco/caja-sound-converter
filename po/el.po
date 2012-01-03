@@ -1,11 +1,11 @@
 # Greek translation for caja-sound-converter.
-# Copyright (C) 2011 nautilus-sound-converter's COPYRIGHT HOLDER
-# This file is distributed under the same license as the nautilus-sound-converter package.
+# Copyright (C) 2011 caja-sound-converter's COPYRIGHT HOLDER
+# This file is distributed under the same license as the caja-sound-converter package.
 # Evangelos Vafeiadis <vagvaf@gmail.com>, 2011.
 # Evangelos Vafeiadis <vagvaf@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter master\n"
+"Project-Id-Version: caja-sound-converter master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-05-04 23:40+0300\n"
 "PO-Revision-Date: 2011-05-04 22:26+0200\n"
@@ -36,11 +36,11 @@ msgstr "Επιλογή ενός φακέλου"
 msgid "Converting Progress"
 msgstr "Πρόοδος μετατροπής"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr "Χρήση φακέλου εισόδου ως φακέλου εξόδου"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr "Χρήση φακέλου εισόδου ως προεπιλεγμένου φακέλου εξόδου"
 
@@ -55,7 +55,7 @@ msgid ""
 "Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
-"Ο Nautilus Sound Converter αδυνατεί να μετατρέψει το αρχείο\n"
+"Ο Caja Sound Converter αδυνατεί να μετατρέψει το αρχείο\n"
 "Αιτία:%s"
 
 #: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
@@ -95,7 +95,7 @@ msgstr "Προφίλ ήχου"
 
 #: ../src/nsc-gstreamer.c:194
 msgid "The MATE Audio Profile used for encoding audio"
-msgstr "Το προφίλ ήχου GNOME που χρησιμοποιείται για την αποκωδικοποίηση ήχου"
+msgstr "Το προφίλ ήχου MATE που χρησιμοποιείται για την αποκωδικοποίηση ήχου"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format

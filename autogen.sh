@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="nautilus-sound-converter"
+PKG_NAME="caja-sound-converter"
 
 (test -f $srcdir/configure.ac) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
@@ -13,9 +13,9 @@ PKG_NAME="nautilus-sound-converter"
 }
 
 
-which gnome-autogen.sh || {
-    echo "You need to install gnome-common from the GNOME CVS"
+which mate-autogen.sh || {
+    echo "You need to install mate-common from the MATE CVS"
     exit 1
 }
 
-USE_GNOME2_MACROS=1 . gnome-autogen.sh
+USE_MATE2_MACROS=1 . mate-autogen.sh

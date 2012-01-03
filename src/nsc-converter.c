@@ -33,8 +33,8 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gst/gst.h>
-#include <libcaja-extension/nautilus-file-info.h>
-#include <libmate-media-profiles/gnome-media-profiles.h>
+#include <libcaja-extension/caja-file-info.h>
+#include <libmate-media-profiles/mate-media-profiles.h>
 
 #include "nsc-converter.h"
 #include "nsc-gstreamer.h"
@@ -94,7 +94,7 @@ struct _NscConverterPrivate {
  * gconf key for whether the user wants to use
  * the source directory for the output directory.
  */
-#define SOURCE_DIRECTORY "/apps/nautilus-sound-converter/source_dir"
+#define SOURCE_DIRECTORY "/apps/caja-sound-converter/source_dir"
 
 #define NSC_CONVERTER_GET_PRIVATE(o)           \
 	((NscConverterPrivate *)((NSC_CONVERTER(o))->priv))
@@ -310,7 +310,7 @@ convert_file (NscConverter *convert)
 
 	/* Get the files */
 	file_info = CAJA_FILE_INFO (priv->files->data);
-	old_file = nautilus_file_info_get_location (file_info);
+	old_file = caja_file_info_get_location (file_info);
 	new_file = create_new_file (convert, old_file);
 
 	/* Let's finally get to the fun stuff */
@@ -361,7 +361,7 @@ on_error_cb (NscGStreamer *gstream, GError *error, gpointer data)
 	converter = NSC_CONVERTER (data);
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
-	text = g_strdup_printf (dgettext (GETTEXT_PACKAGE, "Nautilus Sound Converter could "
+	text = g_strdup_printf (dgettext (GETTEXT_PACKAGE, "Caja Sound Converter could "
 					  "not convert this file.\nReason: %s"),
 				error->message);
 
@@ -671,11 +671,11 @@ create_main_dialog (NscConverter *converter)
 	 * to use that as the output destination.
 	 */
 	if (priv->src_dir) {
-		NautilusFileInfo *file_info;
+		CajaFileInfo *file_info;
 		gchar            *uri;
 
-		file_info = NAUTILUS_FILE_INFO (priv->files->data);
-		uri = nautilus_file_info_get_uri (file_info);
+		file_info = CAJA_FILE_INFO (priv->files->data);
+		uri = caja_file_info_get_uri (file_info);
 
 		gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (priv->path_chooser),
 					  uri);
@@ -752,8 +752,8 @@ nsc_converter_init (NscConverter *self)
 			g_error_free (error);
 		}
 
-		/* Init gnome-media-profiles */
-		gnome_media_profiles_init (gconf);
+		/* Init mate-media-profiles */
+		mate_media_profiles_init (gconf);
 
 		/* Unreference the gconf client */
 		g_object_unref (gconf);

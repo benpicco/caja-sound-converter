@@ -31,7 +31,7 @@
 #include <glib/gi18n.h>
 #include <glib-object.h>
 #include <gst/gst.h>
-#include <libmate-media-profiles/gnome-media-profiles.h>
+#include <libmate-media-profiles/mate-media-profiles.h>
 
 #include "nsc-error.h"
 #include "nsc-gstreamer.h"

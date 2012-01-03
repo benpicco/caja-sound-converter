@@ -2,21 +2,21 @@
 <Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
-         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns:mate="http://api.mate.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">nautilus-sound-converter</name>
-  <shortdesc xml:lang="en">Nautilus extension to convert audio files formats</shortdesc>
-  <download-page rdf:resource="http://download.gnome.org/sources/nautilus-sound-converter/" />
+  <name xml:lang="en">caja-sound-converter</name>
+  <shortdesc xml:lang="en">Caja extension to convert audio files formats</shortdesc>
+  <download-page rdf:resource="http://download.mate.org/sources/caja-sound-converter/" />
 
-  <homepage rdf:resource="http://live.gnome.org/NautilusSoundConverter" />
-  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter" />
+  <homepage rdf:resource="http://live.mate.org/CajaSoundConverter" />
+  <bug-database rdf:resource="https://bugzilla.mate.org/browse.cgi?product=caja-sound-converter" />
 
   <maintainer>
     <foaf:Person>
       <foaf:name>Brian Pepple</foaf:name>
       <foaf:mbox rdf:resource="mailto:bpepple@fedoraproject.org" />
-      <gnome:userid>bpepple</gnome:userid>
+      <mate:userid>bpepple</mate:userid>
     </foaf:Person>
   </maintainer>
 </Project>

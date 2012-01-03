@@ -8,9 +8,9 @@ AM_CPPFLAGS =						\
 
 caja_extensiondir=$(CAJA_EXTENSION_DIR)
 
-nautilus_extension_LTLIBRARIES=libnautilus-sound-converter.la
+caja_extension_LTLIBRARIES=libcaja-sound-converter.la
 
-libnautilus_sound_converter_la_SOURCES =		\
+libcaja_sound_converter_la_SOURCES =		\
 	nsc-module.c					\
 	nsc-error.c		nsc-error.h		\
 	nsc-extension.c		nsc-extension.h		\
@@ -18,5 +18,5 @@ libnautilus_sound_converter_la_SOURCES =		\
 	nsc-gstreamer.c		nsc-gstreamer.h		\
 	nsc-xml.c		nsc-xml.h
 
-libnautilus_sound_converter_la_LDFLAGS = -module -avoid-version
-libnautilus_sound_converter_la_LIBADD  = $(NSC_LIBS)
+libcaja_sound_converter_la_LDFLAGS = -module -avoid-version
+libcaja_sound_converter_la_LIBADD  = $(NSC_LIBS)

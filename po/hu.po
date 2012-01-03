@@ -1,17 +1,17 @@
 # Hungarian translation for caja-sound-converter.
 # Copyright (C) 2009, 2010 Free Software Foundation, Inc.
-# This file is distributed under the same license as the nautilus-sound-converter package.
+# This file is distributed under the same license as the caja-sound-converter package.
 # 
 # Peter Bojtos <ptr at ulx dot hu>, 2010.
 # Gabor Kelemen <kelemeng at mate dot hu>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter master\n"
+"Project-Id-Version: caja-sound-converter master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-26 00:35+0100\n"
 "PO-Revision-Date: 2010-12-26 01:55+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
-"Language-Team: Hungarian <gnome at fsf dot hu>\n"
+"Last-Translator: Gabor Kelemen <kelemeng at mate dot hu>\n"
+"Language-Team: Hungarian <mate at fsf dot hu>\n"
 "Language: \n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,11 +39,11 @@ msgstr "Válasszon mappát"
 msgid "Converting Progress"
 msgstr "Konvertálás folyamatban"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:1
+#: ../data/caja-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
 msgstr "Forráskönyvtár használata célként"
 
-#: ../data/nautilus-sound-converter.schemas.in.h:2
+#: ../data/caja-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
 msgstr "Forráskönyvtár használata alapértelmezett célként."
 
@@ -58,7 +58,7 @@ msgid ""
 "Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
-"A Nautilus hangfájlkonvertáló nem tudta konvertálni ezt a fájlt.\n"
+"A Caja hangfájlkonvertáló nem tudta konvertálni ezt a fájlt.\n"
 "Ok: %s"
 
 #: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
