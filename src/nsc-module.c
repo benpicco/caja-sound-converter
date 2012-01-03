@@ -30,7 +30,7 @@
 
 static GType type_list[1];
 
-void nautilus_module_initialize (GTypeModule  *module);
+void caja_module_initialize (GTypeModule  *module);
 void nautilus_module_shutdown   (void);
 void nautilus_module_list_types (const GType **types,
 				 int          *num_types);
@@ -43,7 +43,7 @@ nautilus_module_initialize (GTypeModule *module)
 	nsc_extension_register_type (module);
 	type_list[0] = NSC_TYPE_EXTENSION;
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, MATELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 

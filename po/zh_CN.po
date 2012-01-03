@@ -1,4 +1,4 @@
-# Chinese (China) translation for nautilus-sound-converter.
+# Chinese (China) translation for caja-sound-converter.
 # Copyright (C) 2010 nautilus-sound-converter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the nautilus-sound-converter package.
 # lainme <lainme993@gmail.com>, 2010.
@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: http://bugzilla.mate.org/enter_bug.cgi?"
 "product=nautilus-sound-converter\n"
 "POT-Creation-Date: 2010-12-15 00:50+0000\n"
 "PO-Revision-Date: 2010-12-27 16:14+0800\n"
@@ -52,7 +52,7 @@ msgstr "转换中：%2$d 中的 %1$d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Nautilus 音频转换器无法转换这个文件。\n"
@@ -78,7 +78,7 @@ msgstr "编辑配置文件(_P)..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "无法创建 GConf 客户端。\n"
 
 #: ../src/nsc-extension.c:166
@@ -94,7 +94,7 @@ msgid "Audio Profile"
 msgstr "音频配置文件"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "用来编码音频的 GNOME 音频配置文件"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390

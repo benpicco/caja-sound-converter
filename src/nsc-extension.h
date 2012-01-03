@@ -29,7 +29,7 @@
 G_BEGIN_DECLS
 
 /*
- * Declarations for the nautilus extension object.  This object will be
+ * Declarations for the caja extension object.  This object will be
  * instantiated by nautilus.  It implements the GInterfaces exported by libnautilus.
  */
 

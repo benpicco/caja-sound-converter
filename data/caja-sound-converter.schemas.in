@@ -1,8 +1,8 @@
-<gconfschemafile>
+<mateconfschemafile>
   <schemalist>
     
     <schema>
-       <key>/schemas/apps/nautilus-sound-converter/source_dir</key>
+       <key>/schemas/apps/caja-sound-converter/source_dir</key>
        <applyto>/apps/nautilus-sound-converter/source_dir</applyto>
        <owner>nautilus-sound-converter</owner>
        <type>bool</type>
@@ -15,4 +15,3 @@
 
   </schemalist>  
 </gconfschemafile>
-

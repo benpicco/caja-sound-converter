@@ -1,6 +1,6 @@
-# Norwegian bokmål translation of nautilus-sound-converter.
+# Norwegian bokmål translation of caja-sound-converter.
 # Copyright (C) 1998-2004, 2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1998-2011.
+# Kjartan Maraas <kmaraas@mate.org>, 1998-2011.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 msgid ""
@@ -53,7 +53,7 @@ msgstr "Konverterer: %d av %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr "Rediger _profiler …"
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr ""
 
 #: ../src/nsc-extension.c:168
@@ -93,7 +93,7 @@ msgid "Audio Profile"
 msgstr "Lydprofil"
 
 #: ../src/nsc-gstreamer.c:193
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr ""
 
 #: ../src/nsc-gstreamer.c:380 ../src/nsc-gstreamer.c:389

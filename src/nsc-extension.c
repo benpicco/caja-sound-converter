@@ -28,7 +28,7 @@
 #include "nsc-extension.h"
 #include "nsc-gstreamer.h"
 
-#include <libnautilus-extension/nautilus-menu-provider.h>
+#include <libcaja-extension/nautilus-menu-provider.h>
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
@@ -38,7 +38,7 @@
 
 static void   nsc_extension_instance_init  (NscExtension         *sound);
 static void   nsc_extension_class_init     (NscExtensionClass    *class);
-static GList *nsc_extension_get_file_items (NautilusMenuProvider *provider,
+static GList *nsc_extension_get_file_items (CajaMenuProvider *provider,
 					    GtkWidget            *window,
 					    GList                *files);
 
@@ -240,6 +240,6 @@ nsc_extension_register_type (GTypeModule *module)
 
 	g_type_module_add_interface (module,
 				     sound_converter_type,
-				     NAUTILUS_TYPE_MENU_PROVIDER,
+				     CAJA_TYPE_MENU_PROVIDER,
 				     &menu_provider_iface_info);
 }

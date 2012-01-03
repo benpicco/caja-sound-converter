@@ -1,4 +1,4 @@
-# Italian translation of nautilus-sound-converter.
+# Italian translation of caja-sound-converter.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Gianvito Cavasoli <janvitus@ubuntu-it.org>, 2010.
@@ -52,7 +52,7 @@ msgstr "Conversione: %d di %d"
 #: ../src/nsc-converter.c:361
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Impossibile convertire questo file.\n"
@@ -78,7 +78,7 @@ msgstr "Modifica _profili..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:739
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Impossibile creare il client GConf.\n"
 
 #: ../src/nsc-extension.c:166
@@ -94,7 +94,7 @@ msgid "Audio Profile"
 msgstr "Profilo audio"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "Il profilo Audio GNOME usato per la codifica audio"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390

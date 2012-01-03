@@ -1,5 +1,5 @@
-schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files = nautilus-sound-converter.schemas.in
+schemasdir	 = $(MATECONF_SCHEMA_FILE_DIR)
+schemas_in_files = caja-sound-converter.schemas.in
 schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 

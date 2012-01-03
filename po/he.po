@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter\n"
+"Project-Id-Version: caja-sound-converter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-04 09:45+0200\n"
 "PO-Revision-Date: 2011-02-04 09:53+0200\n"
@@ -55,7 +55,7 @@ msgstr "בהמרה: %d מתוך %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "ממיר השמע של Nautilus לא הצליח להמיר קובץ זה.\n"
@@ -81,7 +81,7 @@ msgstr "עריכת _פרופילים..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "לא ניתן ליצור לקוח GConf.\n"
 
 #: ../src/nsc-extension.c:166
@@ -97,7 +97,7 @@ msgid "Audio Profile"
 msgstr "פרופיל שמע"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "פרופיל השמע ב־GNOME המשמש להצפנת שמע"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390

@@ -1,4 +1,4 @@
-# Swedish translation for nautilus-sound-converter.
+# Swedish translation for caja-sound-converter.
 # Copyright (C) 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-sound-converter package.
 # Daniel Nylander <po@danielnylander.se>, 2009, 2010.
@@ -52,7 +52,7 @@ msgstr "Konverterar: %d av %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Nautilus-ljudkonverterare kunde inte konvertera denna fil.\n"
@@ -79,7 +79,7 @@ msgstr "Redigera _profiler..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Kunde inte skapa GConf-klient.\n"
 
 #: ../src/nsc-extension.c:166
@@ -95,7 +95,7 @@ msgid "Audio Profile"
 msgstr "Ljudprofil"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "GNOME-ljudprofilen som används för ljudkodning"
 
 #: ../src/nsc-gstreamer.c:381
@@ -159,4 +159,3 @@ msgstr "Insticksmodulen som är nödvändig för wma-filåtkomst hittades inte"
 #~ msgstr "_Utdataformat:"
 #~ msgid "_Save Folder:"
 #~ msgstr "Mapp att _spara i:"
-

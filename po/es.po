@@ -1,7 +1,7 @@
-# Spanish translation for nautilus-sound-converter.
+# Spanish translation for caja-sound-converter.
 # Copyright (C) 2010 nautilus-sound-converter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the nautilus-sound-converter package.
-# Jorge González <jorgegonz@svn.gnome.org>, 2010.
+# Jorge González <jorgegonz@svn.mate.org>, 2010.
 #
 msgid ""
 msgstr ""
@@ -53,7 +53,7 @@ msgstr "Convirtiendo: %d de %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "El conversor de sonido de Nautilus no pudo convertir este archivo.\n"
@@ -79,7 +79,7 @@ msgstr "Editar p_erfiles…"
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "No se pudo crear el cliente GConf.\n"
 
 #: ../src/nsc-extension.c:166
@@ -95,7 +95,7 @@ msgid "Audio Profile"
 msgstr "Perfil de sonido"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "El perfil de sonido de GNOME que se usará para codificar el sonido"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390

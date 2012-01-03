@@ -1,12 +1,12 @@
 AM_CPPFLAGS =						\
-	-DG_LOG_DOMAIN=\"Nautilus-Sound-Converter\"	\
+	-DG_LOG_DOMAIN=\"Caja-Sound-Converter\"	\
 	-DDATADIR=\"$(datadir)\"			\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+	-DMATELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-I$(top_srcdir)					\
 	-I$(top_builddir)				\
 	$(NSC_CFLAGS) $(WARN_CFLAGS)
 
-nautilus_extensiondir=$(NAUTILUS_EXTENSION_DIR)
+caja_extensiondir=$(CAJA_EXTENSION_DIR)
 
 nautilus_extension_LTLIBRARIES=libnautilus-sound-converter.la
 

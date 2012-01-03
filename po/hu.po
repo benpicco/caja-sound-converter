@@ -1,9 +1,9 @@
-# Hungarian translation for nautilus-sound-converter.
+# Hungarian translation for caja-sound-converter.
 # Copyright (C) 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-sound-converter package.
 # 
 # Peter Bojtos <ptr at ulx dot hu>, 2010.
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2010.
+# Gabor Kelemen <kelemeng at mate dot hu>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter master\n"
@@ -55,7 +55,7 @@ msgstr "Konvertálás: %d./%d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "A Nautilus hangfájlkonvertáló nem tudta konvertálni ezt a fájlt.\n"
@@ -81,7 +81,7 @@ msgstr "_Profilok szerkesztése…"
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "GConf-kliens létrehozása sikertelen.\n"
 
 #: ../src/nsc-extension.c:166
@@ -97,8 +97,8 @@ msgid "Audio Profile"
 msgstr "Hangprofil"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
-msgstr "A hangkonvertáláshoz használt Gnome hangprofil"
+msgid "The MATE Audio Profile used for encoding audio"
+msgstr "A hangkonvertáláshoz használt Mate hangprofil"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
 #, c-format
@@ -152,4 +152,3 @@ msgstr "A musepack fájl lejátszásához szükséges bővítmény nem találhat
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
 msgstr "A wma fájl lejátszásához szükséges bővítmény nem található"
-

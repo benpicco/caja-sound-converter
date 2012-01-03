@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: nautilus-sound-converter\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Project-Id-Version: caja-sound-converter\n"
+"Report-Msgid-Bugs-To: http://bugzilla.mate.org/enter_bug.cgi?"
 "product=nautilus-sound-converter\n"
 "POT-Creation-Date: 2010-12-15 00:50+0000\n"
 "PO-Revision-Date: 2010-12-16 08:44+0100\n"
@@ -54,7 +54,7 @@ msgstr "Convertendo: %d de %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "O Nautilus Sound Converter non puido converter este ficheiro.\n"
@@ -80,7 +80,7 @@ msgstr "Editar os _perfís..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Non foi posíbel crear o cliente GConf.\n"
 
 #: ../src/nsc-extension.c:166
@@ -96,7 +96,7 @@ msgid "Audio Profile"
 msgstr "Perfil de son"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "Perfil de son de GNOME usado para codificación de son"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390

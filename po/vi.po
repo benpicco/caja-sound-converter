@@ -1,4 +1,4 @@
-# Vietnamese translation for nautilus-sound-converter.
+# Vietnamese translation for caja-sound-converter.
 # Copyright (C) 2011 nautilus-sound-converter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the nautilus-sound-converter package.
 # Lê Trường An <xinemdungkhoc1@gmail.com>, 2011.
@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=nautilus-sound-converter&keywords=I18N+L10N\n"
+"Report-Msgid-Bugs-To: http://bugzilla.mate.org/enter_bug.cgi?product=nautilus-sound-converter&keywords=I18N+L10N\n"
 "POT-Creation-Date: 2011-04-11 22:47+0000\n"
 "PO-Revision-Date: 2011-04-20 19:31+0700\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
@@ -52,7 +52,7 @@ msgstr "Đang chuyển đổi: %d trong số %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Trình chuyển đổi âm thanh Nautilus không thể chuyển đổi tập tin này.\n"
@@ -79,7 +79,7 @@ msgstr "Chỉnh sửa _Hồ sơ..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Không thể tạo cấu hình GConf.\n"
 
 #: ../src/nsc-extension.c:166
@@ -95,7 +95,7 @@ msgid "Audio Profile"
 msgstr "Hồ sơ âm thanh"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "Hồ sơ âm thanh GNOME được dùng để giải mã âm thanh"
 
 #: ../src/nsc-gstreamer.c:381
@@ -152,4 +152,3 @@ msgstr "Không tìm thấy trình cắm thêm cần thiết để truy cập và
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
 msgstr "Không tìm thấy trình cắm thêm cần thiết để truy cập vào tập tin wma"
-

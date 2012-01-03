@@ -1,8 +1,8 @@
-# German translation for nautilus-sound-converter.
+# German translation for caja-sound-converter.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-sound-converter package.
 # Michael Kogan <michael.kogan@gmx.net>, 2010.
-# Mario Blättermann <mariobl@gnome.org>, 2010.
+# Mario Blättermann <mariobl@mate.org>, 2010.
 #
 msgid ""
 msgstr ""
@@ -56,7 +56,7 @@ msgstr "Umgewandelt wird: %d von %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Nautilus Sound Converter konnte diese Datei nicht umwandeln.\n"
@@ -82,7 +82,7 @@ msgstr "_Profile bearbeiten …"
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Konnte GConf-Client nicht anlegen.\n"
 
 #: ../src/nsc-extension.c:166
@@ -98,7 +98,7 @@ msgid "Audio Profile"
 msgstr "Audio-Profil"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "Das zum Kodieren verwendete Audio-Profil von GNOME"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
@@ -154,4 +154,3 @@ msgstr ""
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
 msgstr "Das zum Einlesen von wav-Dateien benötigte Plugin wurde nicht gefunden"
-

@@ -31,7 +31,7 @@
 #include <glib/gi18n.h>
 #include <glib-object.h>
 #include <gst/gst.h>
-#include <libgnome-media-profiles/gnome-media-profiles.h>
+#include <libmate-media-profiles/gnome-media-profiles.h>
 
 #include "nsc-error.h"
 #include "nsc-gstreamer.h"
@@ -190,7 +190,7 @@ nsc_gstreamer_class_init (NscGStreamerClass *klass)
 	g_object_class_install_property (object_class, PROP_PROFILE,
 					 g_param_spec_object ("profile",
 							      _("Audio Profile"),
-							      _("The GNOME Audio Profile used for encoding audio"),
+							      _("The MATE Audio Profile used for encoding audio"),
 							      GM_AUDIO_TYPE_PROFILE,
 							      G_PARAM_READWRITE));
 

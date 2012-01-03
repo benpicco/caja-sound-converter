@@ -1,4 +1,4 @@
-# Czech translation for nautilus-sound-converter.
+# Czech translation for caja-sound-converter.
 # Copyright (C) 2010 nautilus-sound-converter's COPYRIGHT HOLDER
 # This file is distributed under the same license as the nautilus-sound-converter package.
 #
@@ -11,7 +11,7 @@ msgstr ""
 "POT-Creation-Date: 2011-01-03 22:05+0100\n"
 "PO-Revision-Date: 2010-12-16 10:09+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>>\n"
-"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language-Team: Czech <mate-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +54,7 @@ msgstr "Převádí se: %d z %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Zvukový převodník Nautilus nemůže převést tento soubor.\n"
@@ -80,7 +80,7 @@ msgstr "Upravit _profily…"
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Nelze vytvořit klienta GConf.\n"
 
 #: ../src/nsc-extension.c:166
@@ -96,7 +96,7 @@ msgid "Audio Profile"
 msgstr "Zvukový profil"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "Zvukový profil GNOME použitý pro kódování zvuku"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=nautilus-sound-converter&keywords=I18N+L10N\n"
+"Report-Msgid-Bugs-To: http://bugzilla.mate.org/enter_bug."
+"cgi?product=caja-sound-converter&keywords=I18N+L10N\n"
 "POT-Creation-Date: 2011-04-13 19:30+0000\n"
 "PO-Revision-Date: 2011-04-20 12:47+0300\n"
 "Last-Translator: Rūdofls Mazurs <rudolfs.mazurs@gmail.com>\n"
@@ -54,7 +54,7 @@ msgstr "Konvertē: %d no %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Nautilus skaņas konvertētājs nevar konvertēt šo failu.\n"
@@ -80,7 +80,7 @@ msgstr "Rediģēt _profilus..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr "Nevarēja izveidot GConf klientu.\n"
 
 #: ../src/nsc-extension.c:166
@@ -96,7 +96,7 @@ msgid "Audio Profile"
 msgstr "Audio profils"
 
 #: ../src/nsc-gstreamer.c:194
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr "GNOME Audio profils lietots audio iekodēšanai"
 
 #: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
@@ -151,4 +151,3 @@ msgstr "Faila pieejai nepieciešamais musepack spraudnis netika atrasts"
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
 msgstr "Faila pieejai nepieciešamais wma spraudnis netika atrasts"
-

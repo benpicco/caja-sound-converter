@@ -1,4 +1,4 @@
-# Esperanto translation for nautilus-sound-converter.
+# Esperanto translation for caja-sound-converter.
 # Copyright (C) 2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the nautilus-sound-converter package.
 # Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2011.
@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: http://bugzilla.mate.org/enter_bug.cgi?"
 "product=nautilus-sound-converter&keywords=I18N+L10N\n"
 "POT-Creation-Date: 2011-11-27 20:22+0000\n"
 "PO-Revision-Date: 2011-12-30 20:05+0100\n"
@@ -53,7 +53,7 @@ msgstr "Konverto: %d of %d"
 #: ../src/nsc-converter.c:364
 #, c-format
 msgid ""
-"Nautilus Sound Converter could not convert this file.\n"
+"Caja Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
 "Naŭtilo-Son-Konvertilo ne povas konverti tiun dosieron.\n"
@@ -79,7 +79,7 @@ msgstr "Redakti _profilojn..."
 
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
-msgid "Could not create GConf client.\n"
+msgid "Could not create MateConf client.\n"
 msgstr ""
 
 #: ../src/nsc-extension.c:168
@@ -95,7 +95,7 @@ msgid "Audio Profile"
 msgstr "Sonprofilo"
 
 #: ../src/nsc-gstreamer.c:193
-msgid "The GNOME Audio Profile used for encoding audio"
+msgid "The MATE Audio Profile used for encoding audio"
 msgstr ""
 
 #: ../src/nsc-gstreamer.c:380 ../src/nsc-gstreamer.c:389

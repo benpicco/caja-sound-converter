@@ -29,12 +29,12 @@
 #include <sys/time.h>
 #include <string.h>
 
-#include <gconf/gconf-client.h>
+#include <mateconf/gconf-client.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gst/gst.h>
-#include <libnautilus-extension/nautilus-file-info.h>
-#include <libgnome-media-profiles/gnome-media-profiles.h>
+#include <libcaja-extension/nautilus-file-info.h>
+#include <libmate-media-profiles/gnome-media-profiles.h>
 
 #include "nsc-converter.h"
 #include "nsc-gstreamer.h"
@@ -300,7 +300,7 @@ static void
 convert_file (NscConverter *convert)
 {
 	NscConverterPrivate *priv;
-	NautilusFileInfo    *file_info;
+	CajaFileInfo    *file_info;
 	GFile               *old_file, *new_file;
 	GError              *err = NULL;
 
@@ -309,7 +309,7 @@ convert_file (NscConverter *convert)
 	g_return_if_fail (priv->files != NULL);
 
 	/* Get the files */
-	file_info = NAUTILUS_FILE_INFO (priv->files->data);
+	file_info = CAJA_FILE_INFO (priv->files->data);
 	old_file = nautilus_file_info_get_location (file_info);
 	new_file = create_new_file (convert, old_file);
 
@@ -631,7 +631,7 @@ converter_edit_profile (GtkButton *button,
 			gpointer   user_data)
 {
 	NscConverterPrivate *priv;
-	GConfClient         *gconf;
+	MateConfClient         *gconf;
 	GtkWidget           *dialog;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (user_data);
