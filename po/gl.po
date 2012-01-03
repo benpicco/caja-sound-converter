@@ -81,7 +81,7 @@ msgstr "Editar os _perfís..."
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
 msgid "Could not create MateConf client.\n"
-msgstr "Non foi posíbel crear o cliente GConf.\n"
+msgstr "Non foi posíbel crear o cliente MateConf.\n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."

@@ -82,7 +82,7 @@ msgstr "עריכת _פרופילים..."
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
 msgid "Could not create MateConf client.\n"
-msgstr "לא ניתן ליצור לקוח GConf.\n"
+msgstr "לא ניתן ליצור לקוח MateConf.\n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."

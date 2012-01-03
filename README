@@ -7,19 +7,19 @@ Tips:
 =====
 
 If you don't want to use the source directory as the default output destination, run the following:
-   gconftool-2 --set /apps/caja-sound-converter/source_dir --type bool false
+   mateconftool-2 --set /apps/caja-sound-converter/source_dir --type bool false
 
 Bug reporting:
 ==============
 
 Please report bugs to:
-https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter
+https://bugzilla.mate.org/browse.cgi?product=caja-sound-converter
 
 Hacking:
 ========
 
 n-s-c can be check out with the following command:
 
-git clone git://git.gnome.org/nautilus-sound-converter
+git clone git://git.mate.org/caja-sound-converter
 
 Patches welcomed!

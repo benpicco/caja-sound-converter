@@ -80,7 +80,7 @@ msgstr "Redigera _profiler..."
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
 msgid "Could not create MateConf client.\n"
-msgstr "Kunde inte skapa GConf-klient.\n"
+msgstr "Kunde inte skapa MateConf-klient.\n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."

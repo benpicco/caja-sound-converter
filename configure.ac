@@ -18,8 +18,8 @@ IT_PROG_INTLTOOL([0.40.6])
 LT_INIT
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
+AC_PATH_PROG(MATECONFTOOL, mateconftool-2)
+AM_MATECONF_SOURCE_2
 
 MATE_COMPILE_WARNINGS([maximum])
 MATE_CXX_WARNINGS([yes])
@@ -31,7 +31,7 @@ dnl Set variables for minimum versions needed.
 dnl -----------------------------------------------------------
 GLIB_REQUIRED=2.16.0
 CAJA_REQUIRED=1.1.0
-GCONF_REQUIRED=1.2.0
+MATECONF_REQUIRED=1.2.0
 GTK_REQUIRED=2.24.0
 GSTREAMER_REQUIRED=0.10.20
 MATE_MEDIA_PROFILES_REQUIRED=1.1.0
@@ -42,7 +42,7 @@ dnl -----------------------------------------------------------
 PKG_CHECK_MODULES(NSC,
 [
 	glib-2.0 >= $GLIB_REQUIRED
-	gconf-2.0 >= $GCONF_REQUIRED
+	mateconf-2.0 >= $MATECONF_REQUIRED
 	libcaja-extension >= $CAJA_REQUIRED
 	gtk+-2.0 >= $GTK_REQUIRED
 	gstreamer-0.10 >= $GSTREAMER_REQUIRED

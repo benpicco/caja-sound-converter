@@ -29,7 +29,7 @@
 #include <sys/time.h>
 #include <string.h>
 
-#include <mateconf/gconf-client.h>
+#include <mateconf/mateconf-client.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gst/gst.h>
@@ -91,7 +91,7 @@ struct _NscConverterPrivate {
 #define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
 
 /*
- * gconf key for whether the user wants to use
+ * mateconf key for whether the user wants to use
  * the source directory for the output directory.
  */
 #define SOURCE_DIRECTORY "/apps/caja-sound-converter/source_dir"
@@ -631,17 +631,17 @@ converter_edit_profile (GtkButton *button,
 			gpointer   user_data)
 {
 	NscConverterPrivate *priv;
-	MateConfClient         *gconf;
+	MateConfClient         *mateconf;
 	GtkWidget           *dialog;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (user_data);
 
-	gconf = gconf_client_get_default ();
+	mateconf = mateconf_client_get_default ();
 
-	dialog = gm_audio_profiles_edit_new (gconf,
+	dialog = gm_audio_profiles_edit_new (mateconf,
 					     GTK_WINDOW (priv->dialog));
 
-	g_object_unref (gconf);
+	g_object_unref (mateconf);
 
 	gtk_widget_show_all (dialog);
 	gtk_dialog_run (GTK_DIALOG (dialog));
@@ -726,7 +726,7 @@ nsc_converter_init (NscConverter *self)
 	/* If correctly allocated, initialize parameters */
 	if ((NSC_CONVERTER (self))->priv != NULL) {
 		NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
-		GConfClient         *gconf;
+		MateConfClient         *mateconf;
 		GError              *error = NULL;
 
 		/* Set init values */
@@ -736,14 +736,14 @@ nsc_converter_init (NscConverter *self)
 		priv->total_duration = 0;
 		priv->before.seconds = -1;
 
-		/* Get gconf client */
-		gconf = gconf_client_get_default ();
-		if (gconf == NULL) {
+		/* Get mateconf client */
+		mateconf = mateconf_client_get_default ();
+		if (mateconf == NULL) {
 			/* Should probably do more than just give a warning */
-			g_warning (_("Could not create GConf client.\n"));
+			g_warning (_("Could not create MateConf client.\n"));
 		}
 
-		priv->src_dir = gconf_client_get_bool (gconf,
+		priv->src_dir = mateconf_client_get_bool (mateconf,
 						       SOURCE_DIRECTORY,
 						       &error);
 
@@ -753,10 +753,10 @@ nsc_converter_init (NscConverter *self)
 		}
 
 		/* Init mate-media-profiles */
-		mate_media_profiles_init (gconf);
+		mate_media_profiles_init (mateconf);
 
-		/* Unreference the gconf client */
-		g_object_unref (gconf);
+		/* Unreference the mateconf client */
+		g_object_unref (mateconf);
 
 		/* Set the profile to the default. */
 		priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);

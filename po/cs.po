@@ -81,7 +81,7 @@ msgstr "Upravit _profily…"
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
 msgid "Could not create MateConf client.\n"
-msgstr "Nelze vytvořit klienta GConf.\n"
+msgstr "Nelze vytvořit klienta MateConf.\n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."

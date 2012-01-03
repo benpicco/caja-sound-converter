@@ -80,7 +80,7 @@ msgstr "Editar p_erfiles…"
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
 msgid "Could not create MateConf client.\n"
-msgstr "No se pudo crear el cliente GConf.\n"
+msgstr "No se pudo crear el cliente MateConf.\n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."

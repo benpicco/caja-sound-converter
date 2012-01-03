@@ -79,7 +79,7 @@ msgstr "编辑配置文件(_P)..."
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:741
 msgid "Could not create MateConf client.\n"
-msgstr "无法创建 GConf 客户端。\n"
+msgstr "无法创建 MateConf 客户端。\n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."

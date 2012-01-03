@@ -79,7 +79,7 @@ msgstr "Επεξεργασία _προφίλ…"
 #. Should probably do more than just give a warning
 #: ../src/nsc-converter.c:743
 msgid "Could not create MateConf client.\n"
-msgstr "Αδυναμία δημιουργίας πελάτη GConf \n"
+msgstr "Αδυναμία δημιουργίας πελάτη MateConf \n"
 
 #: ../src/nsc-extension.c:166
 msgid "_Convert..."
