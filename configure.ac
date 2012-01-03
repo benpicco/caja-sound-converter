@@ -31,7 +31,7 @@ dnl Set variables for minimum versions needed.
 dnl -----------------------------------------------------------
 GLIB_REQUIRED=2.16.0
 CAJA_REQUIRED=1.1.0
-MATECONF_REQUIRED=1.2.0
+MATECONF_REQUIRED=1.1.0
 GTK_REQUIRED=2.24.0
 GSTREAMER_REQUIRED=0.10.20
 MATE_MEDIA_PROFILES_REQUIRED=1.1.0
